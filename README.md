@@ -1,2 +1,2 @@
-# nvm.nix
-Personal neovim config via Nix
+# PDENV
+Personal Development Environment - design for me by me to meet my needs.
