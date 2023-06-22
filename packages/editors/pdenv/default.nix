@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   packages,
@@ -7,9 +8,17 @@
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     withRuby = false;
     withPython3 = false;
-    plugins = import ./plugins.nix {inherit pkgs packages;};
+    plugins = import ./plugins.nix {inherit pkgs packages inputs;};
     wrapRc = false;
   };
+  extraPackages = with pkgs; [
+    # go
+    gofumpt
+    golines
+    golangci-lint
+
+  ]; # import ./extraPackages.nix;
+  extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   nvimrc = pkgs.stdenv.mkDerivation {
     name = "nvimrc";
     src = ./config;
@@ -38,6 +47,10 @@
   # convert to string to stop doublbing of args
   wrapperArgs = lib.escapeShellArgs (neovimConfig.wrapperArgs
     ++ [
+      "--suffix"
+      "PATH"
+      ":"
+      "${extraPackagesBinPath}"
       "--add-flags"
       ''--cmd "set rtp^=${nvimrc}"''
       "--add-flags"
