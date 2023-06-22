@@ -9,13 +9,18 @@
     plugins = with pkgs.vimPlugins; [
     ];
   };
-  nvimRC = pkgs.stdenv.mkDerivation {
+  nvimrc = pkgs.stdenv.mkDerivation {
     name = "nvimRC";
     src = ./config;
     installPhase = ''
       mkdir -p $out/
-      cp ./* $out/
+      cp -r ./* $out/
     '';
   };
+  LuaConfig =
+    neovimConfig
+    // {
+      wrapperArgs = neovimConfig.wrapperArgs ++ ["--add-flags" "-u ${nvimrc}/init.lua"];
+    };
 in
-  pkgs.wrapNeovimUnstable packages.neovim neovimConfig
+  pkgs.wrapNeovimUnstable packages.neovim LuaConfig
