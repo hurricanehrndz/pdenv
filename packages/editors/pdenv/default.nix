@@ -11,13 +11,7 @@
     plugins = import ./plugins.nix {inherit pkgs packages inputs;};
     wrapRc = false;
   };
-  extraPackages = with pkgs; [
-    # go
-    gofumpt
-    golines
-    golangci-lint
-
-  ]; # import ./extraPackages.nix;
+  extraPackages =  import ./extraPackages.nix  { inherit pkgs packages;};
   extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   nvimrc = pkgs.stdenv.mkDerivation {
     name = "nvimrc";
