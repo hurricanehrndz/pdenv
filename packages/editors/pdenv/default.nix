@@ -5,6 +5,27 @@
   packages,
   ...
 }: let
+  treesitter-parsers = pkgs.symlinkJoin {
+    name = "treesitter-parsers";
+    paths =
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+        p.bash
+        p.c
+        # p.comment
+        p.cpp
+        p.go
+        p.javascript
+        p.lua
+        p.make
+        p.markdown
+        p.nix
+        p.puppet
+        p.python
+        p.tsx
+        p.typescript
+      ]))
+      .dependencies;
+  };
   nvimPython = pkgs.python3.withPackages (ps: with ps; [debugpy flake8]);
   extraPackages = import ./extraPackages.nix {inherit pkgs packages nvimPython;};
   extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
@@ -21,6 +42,9 @@
       mkdir -p $out/
       cp -r ./* $out/
       cp ${pkgs.writeText "$out/init.lua" ''
+        -- Add Treesitter Parsers Path
+        vim.opt.runtimepath:append("${treesitter-parsers}")
+
         -- Sensible defaults - mine
         require("hrndz.options")
 
@@ -48,8 +72,6 @@
       "${extraPackagesBinPath}"
       "--add-flags"
       ''--cmd "set rtp^=${nvimrc}"''
-      "--add-flags"
-      ''--cmd "set rtp+=${packages.nvim-treesitter-master}"''
       "--add-flags"
       "-u ${nvimrc}/init.lua"
     ]);
