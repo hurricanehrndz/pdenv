@@ -11,11 +11,43 @@
   in {
     packages = {
       neovim = pkgs.callPackage ./editors/neovim {inherit neovim;};
-      pdenv = pkgs.callPackage ./editors/pdenv {inherit (self') packages; inherit inputs;};
+      pdenv = pkgs.callPackage ./editors/pdenv {
+        inherit (self') packages;
+        inherit inputs;
+      };
       codelldb = let pkgs = inputs.nixpkgs-pr211321.legacyPackages.${system}; in pkgs.vscode-extensions.vadimcn.vscode-lldb;
       swiftformat = pkgs.callPackage ./swift/swiftformat {inherit (inputs) swiftformat-src;};
       swiftlint = pkgs.callPackage ./swift/swiftlint {inherit (inputs) swiftlint-src;};
-      yamllint = pkgs.callPackage ./yaml/yamllint.nix {inherit (inputs) yamllint-src;};
+      # yamllint = with pkgs.python3Packages;
+      #   buildPythonApplication {
+      #     name = "yamllint";
+      #     src = inputs.yamllint-src;
+      #     doCheck = false;
+      #     propagatedBuildInputs = [setuptools pyaml pathspec];
+      #   };
+      yamlfixer = with pkgs.python3Packages;
+        buildPythonApplication {
+          name = "yamlfixer";
+          src = inputs.yamlfixer-src;
+          doCheck = false;
+          propagatedBuildInputs = [setuptools yamllint];
+        };
+      go-enum = pkgs.buildGoModule {
+        name = "go-enum";
+        src = inputs.go-enum-src;
+        vendorSha256 = "sha256-tIY3CJnb6QuHBSDjfsxRZRUm1n3NTWLSEE1YruNksU4=";
+      };
+      gomvp = pkgs.buildGoModule {
+        name = "gomvp";
+        src = inputs.gomvp-src;
+        vendorSha256 = null;
+      };
+      json-to-struct = pkgs.buildGoModule rec {
+        name = "json-to-struct";
+        src = inputs.json-to-struct-src;
+        vendorSha256 = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
+        proxyVendor = true;
+      };
       nvim-window = pkgs.vimUtils.buildVimPluginFrom2Nix {
         pname = "nvim-window";
         src = inputs.nvim-window-src;

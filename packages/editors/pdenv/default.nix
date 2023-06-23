@@ -5,14 +5,15 @@
   packages,
   ...
 }: let
+  nvimPython = pkgs.python3.withPackages (ps: with ps; [debugpy flake8]);
+  extraPackages = import ./extraPackages.nix {inherit pkgs packages nvimPython;};
+  extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     withRuby = false;
     withPython3 = false;
-    plugins = import ./plugins.nix {inherit pkgs packages inputs;};
+    plugins = import ./plugins.nix {inherit pkgs packages inputs nvimPython;};
     wrapRc = false;
   };
-  extraPackages =  import ./extraPackages.nix  { inherit pkgs packages;};
-  extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   nvimrc = pkgs.stdenv.mkDerivation {
     name = "nvimrc";
     src = ./config;
@@ -47,6 +48,8 @@
       "${extraPackagesBinPath}"
       "--add-flags"
       ''--cmd "set rtp^=${nvimrc}"''
+      "--add-flags"
+      ''--cmd "set rtp+=${packages.nvim-treesitter-master}"''
       "--add-flags"
       "-u ${nvimrc}/init.lua"
     ]);

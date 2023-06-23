@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   packages,
+  nvimPython,
   ...
 }: let
   withSrc = pkg: src: pkg.overrideAttrs (_: {inherit src;});
@@ -66,6 +67,166 @@ in
       type = "lua";
       config = ''
         require("hrndz.plugins.treesitter")
+      '';
+    }
+    # functionality
+    {
+      plugin = toggleterm-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.toggleterm")
+      '';
+    }
+    # comment
+    {
+      plugin = comment-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.comment")
+      '';
+    }
+    {
+      plugin = nvim-window;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.winpicker")
+      '';
+    }
+    # which key did I just hit
+    {
+      plugin = which-key-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.whichkey")
+      '';
+    }
+    # what's did I do wrong
+    {
+      plugin = trouble-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.trouble")
+      '';
+    }
+    # add completion
+    {
+      plugin = nvim-cmp;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.completion")
+      '';
+    }
+    cmp-nvim-lsp
+    cmp-nvim-lua
+    cmp-path
+    cmp-buffer
+    cmp-cmdline
+    cmp-zsh # next is required
+    deol-nvim
+    (withSrc go-nvim inputs.go-nvim-src)
+    nvim-guihua
+    lsp_lines-nvim
+
+    # snippets
+    luasnip
+    cmp_luasnip
+    friendly-snippets
+    vim-snippets
+
+    # formatters, linters
+    null-ls-nvim
+
+    # add lsp config
+    {
+      plugin = withSrc nvim-lspconfig inputs.nvim-lspconfig-src;
+      type = "lua";
+      config = ''
+        require("hrndz.lsp")
+      '';
+    }
+    neodev-nvim
+
+    # nice plugins
+    nvim-osc52
+    vim-tmux-navigator
+    nvim-notify
+    undotree
+    {
+      plugin = feline-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.statusline")
+      '';
+    }
+    {
+      plugin = mini-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.mini")
+      '';
+    }
+    {
+      plugin = vim-better-whitespace;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.whitespace")
+      '';
+    }
+
+    # pictograms
+    lspkind-nvim
+
+    # debugging
+    {
+      plugin = nvim-dap;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.dap")
+        local dap_python = require("dap-python")
+        ---@diagnostic disable-next-line: param-type-mismatch
+        dap_python.setup("${nvimPython}/bin/python")
+
+        local dap = require('dap')
+        local codelldb_bin = "${packages.codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
+        dap.adapters.codelldb = {
+        type = 'server',
+        port = "''${port}",
+          executable = {
+            command = codelldb_bin,
+            args = {"--port", "''${port}", "--liblldb", "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB"},
+          }
+        }
+        dap.configurations.cpp = {
+          {
+            name = "Launch file",
+            type = "codelldb",
+            request = "launch",
+            program = function()
+              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "''${workspaceFolder}",
+            stopOnEntry = false,
+          },
+        }
+        dap.configurations.swift = dap.configurations.cpp
+      '';
+    }
+    nvim-dap-ui
+    nvim-dap-virtual-text
+    nvim-dap-python
+    vim-puppet
+    {
+      plugin = alpha-nvim;
+      type = "lua";
+      config = ''
+        require("hrndz.plugins.alpha")
+      '';
+    }
+    {
+      plugin = diffview-nvim;
+      type = "lua";
+      config = ''
+        require("diffview").setup({})
       '';
     }
   ]

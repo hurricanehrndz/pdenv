@@ -1,6 +1,7 @@
 {
   pkgs,
   packages,
+  nvimPython,
   ...
 }:
 with pkgs;
@@ -22,9 +23,9 @@ with packages; [
   gotestsum
   govulncheck
   mockgen
-  # go-enum
-  # gomvp
-  # json-to-struct
+  go-enum
+  gomvp
+  json-to-struct
   revive
 
   # lua
@@ -53,13 +54,13 @@ with packages; [
   # sourcekit-lsp
 
   # yaml
-  # yamlfixer
+  yamlfixer
   yamllint
 
   # python
   black
   nodePackages.pyright
-  # nvimPython
+  nvimPython
 
   # one-ofs
   nodePackages.prettier
