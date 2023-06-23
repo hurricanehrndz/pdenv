@@ -15,6 +15,7 @@
         inherit (self') packages;
         inherit inputs;
       };
+      default = config.packages.pdenv;
       codelldb = let pkgs = inputs.nixpkgs-pr211321.legacyPackages.${system}; in pkgs.vscode-extensions.vadimcn.vscode-lldb;
       swiftformat = pkgs.callPackage ./swift/swiftformat {inherit (inputs) swiftformat-src;};
       swiftlint = pkgs.callPackage ./swift/swiftlint {inherit (inputs) swiftlint-src;};

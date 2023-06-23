@@ -82,9 +82,9 @@
           # https://devenv.sh/reference/options/
           packages = [config.packages.default];
 
-          # enterShell = ''
-          #   hello
-          # '';
+          enterShell = ''
+            Run nvim
+          '';
         };
       };
       flake = {
