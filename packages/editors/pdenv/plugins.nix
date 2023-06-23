@@ -152,7 +152,7 @@ in
     nvim-notify
     undotree
     {
-      plugin = feline-nvim;
+      plugin = lualine-nvim;
       type = "lua";
       config = ''
         require("hrndz.plugins.statusline")
