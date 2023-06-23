@@ -25,5 +25,8 @@ jobs:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Build nix flake
-        run: nix build -L
+      - name: Build and Publish nix flake
+        run: >
+          nix build --json \
+            | jq -r '.[].outputs | to_entries[].value' \
+            | cachix push hurricanehrndz
