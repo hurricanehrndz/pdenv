@@ -6,7 +6,7 @@ name: Cachix
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish:
