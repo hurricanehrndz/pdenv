@@ -4,9 +4,8 @@
 # https://sourcegraph.com/github.com/helix-editor/helix/-/blob/.github/workflows/cachix.yml
 name: Cachix
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "30 1 1-7,14-21 * 5"
 
 jobs:
   publish:
@@ -24,6 +23,9 @@ jobs:
         with:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Watch store and push new
+        run: cachix watch-store hurricanehrndz &
 
       - name: Build and Publish nix flake
         run: >
