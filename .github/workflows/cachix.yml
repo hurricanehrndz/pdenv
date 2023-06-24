@@ -27,6 +27,4 @@ jobs:
 
       - name: Build and Publish nix flake
         run: >
-          nix build --json \
-            | jq -r '.[].outputs | to_entries[].value' \
-            | cachix push hurricanehrndz
+          nix build --show-trace
