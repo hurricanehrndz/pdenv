@@ -7,12 +7,12 @@ Personal Development Environment - design for me by me to meet my needs.
 1. Install nix, follow usual [instructions][nix-install]. On systems without
    root use the latest static build from [hydra][nix-hydra].
 
-```sh
-# using: https://hydra.nixos.org/job/nix/maintenance-2.16/buildStatic.x86_64-linux/latest/download-by-type/file/binary-dist
-mkdir ~/.local/tmp/
-curl -o ~/.local/bin/nix -L https://hydra.nixos.org/job/nix/maintenance-2.16/buildStatic.x86_64-linux/latest/download-by-type/file/binary-dist
-chmod +x ~/.local/bin/nix
-```
+    ```sh
+    # using: https://hydra.nixos.org/job/nix/maintenance-2.16/buildStatic.x86_64-linux/latest/download-by-type/file/binary-dist
+    mkdir ~/.local/tmp/
+    curl -o ~/.local/bin/nix -L https://hydra.nixos.org/job/nix/maintenance-2.16/buildStatic.x86_64-linux/latest/download-by-type/file/binary-dist
+    chmod +x ~/.local/bin/nix
+    ```
 
 2. Install nix.conf from this repo
 
