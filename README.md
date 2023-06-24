@@ -14,18 +14,18 @@ curl -o ~/.local/bin/nix -L https://hydra.nixos.org/job/nix/maintenance-2.16/bui
 chmod +x ~/.local/bin/nix
 ```
 
-1. Install nix.conf from this repo
+2. Install nix.conf from this repo
 
-```sh
-mkdir ~/.config/nix
-curl -o ~/.config/nix/nix.conf -L https://raw.githubusercontent.com/hurricanehrndz/pdenv/main/nix.conf
-```
+    ```sh
+    mkdir ~/.config/nix
+    curl -o ~/.config/nix/nix.conf -L https://raw.githubusercontent.com/hurricanehrndz/pdenv/main/nix.conf
+    ```
 
-1. Run pdenv
+3. Run pdenv
 
-```sh
-~/.local/tmp/nix run github:hurricanehrndz/pdenv
-```
+    ```sh
+    ~/.local/tmp/nix run github:hurricanehrndz/pdenv
+    ```
 
 [nix-hydra]: https://hydra.nixos.org/project/nix
 [nix-install]: https://nixos.org/download.html
