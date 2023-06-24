@@ -25,9 +25,7 @@ jobs:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Watch store and push new
-        run: cachix watch-store hurricanehrndz &
-
       - name: Build and Publish nix flake
         run: >
-          nix build --show-trace
+          cachix watch-exec hurricanehrndz -- \
+          nix build --print-build-logs
