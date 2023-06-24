@@ -7,6 +7,7 @@
     nix2container.url = "github:nlewo/nix2container";
     nix2container.inputs.nixpkgs.follows = "nixpkgs";
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     # neovim
     nixpkgs-pr211321.url = "github:mstone/nixpkgs/darwin-fix-vscode-lldb";
