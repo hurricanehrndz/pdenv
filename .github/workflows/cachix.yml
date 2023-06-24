@@ -27,4 +27,4 @@ jobs:
 
       - name: Build and Publish nix flake
         run: >
-          cachix watch-exec hurricanehrndz -- nix build -L
+          cachix watch-exec hurricanehrndz -- nix build --show-trace
