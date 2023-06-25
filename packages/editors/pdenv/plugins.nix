@@ -12,28 +12,24 @@ in
     # Theme
     {
       plugin = tokyonight-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.tokyonight")
       '';
     }
     {
       plugin = indent-blankline-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.indentblankline")
       '';
     }
     {
       plugin = withSrc gitsigns-nvim inputs.gitsigns-src;
-      type = "lua";
       config = ''
         require("hrndz.plugins.gitsigns")
       '';
     }
     {
       plugin = withSrc nvim-colorizer-lua inputs.nvim-colorizer-src;
-      type = "lua";
       config = ''
         colorizer = require("colorizer")
         colorizer.setup()
@@ -41,7 +37,6 @@ in
     }
     {
       plugin = nvim-web-devicons;
-      type = "lua";
       config = ''
         local devicons = require("nvim-web-devicons")
         devicons.setup({ default = true })
@@ -50,7 +45,6 @@ in
     # Fuzzy finder
     {
       plugin = withSrc telescope-nvim inputs.telescope-nvim-src;
-      type = "lua";
       config = ''
         require("hrndz.plugins.telescope")
       '';
@@ -64,7 +58,6 @@ in
     # add some syntax highlighting
     {
       plugin = nvim-treesitter-master;
-      type = "lua";
       config = ''
         require("hrndz.plugins.treesitter")
       '';
@@ -72,7 +65,6 @@ in
     # functionality
     {
       plugin = toggleterm-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.toggleterm")
       '';
@@ -80,14 +72,12 @@ in
     # comment
     {
       plugin = comment-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.comment")
       '';
     }
     {
       plugin = nvim-window;
-      type = "lua";
       config = ''
         require("hrndz.plugins.winpicker")
       '';
@@ -95,7 +85,6 @@ in
     # which key did I just hit
     {
       plugin = which-key-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.whichkey")
       '';
@@ -103,7 +92,6 @@ in
     # what's did I do wrong
     {
       plugin = trouble-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.trouble")
       '';
@@ -111,7 +99,6 @@ in
     # add completion
     {
       plugin = nvim-cmp;
-      type = "lua";
       config = ''
         require("hrndz.plugins.completion")
       '';
@@ -139,7 +126,6 @@ in
     # add lsp config
     {
       plugin = withSrc nvim-lspconfig inputs.nvim-lspconfig-src;
-      type = "lua";
       config = ''
         require("hrndz.lsp")
       '';
@@ -152,22 +138,19 @@ in
     nvim-notify
     undotree
     {
-      plugin = lualine-nvim;
-      type = "lua";
+      plugin = feline-nvim;
       config = ''
         require("hrndz.plugins.statusline")
       '';
     }
     {
       plugin = mini-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.mini")
       '';
     }
     {
       plugin = vim-better-whitespace;
-      type = "lua";
       config = ''
         require("hrndz.plugins.whitespace")
       '';
@@ -179,7 +162,6 @@ in
     # debugging
     {
       plugin = nvim-dap;
-      type = "lua";
       config = ''
         require("hrndz.plugins.dap")
         local dap_python = require("dap-python")
@@ -217,14 +199,12 @@ in
     vim-puppet
     {
       plugin = alpha-nvim;
-      type = "lua";
       config = ''
         require("hrndz.plugins.alpha")
       '';
     }
     {
       plugin = diffview-nvim;
-      type = "lua";
       config = ''
         require("diffview").setup({})
       '';

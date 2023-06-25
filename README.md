@@ -24,7 +24,7 @@ Personal Development Environment - design for me by me to meet my needs.
 3. Run pdenv
 
     ```sh
-    ~/.local/tmp/nix run github:hurricanehrndz/pdenv
+    ~/.local/tmp/nix run github:hurricanehrndz/pdenv --accept-flake-config
     ```
 
 [nix-hydra]: https://hydra.nixos.org/project/nix
