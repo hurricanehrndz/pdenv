@@ -32,6 +32,8 @@
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     withRuby = false;
     withPython3 = false;
+    viAlias = true;
+    vimAlias = true;
     plugins = import ./plugins.nix {inherit pkgs packages inputs nvimPython;};
     wrapRc = false;
   };
