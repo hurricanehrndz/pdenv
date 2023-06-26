@@ -28,5 +28,5 @@ jobs:
       - name: Build and Publish nix flake
         run: >
           cachix watch-exec hurricanehrndz -- nix build \
-            --accept-nix-config \
+            --accept-flake-config \
             --show-trace
