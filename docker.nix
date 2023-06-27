@@ -3,6 +3,7 @@
   tag,
   rev ? null,
   system ? builtins.currentSystem,
+  arch,
 }: let
   flake = builtins.getFlake ("git+file:${builtins.toString ./.}"
     + (
@@ -15,6 +16,7 @@
     pkgs,
     name ? "ghcr.io/hurricanehrndz/pdenv",
     tag ? null,
+    arch,
   }:
     pkgs.dockerTools.buildImage {
       inherit name;
@@ -22,14 +24,18 @@
         if builtins.isNull tag
         then neovim.version
         else tag;
+      architecture =
+        if arch == "arm64"
+        then "arm64"
+        else "amd64";
       copyToRoot = pkgs.buildEnv {
-        name = "tailscale-lb";
+        name = "pdenv";
         paths = [
           pdenv
         ];
       };
       config = {
-        Entrypoint = [ "/bin/nvim" ];
+        Entrypoint = ["/bin/nvim"];
       };
       # layers = [
       #   (n2c.buildLayer {deps = [pdenv];})
@@ -38,5 +44,5 @@
 in
   mkDocker {
     pkgs = flake.lib.nixpkgs system;
-    inherit name tag;
+    inherit name tag arch;
   }

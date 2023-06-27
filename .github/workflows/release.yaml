@@ -95,7 +95,8 @@ jobs:
             --file docker.nix \
             --argstr name "$IMAGE_NAME" \
             --argstr tag "$IMAGE_TAG" \
-            --argstr rev ${{ github.sha }}
+            --argstr rev ${{ github.sha }} \
+            --argstr arch ${{ matrix.arch }}
 
       - name: Load into Docker
         run: docker load < result
