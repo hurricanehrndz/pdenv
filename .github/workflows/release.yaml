@@ -102,8 +102,7 @@ jobs:
         run: |
           IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-          docker manifest create \
-            "${IMAGE_NAME}:${IMAGE_TAG}" \
+          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" \
             "${IMAGE_NAME}:${IMAGE_TAG}-amd64" \
             "${IMAGE_NAME}:${IMAGE_TAG}-arm64"
 
