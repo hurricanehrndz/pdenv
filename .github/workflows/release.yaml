@@ -106,9 +106,7 @@ jobs:
         run: |
           IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" \
-            "${IMAGE_NAME}:${IMAGE_TAG}-linux-amd64" \
-            "${IMAGE_NAME}:${IMAGE_TAG}-linux-arm64"
+          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-linux-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-linux-amd64"
 
       - name: Verify Image on GitHub Container Registry
         run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
