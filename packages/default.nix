@@ -19,7 +19,6 @@
       codelldb = let pkgs = inputs.nixpkgs-pr211321.legacyPackages.${system}; in pkgs.vscode-extensions.vadimcn.vscode-lldb;
       swiftformat = pkgs.callPackage ./swift/swiftformat {inherit (inputs) swiftformat-src;};
       swiftlint = pkgs.callPackage ./swift/swiftlint {inherit (inputs) swiftlint-src;};
-      pdenvOCI = pkgs.callPackage ./oci {inherit (inputs'.nix2container.packages) nix2container; inherit (self'.packages) pdenv;};
 
       yamlfixer = with pkgs.python3Packages;
         buildPythonApplication {

@@ -1,0 +1,15 @@
+---
+extends: default
+
+rules:
+  comments: disable
+  comments-indentation: disable
+  document-start: disable
+  indentation:
+    spaces: 2
+  truthy:
+    level: error
+  line-length:
+    max: 150
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
