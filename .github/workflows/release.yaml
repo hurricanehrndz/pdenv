@@ -98,7 +98,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: manifest
-        name: Create manifest
+        name: Create and Push mainfest to Github Container Registry
         run: |
           IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
@@ -106,8 +106,8 @@ jobs:
             "${IMAGE_NAME}:${IMAGE_TAG}-amd64" \
             "${IMAGE_NAME}:${IMAGE_TAG}-arm64"
 
-      - name: Push to GitHub Container Registry
-        run: docker manifest push "${IMAGE_NAME}:${IMAGE_TAG}"
+      - name: Verify Image on GitHub Container Registry
+        run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
         env:
           IMAGE_TAG: ${{ steps.manifest.outputs.tag }}
 
