@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: ["amd64", "arm64"]
+        platform:
+          - linux/amd64
+          - linux/arm64
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -52,7 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: ["amd64", "arm64"]
+        platform:
+          - linux/amd64
+          - linux/arm64
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
