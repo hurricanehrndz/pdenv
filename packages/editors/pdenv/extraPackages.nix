@@ -65,4 +65,18 @@ with packages; [
   # one-ofs
   nodePackages.prettier
   puppet-lint
+
+  # other useful binaries
+  zsh
+  (ripgrep.override {withPCRE2 = true;})
+  bashInteractive
+  bat
+  coreutils
+  direnv
+  exa
+  fd
+  findutils
+  fzf
+  gawk
+
 ]
