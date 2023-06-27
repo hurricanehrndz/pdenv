@@ -103,7 +103,7 @@ jobs:
       - name: Push to GitHub Container Registry
         run: docker push "${IMAGE_NAME}:${IMAGE_TAG}"
         env:
-          IMAGE_TAG: ${{ steps.build.outputs.tag }
+          IMAGE_TAG: ${{ steps.build.outputs.tag }}
 
   docker-manifest:
     name: Create Multi-Arch Image
