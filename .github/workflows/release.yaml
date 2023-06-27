@@ -20,6 +20,9 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v3
 
+      - name: Install nix
+        uses: cachix/install-nix-action@v22
+
       - name: Update flake inputs
         run: >
           nix flake update --accept-flake-config --no-use-registries
@@ -32,6 +35,7 @@ jobs:
   cachix:
     name: Publish Flake to Cachix
     runs-on: ubuntu-latest
+    needs: [update]
     strategy:
       matrix:
         platform:
