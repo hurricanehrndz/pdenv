@@ -84,7 +84,7 @@ jobs:
             --argstr name "$IMAGE_NAME" \
             --argstr tag "$IMAGE_TAG" \
             --argstr rev ${{ github.sha }} \
-            ".#copyToRegistry"
+            copyToRegistry
 
   docker-manifest:
     name: Create Multi-Arch Image
