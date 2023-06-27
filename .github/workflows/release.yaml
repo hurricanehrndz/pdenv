@@ -65,9 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        arch: ["amd64", "arm64"]
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -91,7 +89,7 @@ jobs:
       - id: build
         name: Build
         run: |
-          IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')-linux-${{ matrix.arch }}"
+          IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')-${{ matrix.arch }}"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
           nix run \
             --file docker.nix \
@@ -117,7 +115,7 @@ jobs:
         run: |
           IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-linux-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-linux-amd64"
+          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
 
       - name: Verify Image on GitHub Container Registry
         run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
