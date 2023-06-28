@@ -58,7 +58,7 @@
     swiftlint-src.flake = false;
 
     # golang support tools
-    go-enum-src.url = "github:abice/go-enum";
+    go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
     go-enum-src.flake = false;
     gomvp-src.url = "github:abenz1267/gomvp";
     gomvp-src.flake = false;

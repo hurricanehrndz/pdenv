@@ -30,7 +30,7 @@
       go-enum = pkgs.buildGoModule {
         name = "go-enum";
         src = inputs.go-enum-src;
-        vendorSha256 = "sha256-igtZkuNOUAveL+euw/0EsmxSot4m4IxdXH2DSQLYmiI=";
+        vendorSha256 = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
       };
       gomvp = pkgs.buildGoModule {
         name = "gomvp";
