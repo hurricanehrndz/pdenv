@@ -19,9 +19,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    devenv.url = "github:cachix/devenv";
-    mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    devshell.url = "github:numtide/devshell";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
 
     # neovim
     nixpkgs-pr211321.url = "github:mstone/nixpkgs/darwin-fix-vscode-lldb";
@@ -75,7 +75,7 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        inputs.devenv.flakeModule
+        inputs.devshell.flakeModule
         ./packages
       ];
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
@@ -88,18 +88,16 @@
         system,
         ...
       }: {
-        # Per-system attributes can be defined here. The self' and inputs'
-        # module parameters provide easy access to attributes of the same
-        # system.
-        devenv.shells.default = {
-          name = "Personal DevEnv";
-
-          # https://devenv.sh/reference/options/
-          packages = [config.packages.default];
-
-          enterShell = ''
-            Run nvim
-          '';
+        devshells.default = {
+          name = "Personal development environment";
+          packages = with pkgs; [
+            nix
+            home-manager
+            self'.packages.pdenv
+          ];
+          commands = [
+            { category = "editors"; name = "pdenv"; command = "${self'.packages.pdenv}/bin/nvim"; help = "personalized neovim instance"; }
+          ];
         };
       };
       flake = {
