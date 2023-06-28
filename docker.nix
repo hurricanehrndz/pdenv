@@ -12,6 +12,7 @@
       else ""
     ));
   inherit (flake.packages.${system}) pdenv neovim;
+  nixpkgs = system: import flake.inputs.nixpkgs {inherit system;};
   mkDocker = {
     pkgs,
     name ? "ghcr.io/hurricanehrndz/pdenv",
@@ -43,6 +44,6 @@
     };
 in
   mkDocker {
-    pkgs = flake.lib.nixpkgs system;
+    pkgs = nixpkgs system;
     inherit name tag arch;
   }

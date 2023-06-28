@@ -88,21 +88,6 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
-      "locked": {
-        "lastModified": 1653893745,
-        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -296,27 +281,6 @@
         "owner": "domenkozar",
         "ref": "relaxed-flakes",
         "repo": "nix",
-        "type": "github"
-      }
-    },
-    "nix2container": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1687467666,
-        "narHash": "sha256-z9n7ATBXeDqz5a8+4HJ9fhU6KMyg7zZX0wrhLdVG7bQ=",
-        "owner": "nlewo",
-        "repo": "nix2container",
-        "rev": "56e249151911e3d3928b578f5b6c01b16f55c308",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nlewo",
-        "repo": "nix2container",
         "type": "github"
       }
     },
@@ -570,7 +534,6 @@
         "mini-nvim-src": "mini-nvim-src",
         "mk-shell-bin": "mk-shell-bin",
         "neovim-flake": "neovim-flake",
-        "nix2container": "nix2container",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-pr211321": "nixpkgs-pr211321",
         "nvim-colorizer-src": "nvim-colorizer-src",
