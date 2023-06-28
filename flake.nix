@@ -99,6 +99,13 @@
             { category = "editors"; name = "pdenv"; command = "${self'.packages.pdenv}/bin/nvim"; help = "personalized neovim instance"; }
           ];
         };
+        apps = {
+          pdenv = {
+            type = "app";
+            program = "${self'.packages.pdenv}/bin/nvim";
+          };
+          default = self'.apps.pdenv;
+        };
       };
       flake = {
         # The usual flake attributes can be defined here, including system-
