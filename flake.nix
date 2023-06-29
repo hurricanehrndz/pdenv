@@ -5,7 +5,7 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://hurricanehrndz.cachix.org"
-      "nixpkgs-update.cachix.org-1:6y6Z2JdoL3APdu6/+Iy8eZX2ajf09e4EE9SnxSML1W8="
+      "https://nixpkgs-update.cachix.org/"
       "https://cache.nixos.org "
     ];
     extra-trusted-public-keys = [
@@ -93,6 +93,7 @@
           packages = with pkgs; [
             nix
             home-manager
+            zsh
             self'.packages.pdenv
           ];
           commands = [

@@ -10,45 +10,15 @@ in
   with pkgs.vimPlugins;
   with packages; [
     # Theme
-    {
-      plugin = tokyonight-nvim;
-      config = ''
-        require("hrndz.plugins.tokyonight")
-      '';
-    }
-    {
-      plugin = indent-blankline-nvim;
-      config = ''
-        require("hrndz.plugins.indentblankline")
-      '';
-    }
-    {
-      plugin = withSrc gitsigns-nvim inputs.gitsigns-src;
-      config = ''
-        require("hrndz.plugins.gitsigns")
-      '';
-    }
-    {
-      plugin = withSrc nvim-colorizer-lua inputs.nvim-colorizer-src;
-      config = ''
-        colorizer = require("colorizer")
-        colorizer.setup()
-      '';
-    }
-    {
-      plugin = nvim-web-devicons;
-      config = ''
-        local devicons = require("nvim-web-devicons")
-        devicons.setup({ default = true })
-      '';
-    }
+    tokyonight-nvim
+    alpha-nvim
+    indent-blankline-nvim
+    (withSrc gitsigns-nvim inputs.gitsigns-src)
+    (withSrc nvim-colorizer-lua inputs.nvim-colorizer-src)
+    nvim-web-devicons
+
     # Fuzzy finder
-    {
-      plugin = withSrc telescope-nvim inputs.telescope-nvim-src;
-      config = ''
-        require("hrndz.plugins.telescope")
-      '';
-    }
+    (withSrc telescope-nvim inputs.telescope-nvim-src)
     plenary-nvim
     popup-nvim
     telescope-fzf-native-nvim
@@ -56,53 +26,22 @@ in
     telescope-dap-nvim
 
     # add some syntax highlighting
-    {
-      plugin = nvim-treesitter-master;
-      config = ''
-        require("hrndz.plugins.treesitter")
-      '';
-    }
+    nvim-treesitter-master
+
     # functionality
-    {
-      plugin = toggleterm-nvim;
-      config = ''
-        require("hrndz.plugins.toggleterm")
-      '';
-    }
+    toggleterm-nvim
+
     # comment
-    {
-      plugin = comment-nvim;
-      config = ''
-        require("hrndz.plugins.comment")
-      '';
-    }
-    {
-      plugin = nvim-window;
-      config = ''
-        require("hrndz.plugins.winpicker")
-      '';
-    }
+    comment-nvim
+    nvim-window
+
     # which key did I just hit
-    {
-      plugin = which-key-nvim;
-      config = ''
-        require("hrndz.plugins.whichkey")
-      '';
-    }
+    which-key-nvim
     # what's did I do wrong
-    {
-      plugin = trouble-nvim;
-      config = ''
-        require("hrndz.plugins.trouble")
-      '';
-    }
+    trouble-nvim
+
     # add completion
-    {
-      plugin = nvim-cmp;
-      config = ''
-        require("hrndz.plugins.completion")
-      '';
-    }
+    nvim-cmp
     cmp-nvim-lsp
     cmp-nvim-lua
     cmp-path
@@ -124,12 +63,7 @@ in
     null-ls-nvim
 
     # add lsp config
-    {
-      plugin = withSrc nvim-lspconfig inputs.nvim-lspconfig-src;
-      config = ''
-        require("hrndz.lsp")
-      '';
-    }
+    (withSrc nvim-lspconfig inputs.nvim-lspconfig-src)
     neodev-nvim
 
     # nice plugins
@@ -137,76 +71,21 @@ in
     vim-tmux-navigator
     nvim-notify
     undotree
-    {
-      plugin = feline-nvim;
-      config = ''
-        require("hrndz.plugins.statusline")
-      '';
-    }
-    {
-      plugin = mini-nvim;
-      config = ''
-        require("hrndz.plugins.mini")
-      '';
-    }
-    {
-      plugin = vim-better-whitespace;
-      config = ''
-        require("hrndz.plugins.whitespace")
-      '';
-    }
+
+    feline-nvim
+    mini-nvim
+
+    vim-better-whitespace
 
     # pictograms
     lspkind-nvim
 
     # debugging
-    {
-      plugin = nvim-dap;
-      config = ''
-        require("hrndz.plugins.dap")
-        local dap_python = require("dap-python")
-        ---@diagnostic disable-next-line: param-type-mismatch
-        dap_python.setup("${nvimPython}/bin/python")
-
-        local dap = require('dap')
-        local codelldb_bin = "${packages.codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
-        dap.adapters.codelldb = {
-        type = 'server',
-        port = "''${port}",
-          executable = {
-            command = codelldb_bin,
-            args = {"--port", "''${port}", "--liblldb", "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB"},
-          }
-        }
-        dap.configurations.cpp = {
-          {
-            name = "Launch file",
-            type = "codelldb",
-            request = "launch",
-            program = function()
-              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-            end,
-            cwd = "''${workspaceFolder}",
-            stopOnEntry = false,
-          },
-        }
-        dap.configurations.swift = dap.configurations.cpp
-      '';
-    }
+    nvim-dap
     nvim-dap-ui
     nvim-dap-virtual-text
     nvim-dap-python
     vim-puppet
-    {
-      plugin = alpha-nvim;
-      config = ''
-        require("hrndz.plugins.alpha")
-      '';
-    }
-    {
-      plugin = diffview-nvim;
-      config = ''
-        require("diffview").setup({})
-      '';
-    }
+
+    diffview-nvim
   ]

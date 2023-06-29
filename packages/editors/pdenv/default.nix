@@ -10,12 +10,10 @@
     paths =
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
         p.bash
-        p.c
         # p.comment
         p.cpp
         p.go
         p.javascript
-        p.lua
         p.make
         p.markdown
         p.nix
@@ -43,26 +41,20 @@
     installPhase = ''
       mkdir -p $out/
       cp -r ./* $out/
+      mkdir -p $out/lua/hrndz/generated
       cp ${pkgs.writeText "$out/init.lua" ''
-        -- Add Treesitter Parsers Path
-        vim.opt.runtimepath:append("${treesitter-parsers}")
+        local M = {}
+        M.run = function ()
+          -- Add Treesitter Parsers Path
+          vim.opt.runtimepath:append("${treesitter-parsers}")
 
-        -- Sensible defaults - mine
-        require("hrndz.options")
+          -- Global vars
+          vim.g.nix_codelldb_bin = "${packages.codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
+          vim.g.nix_dap_python = "${nvimPython}/bin/python"
+        end
 
-        -- Key mappings
-        require("hrndz.keymaps")
-
-        -- Autocmds
-        require("hrndz.autocmds")
-
-        -- Plugins
-        require("hrndz.plugins")
-      ''} $out/init.lua
-      cp ${pkgs.writeText "$out/plugins.lua" ''
-        -- Generated plugins configs
-        ${neovimConfig.neovimRcContent}
-      ''} $out/lua/hrndz/plugins/init.lua
+        return M
+      ''} $out/lua/hrndz/generated/init.lua
     '';
   };
   # convert to string to stop doublbing of args

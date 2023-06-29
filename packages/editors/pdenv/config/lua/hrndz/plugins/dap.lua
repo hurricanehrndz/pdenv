@@ -66,3 +66,33 @@ map("n", "<space>dr", "<Cmd>lua require'dap'.repl.toggle()<CR>", "Repl")
 map("n", "<space>dl", "<Cmd>lua require'dap'.run_last()<CR>", "Last")
 map("n", "<space>du", "<Cmd>lua require'dapui'.toggle()<CR>", "UI")
 map("n", "<space>dx", "<Cmd>lua require'dap'.terminate()<CR>", "Exit")
+
+local dap_python = require("dap-python")
+dap_python.setup(vim.g.nix_dap_python)
+dap.adapters.codelldb = {
+  type = "server",
+  port = "''${port}",
+  executable = {
+    command = vim.g.nix_codelldb_bin,
+    args = {
+      "--port",
+      "''${port}",
+      "--liblldb",
+      -- TODO: fix for linux
+      "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+    },
+  },
+}
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "''${workspaceFolder}",
+    stopOnEntry = false,
+  },
+}
+dap.configurations.swift = dap.configurations.cpp
