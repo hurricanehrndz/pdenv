@@ -85,6 +85,9 @@ in
     nvim-dap-ui
     nvim-dap-virtual-text
     nvim-dap-python
+
+    # filetype
+    Jenkinsfile-vim-syntax
     vim-puppet
 
     diffview-nvim
