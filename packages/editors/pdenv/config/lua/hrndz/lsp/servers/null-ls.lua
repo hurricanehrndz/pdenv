@@ -61,11 +61,14 @@ local swiftlint = {
   }),
 }
 
-local gotest = require("go.null_ls").gotest()
-local gotest_codeaction = require("go.null_ls").gotest_action()
--- local golangci_lint = require("go.null_ls").golangci_lint()
-
 local sources = {
+  -- golang
+  b.code_actions.gomodifytags,
+  b.code_actions.impl,
+  b.code_actions.refactoring,
+  b.formatting.gofumpt,
+  b.formatting.goimports_reviser,
+
   -- formatting
   b.formatting.alejandra,
   b.formatting.prettier.with({
@@ -102,16 +105,12 @@ local sources = {
   b.diagnostics.markdownlint,
   b.diagnostics.flake8,
   b.diagnostics.yamllint,
-  b.diagnostics.revive,
+  b.diagnostics.golangci_lint,
   b.diagnostics.puppet_lint,
 
   -- custom
   yamlfixer,
   swiftlint,
-
-  -- nivm go
-  gotest,
-  gotest_codeaction,
 }
 
 local M = {}

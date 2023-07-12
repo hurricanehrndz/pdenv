@@ -12,19 +12,40 @@ end
 
 local map = require("hrndz.utils").map
 map("n", "<space>lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
-map("n", "<space>la", "<Cmd>CodeActionMenu<CR>", "Code Action")
+map("n", "<space>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>",  "Code Action")
 map("n", "<space>ld", "<Cmd>lua vim.diagnostic.open_float()<CR>", "Diagnostic float")
 map("n", "<space>lt", "<Cmd>TroubleToggle<CR>", "Diagnostics")
 map("n", "<space>lw", "<Cmd>Telescope diagnostics<CR>", "Workspace Diagnostics")
 map("n", "<space>li", "<Cmd>LspInfo<CR>", "Info")
 map("n", "<space>ll", [[<Cmd>lua require("lsp_lines").toggle()<CR>]], "Toggle lsp lines")
 
-local util = require 'vim.lsp.util'
+local util = require("vim.lsp.util")
 local formatting_callback = function(client, bufnr)
-  vim.keymap.set('n', '<space>lf', function()
+  vim.keymap.set("n", "<space>lf", function()
     local params = util.make_formatting_params({})
-    client.request('textDocument/formatting', params, nil, bufnr)
+    client.request("textDocument/formatting", params, nil, bufnr)
   end, { buffer = bufnr, desc = "Format" })
+end
+
+local function try_attach_inlay_hints(client, bufnr)
+  if client.server_capabilities.inlayHintProvider then
+    vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+
+    vim.api.nvim_create_autocmd("InsertEnter", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.inlay_hint(bufnr, true)
+      end,
+      group = "lsp_augroup",
+    })
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.inlay_hint(bufnr, false)
+      end,
+      group = "lsp_augroup",
+    })
+  end
 end
 
 local custom_attach = function(client, bufnr)
@@ -45,6 +66,7 @@ local custom_attach = function(client, bufnr)
   bufmap("n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic")
   bufmap("n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", "Go to prev diagnostic")
 
+  try_attach_inlay_hints(client, bufnr)
   local codelens_enabled = (client.server_capabilities.codeLensProvider ~= false)
   if not codelens_enabled then
     vim.lsp.codelens.refresh()
@@ -71,7 +93,11 @@ vim.diagnostic.config({
     focusable = false,
   },
   update_in_insert = false, -- default to false
-  severity_sort = true,     -- default to false
+  severity_sort = true, -- default to false
+})
+
+require("nvim-lightbulb").setup({
+  autocmd = { enabled = true }
 })
 
 local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "null-ls", "pyright", "go" }

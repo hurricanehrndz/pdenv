@@ -25,8 +25,8 @@ with packages; [
   mockgen
   go-enum
   gomvp
+  goimports-reviser
   json-to-struct
-  revive
 
   # lua
   sumneko-lua-language-server

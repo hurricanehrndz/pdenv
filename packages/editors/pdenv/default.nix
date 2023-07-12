@@ -13,6 +13,9 @@
         # p.comment
         p.cpp
         p.go
+        p.gomod
+        p.gowork
+        p.gosum
         p.javascript
         p.make
         p.markdown

@@ -12,10 +12,10 @@ in
     # Theme
     tokyonight-nvim
     alpha-nvim
+    nvim-web-devicons
     indent-blankline-nvim
     (withSrc gitsigns-nvim inputs.gitsigns-src)
     (withSrc nvim-colorizer-lua inputs.nvim-colorizer-src)
-    nvim-web-devicons
 
     # Fuzzy finder
     (withSrc telescope-nvim inputs.telescope-nvim-src)
@@ -49,8 +49,6 @@ in
     cmp-cmdline
     cmp-zsh # next is required
     deol-nvim
-    (withSrc go-nvim inputs.go-nvim-src)
-    nvim-guihua
     lsp_lines-nvim
 
     # snippets
@@ -64,6 +62,7 @@ in
 
     # add lsp config
     (withSrc nvim-lspconfig inputs.nvim-lspconfig-src)
+    (withSrc nvim-lightbulb inputs.nvim-lightbulb-src)
     neodev-nvim
 
     # nice plugins
@@ -91,4 +90,7 @@ in
     vim-puppet
 
     diffview-nvim
+
+    # motion
+    (withSrc flash-nvim inputs.flash-nvim-src)
   ]

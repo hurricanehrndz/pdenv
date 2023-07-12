@@ -30,8 +30,8 @@
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    go-nvim-src.url = "github:ray-x/go.nvim";
-    go-nvim-src.flake = false;
+    # go-nvim-src.url = "github:ray-x/go.nvim";
+    # go-nvim-src.flake = false;
     gitsigns-src.url = "github:lewis6991/gitsigns.nvim";
     gitsigns-src.flake = false;
     nvim-colorizer-src.url = "github:NvChad/nvim-colorizer.lua";
@@ -56,10 +56,16 @@
     swiftformat-src.flake = false;
     swiftlint-src.url = "github:realm/SwiftLint?rev=eb85125a5f293de3d3248af259980c98bc2b1faa";
     swiftlint-src.flake = false;
+    flash-nvim-src.url = "github:folke/flash.nvim";
+    flash-nvim-src.flake = false;
+    nvim-lightbulb-src.url = "github:kosayoda/nvim-lightbulb";
+    nvim-lightbulb-src.flake = false;
 
     # golang support tools
     go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
     go-enum-src.flake = false;
+    goimports-reviser-src.url = "github:incu6us/goimports-reviser?ref=v3.3.1";
+    goimports-reviser-src.flake = false;
     gomvp-src.url = "github:abenz1267/gomvp";
     gomvp-src.flake = false;
     json-to-struct-src.url = "github:tmc/json-to-struct";
