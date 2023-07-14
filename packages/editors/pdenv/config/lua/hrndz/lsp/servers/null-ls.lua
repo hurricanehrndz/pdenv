@@ -68,6 +68,7 @@ local sources = {
   b.code_actions.refactoring,
   b.formatting.gofumpt,
   b.formatting.goimports_reviser,
+  b.diagnostics.golangci_lint,
 
   -- formatting
   b.formatting.alejandra,
@@ -105,7 +106,6 @@ local sources = {
   b.diagnostics.markdownlint,
   b.diagnostics.flake8,
   b.diagnostics.yamllint,
-  b.diagnostics.golangci_lint,
   b.diagnostics.puppet_lint,
 
   -- custom
