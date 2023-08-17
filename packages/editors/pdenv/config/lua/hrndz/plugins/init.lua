@@ -8,7 +8,6 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.telescope")
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.toggleterm")
-  require("hrndz.plugins.comment")
   require("hrndz.plugins.winpicker")
 
   require("hrndz.plugins.whichkey")
@@ -25,4 +24,5 @@ if vim.g.vscode == nil then
 end
 
 -- text manipulation
+require("hrndz.plugins.comment")
 require("hrndz.plugins.mini")
