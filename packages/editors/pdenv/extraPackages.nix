@@ -62,6 +62,10 @@ with packages; [
   nodePackages.pyright
   nvimPython
 
+  # terraform
+  terraform-ls
+  tflint
+
   # one-ofs
   nodePackages.prettier
   puppet-lint

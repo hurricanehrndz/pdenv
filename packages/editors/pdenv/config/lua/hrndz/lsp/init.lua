@@ -100,7 +100,7 @@ require("nvim-lightbulb").setup({
   autocmd = { enabled = true }
 })
 
-local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "null-ls", "pyright", "go" }
+local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "null-ls", "pyright", "go", "terraformls" }
 for _, server_name in ipairs(lsp_servers) do
   local has_custom_setup, server = pcall(require, "hrndz.lsp.servers." .. server_name)
   if has_custom_setup then

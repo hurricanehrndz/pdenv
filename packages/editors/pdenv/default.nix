@@ -16,14 +16,17 @@
         p.gomod
         p.gowork
         p.gosum
+        p.hcl
         p.javascript
         p.make
         p.markdown
         p.nix
         p.puppet
         p.python
+        p.terraform
         p.tsx
         p.typescript
+        p.yaml
       ]))
       .dependencies;
   };
