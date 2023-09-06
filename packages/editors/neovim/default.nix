@@ -35,5 +35,8 @@ in
       )
       != "use-the-correct-replacement-args-for-gsub-directive.patch")
     o.patches;
+    postInstall = ''
+      rm -rf $out/lib/nvim/parser
+    '';
     nativeBuildInputs = o.nativeBuildInputs ++ lib.optionals isDarwin [liblpeg];
   })
