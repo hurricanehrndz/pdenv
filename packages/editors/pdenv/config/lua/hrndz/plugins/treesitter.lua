@@ -5,12 +5,8 @@ end
 
 ts_configs.setup({
   indent = { enable = true },
-  ignore_install = { "query", "bash" },
   highlight = {
-    enable = false,
-
-    -- list of language that will be disabled
-    disable = { "bash", "query" },
+    enable = true,
 
     additional_vim_regex_highlighting = false,
   },
