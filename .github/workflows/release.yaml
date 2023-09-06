@@ -16,7 +16,6 @@ jobs:
   cachix:
     name: Publish Flake to Cachix
     runs-on: ubuntu-latest
-    needs: [update]
     strategy:
       matrix:
         platform:
