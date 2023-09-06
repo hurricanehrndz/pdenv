@@ -37,6 +37,7 @@ in
     o.patches;
     postInstall = ''
       rm -rf $out/lib/nvim/parser
+      rm -rf $out/share/nvim/runtime/queries/bash/highlights.scm
     '';
     nativeBuildInputs = o.nativeBuildInputs ++ lib.optionals isDarwin [liblpeg];
   })
