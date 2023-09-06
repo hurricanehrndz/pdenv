@@ -10,7 +10,8 @@
     paths =
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
         p.bash
-        # p.comment
+        p.c
+        p.comment
         p.cpp
         p.go
         p.gomod
@@ -18,14 +19,18 @@
         p.gosum
         p.hcl
         p.javascript
+        p.lua
         p.make
         p.markdown
         p.nix
         p.puppet
         p.python
+        p.query
         p.terraform
         p.tsx
         p.typescript
+        p.vim
+        p.vimdoc
         p.yaml
       ]))
       .dependencies;
@@ -51,9 +56,6 @@
       cp ${pkgs.writeText "$out/init.lua" ''
         local M = {}
         M.run = function ()
-          -- Add Treesitter Parsers Path
-          vim.opt.runtimepath:append("${treesitter-parsers}")
-
           -- Global vars
           vim.g.nix_codelldb_bin = "${packages.codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
           vim.g.nix_dap_python = "${nvimPython}/bin/python"
@@ -71,7 +73,7 @@
       ":"
       "${extraPackagesBinPath}"
       "--add-flags"
-      ''--cmd "set rtp^=${nvimrc}"''
+      ''--cmd "set rtp^=${treesitter-parsers},${nvimrc}"''
       "--add-flags"
       "-u ${nvimrc}/init.lua"
     ]);

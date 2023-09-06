@@ -7,6 +7,10 @@ ts_configs.setup({
   indent = { enable = true },
   highlight = {
     enable = true,
+
+    -- list of language that will be disabled
+    disable = { "bash" },
+
     additional_vim_regex_highlighting = false,
   },
   -- rainbow = { enable = true, disable = {} },
