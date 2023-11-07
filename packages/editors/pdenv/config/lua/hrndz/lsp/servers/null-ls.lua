@@ -67,6 +67,7 @@ local sources = {
   b.code_actions.impl,
   b.code_actions.refactoring,
   b.formatting.gofumpt,
+  b.formatting.goimports,
   b.formatting.goimports_reviser,
   b.diagnostics.golangci_lint,
 

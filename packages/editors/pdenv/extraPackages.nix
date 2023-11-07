@@ -77,7 +77,7 @@ with packages; [
   bat
   coreutils
   direnv
-  exa
+  eza
   fd
   findutils
   fzf

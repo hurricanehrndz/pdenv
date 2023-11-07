@@ -18,7 +18,8 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.follows = "nixpkgs-master";
     flake-parts.url = "github:hercules-ci/flake-parts";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";

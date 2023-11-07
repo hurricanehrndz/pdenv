@@ -3,6 +3,7 @@
   lib,
   pkgs,
   packages,
+  neovim,
   ...
 }: let
   treesitter-parsers = pkgs.symlinkJoin {
@@ -79,4 +80,4 @@
     ]);
   LuaConfig = neovimConfig // {inherit wrapperArgs;};
 in
-  pkgs.wrapNeovimUnstable packages.neovim LuaConfig
+  pkgs.wrapNeovimUnstable neovim LuaConfig

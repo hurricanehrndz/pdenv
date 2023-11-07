@@ -66,7 +66,6 @@ local custom_attach = function(client, bufnr)
   bufmap("n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic")
   bufmap("n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", "Go to prev diagnostic")
 
-  try_attach_inlay_hints(client, bufnr)
   local codelens_enabled = (client.server_capabilities.codeLensProvider ~= false)
   if not codelens_enabled then
     vim.lsp.codelens.refresh()

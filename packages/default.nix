@@ -14,6 +14,7 @@
       pdenv = pkgs.callPackage ./editors/pdenv {
         inherit (self') packages;
         inherit inputs;
+        inherit neovim;
       };
       default = config.packages.pdenv;
       codelldb = let pkgs = inputs.nixpkgs-pr211321.legacyPackages.${system}; in pkgs.vscode-extensions.vadimcn.vscode-lldb;

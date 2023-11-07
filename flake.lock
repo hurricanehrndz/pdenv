@@ -210,21 +210,6 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
-      "locked": {
-        "lastModified": 1694002086,
-        "narHash": "sha256-6+G37V4KbfGiX/TCDb0eb3iozovWo75oYSIqfj4AhxU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "7cbc8215fdaa0bee878327f8edebbef2c19e62a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -239,6 +224,22 @@
         "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1699330949,
+        "narHash": "sha256-B+C46k14HFU6/6dFzwFoSjBvxITAPcyekcAqNvwFiTI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fa65ad7e14c1c3996579d7f0e96092883c77db73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -400,7 +401,10 @@
         "json-to-struct-src": "json-to-struct-src",
         "mini-nvim-src": "mini-nvim-src",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "nixpkgs-master"
+        ],
+        "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-pr211321": "nixpkgs-pr211321",
         "nvim-colorizer-src": "nvim-colorizer-src",
         "nvim-guihua-src": "nvim-guihua-src",
