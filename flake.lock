@@ -388,6 +388,22 @@
         "type": "gitlab"
       }
     },
+    "rainbow-delimiters_src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1698573782,
+        "narHash": "sha256-rJOWVz1cplThmx9HY7RqYSxUgKKq1yjzhS4Pb2ebFQ4=",
+        "owner": "HiPhish",
+        "repo": "rainbow-delimiters.nvim",
+        "rev": "df8cdf68234fbf056202a9684931c3dfa89988c1",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "HiPhish",
+        "repo": "rainbow-delimiters.nvim",
+        "type": "gitlab"
+      }
+    },
     "root": {
       "inputs": {
         "alpha-nvim-src": "alpha-nvim-src",
@@ -414,6 +430,7 @@
         "nvim-retrail-src": "nvim-retrail-src",
         "nvim-treesitter-src": "nvim-treesitter-src",
         "nvim-window-src": "nvim-window-src",
+        "rainbow-delimiters_src": "rainbow-delimiters_src",
         "swiftformat-src": "swiftformat-src",
         "swiftlint-src": "swiftlint-src",
         "telescope-nvim-src": "telescope-nvim-src",
