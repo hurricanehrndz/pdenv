@@ -388,7 +388,7 @@
         "type": "gitlab"
       }
     },
-    "rainbow-delimiters_src": {
+    "rainbow-delimiters-src": {
       "flake": false,
       "locked": {
         "lastModified": 1698573782,
@@ -430,7 +430,7 @@
         "nvim-retrail-src": "nvim-retrail-src",
         "nvim-treesitter-src": "nvim-treesitter-src",
         "nvim-window-src": "nvim-window-src",
-        "rainbow-delimiters_src": "rainbow-delimiters_src",
+        "rainbow-delimiters-src": "rainbow-delimiters-src",
         "swiftformat-src": "swiftformat-src",
         "swiftlint-src": "swiftlint-src",
         "telescope-nvim-src": "telescope-nvim-src",

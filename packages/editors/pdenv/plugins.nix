@@ -93,4 +93,7 @@ in
 
     # motion
     (withSrc flash-nvim inputs.flash-nvim-src)
+
+    # rainbow
+    rainbow-delimiters
   ]

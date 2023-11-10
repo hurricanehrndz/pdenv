@@ -63,8 +63,8 @@
     flash-nvim-src.flake = false;
     nvim-lightbulb-src.url = "github:kosayoda/nvim-lightbulb";
     nvim-lightbulb-src.flake = false;
-    rainbow-delimiters_src.url = "gitlab:HiPhish/rainbow-delimiters.nvim";
-    rainbow-delimiters_src.flake = false;
+    rainbow-delimiters-src.url = "gitlab:HiPhish/rainbow-delimiters.nvim";
+    rainbow-delimiters-src.flake = false;
 
     # golang support tools
     go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
