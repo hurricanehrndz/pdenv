@@ -33,9 +33,9 @@ jobs:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Update flake inputs
-        run: >
-          nix flake update --accept-flake-config --no-use-registries
+#      - name: Update flake inputs
+#       run: >
+#         nix flake update --accept-flake-config --no-use-registries
 
       - name: Build and Publish nix flake
         run: >
