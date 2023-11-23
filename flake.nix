@@ -24,8 +24,6 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    # neovim
-    nixpkgs-pr211321.url = "github:mstone/nixpkgs/darwin-fix-vscode-lldb";
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
     neovim-flake = {
       url = "github:neovim/neovim?dir=contrib";
@@ -55,10 +53,6 @@
     nvim-retrail-src.flake = false;
     nvim-guihua-src.url = "github:ray-x/guihua.lua";
     nvim-guihua-src.flake = false;
-    swiftformat-src.url = "github:nicklockwood/SwiftFormat?rev=a5d58763da90d8240b2a0f7f2b57da29438a0530";
-    swiftformat-src.flake = false;
-    swiftlint-src.url = "github:realm/SwiftLint?rev=eb85125a5f293de3d3248af259980c98bc2b1faa";
-    swiftlint-src.flake = false;
     flash-nvim-src.url = "github:folke/flash.nvim";
     flash-nvim-src.flake = false;
     nvim-lightbulb-src.url = "github:kosayoda/nvim-lightbulb";

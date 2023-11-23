@@ -69,20 +69,20 @@ map("n", "<space>dx", "<Cmd>lua require'dap'.terminate()<CR>", "Exit")
 
 local dap_python = require("dap-python")
 dap_python.setup(vim.g.nix_dap_python)
-dap.adapters.codelldb = {
-  type = "server",
-  port = "''${port}",
-  executable = {
-    command = vim.g.nix_codelldb_bin,
-    args = {
-      "--port",
-      "''${port}",
-      "--liblldb",
-      -- TODO: fix for linux
-      "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
-    },
-  },
-}
+-- dap.adapters.codelldb = {
+--   type = "server",
+--   port = "''${port}",
+--   executable = {
+--     command = vim.g.nix_codelldb_bin,
+--     args = {
+--       "--port",
+--       "''${port}",
+--       "--liblldb",
+--       -- TODO: fix for linux
+--       "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+--     },
+--   },
+-- }
 dap.configurations.cpp = {
   {
     name = "Launch file",

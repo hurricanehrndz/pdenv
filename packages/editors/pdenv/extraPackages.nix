@@ -49,8 +49,8 @@ with packages; [
   vale
 
   # swift
-  # packages.swiftformat
-  # packages.swiftlint
+  # pkgs.swiftformat
+  # pkgs.swiftlint
   # sourcekit-lsp
 
   # yaml

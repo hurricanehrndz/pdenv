@@ -58,7 +58,6 @@
         local M = {}
         M.run = function ()
           -- Global vars
-          vim.g.nix_codelldb_bin = "${packages.codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
           vim.g.nix_dap_python = "${nvimPython}/bin/python"
         end
 
