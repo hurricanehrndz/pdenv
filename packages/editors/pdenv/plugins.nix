@@ -11,6 +11,7 @@ in
   with packages; [
     # Theme
     tokyonight-nvim
+    catppuccin-nvim
     (withSrc alpha-nvim inputs.alpha-nvim-src)
     nvim-web-devicons
     indent-blankline-nvim

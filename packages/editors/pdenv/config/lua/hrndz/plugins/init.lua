@@ -1,6 +1,6 @@
 if vim.g.vscode == nil then
   require("hrndz.plugins.alpha")
-  require("hrndz.plugins.tokyonight")
+  require("hrndz.plugins.theme")
   require("hrndz.plugins.indentblankline")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
