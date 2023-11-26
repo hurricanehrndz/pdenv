@@ -88,14 +88,14 @@ local sources = {
   b.formatting.swiftformat,
   b.formatting.puppet_lint,
   b.formatting.black.with({ extra_args = { "--fast" } }),
-  b.formatting.cbfmt.with({
-    extra_args = function(params)
-      local c = match_conf(".cbfmt.toml")(params.root)
-      if c then
-        return { "--config", c }
-      end
-    end,
-  }),
+  -- b.formatting.cbfmt.with({
+  --   extra_args = function(params)
+  --     local c = match_conf(".cbfmt.toml")(params.root)
+  --     if c then
+  --       return { "--config", c }
+  --     end
+  --   end,
+  -- }),
 
   -- diagnostics
   b.diagnostics.shellcheck.with({

@@ -44,7 +44,6 @@ with packages; [
   shfmt
 
   # markdwon
-  cbfmt
   nodePackages.markdownlint-cli
   vale
 
