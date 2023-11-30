@@ -28,24 +28,24 @@
       go-enum = pkgs.buildGoModule {
         name = "go-enum";
         src = inputs.go-enum-src;
-        vendorSha256 = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
+        vendorHash = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
       };
       goimports-reviser = pkgs.buildGoModule rec {
         name = "goimports-reviser";
         src = inputs.goimports-reviser-src;
-        vendorSha256 = "sha256-lyV4HlpzzxYC6OZPGVdNVL2mvTFE9yHO37zZdB/ePBg=";
+        vendorHash = "sha256-lyV4HlpzzxYC6OZPGVdNVL2mvTFE9yHO37zZdB/ePBg=";
         excludedPackages = [ "linter" ];
         doCheck = false;
       };
       gomvp = pkgs.buildGoModule {
         name = "gomvp";
         src = inputs.gomvp-src;
-        vendorSha256 = null;
+        vendorHash = null;
       };
       json-to-struct = pkgs.buildGoModule rec {
         name = "json-to-struct";
         src = inputs.json-to-struct-src;
-        vendorSha256 = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
+        vendorHash = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
         proxyVendor = true;
       };
       nvim-window = pkgs.vimUtils.buildVimPlugin {
