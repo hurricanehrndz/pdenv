@@ -72,7 +72,8 @@ in
     nvim-notify
     undotree
 
-    feline-nvim
+    # feline-nvim
+    lualine-nvim
     mini-nvim
 
     vim-better-whitespace

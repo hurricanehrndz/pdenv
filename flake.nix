@@ -102,7 +102,12 @@
             self'.packages.pdenv
           ];
           commands = [
-            { category = "editors"; name = "pdenv"; command = "${self'.packages.pdenv}/bin/nvim"; help = "personalized neovim instance"; }
+            {
+              category = "editors";
+              name = "pdenv";
+              command = "${self'.packages.pdenv}/bin/nvim";
+              help = "personalized neovim instance";
+            }
           ];
         };
         apps = {
