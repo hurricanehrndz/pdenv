@@ -23,43 +23,13 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
+    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
     neovim-flake = {
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # go-nvim-src.url = "github:ray-x/go.nvim";
-    # go-nvim-src.flake = false;
-    alpha-nvim-src.url = "github:goolord/alpha-nvim";
-    alpha-nvim-src.flake = false;
-    gitsigns-src.url = "github:lewis6991/gitsigns.nvim";
-    gitsigns-src.flake = false;
-    nvim-colorizer-src.url = "github:NvChad/nvim-colorizer.lua";
-    nvim-colorizer-src.flake = false;
-    nvim-window-src.url = "gitlab:yorickpeterse/nvim-window";
-    nvim-window-src.flake = false;
-    nvim-osc52-src.url = "github:ojroques/nvim-osc52";
-    nvim-osc52-src.flake = false;
-    telescope-nvim-src.url = "github:nvim-telescope/telescope.nvim";
-    telescope-nvim-src.flake = false;
-    nvim-treesitter-src.url = "github:nvim-treesitter/nvim-treesitter";
-    nvim-treesitter-src.flake = false;
-    mini-nvim-src.url = "github:echasnovski/mini.nvim";
-    mini-nvim-src.flake = false;
-    nvim-lspconfig-src.url = "github:neovim/nvim-lspconfig";
-    nvim-lspconfig-src.flake = false;
-    nvim-retrail-src.url = "github:kaplanz/nvim-retrail";
-    nvim-retrail-src.flake = false;
-    nvim-guihua-src.url = "github:ray-x/guihua.lua";
-    nvim-guihua-src.flake = false;
-    flash-nvim-src.url = "github:folke/flash.nvim";
-    flash-nvim-src.flake = false;
-    nvim-lightbulb-src.url = "github:kosayoda/nvim-lightbulb";
-    nvim-lightbulb-src.flake = false;
-    rainbow-delimiters-src.url = "gitlab:HiPhish/rainbow-delimiters.nvim";
-    rainbow-delimiters-src.flake = false;
-
     # golang support tools
     go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
     go-enum-src.flake = false;
@@ -93,6 +63,12 @@
         system,
         ...
       }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.nixneovimplugins.overlays.default
+          ];
+        };
         devshells.default = {
           name = "Personal development environment";
           packages = with pkgs; [

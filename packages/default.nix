@@ -48,37 +48,6 @@
         vendorHash = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
         proxyVendor = true;
       };
-      nvim-window = pkgs.vimUtils.buildVimPlugin {
-        pname = "nvim-window";
-        src = inputs.nvim-window-src;
-        version = "master";
-      };
-      nvim-osc52 = pkgs.vimUtils.buildVimPlugin {
-        pname = "nvim-osc52";
-        src = inputs.nvim-osc52-src;
-        version = "master";
-      };
-      mini-nvim = pkgs.vimUtils.buildVimPlugin {
-        pname = "mini-nvim";
-        src = inputs.mini-nvim-src;
-        version = "master";
-      };
-      nvim-treesitter-master = pkgs.vimUtils.buildVimPlugin {
-        pname = "nvim-treesitter";
-        version = "master";
-        src = inputs.nvim-treesitter-src;
-      };
-      nvim-guihua = pkgs.vimUtils.buildVimPlugin {
-        pname = "nvim-guihua";
-        version = "master";
-        src = inputs.nvim-guihua-src;
-      };
-      rainbow-delimiters = pkgs.vimUtils.buildVimPlugin {
-        pname = "rainbow-delimiters";
-        version = "master";
-        src = inputs.rainbow-delimiters-src;
-
-      };
     };
   };
 }

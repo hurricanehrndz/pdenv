@@ -7,27 +7,26 @@
 }: let
   withSrc = pkg: src: pkg.overrideAttrs (_: {inherit src;});
 in
-  with pkgs.vimPlugins;
-  with packages; [
+  with pkgs.vimExtraPlugins;
+  with pkgs.vimPlugins; [
     # Theme
     tokyonight-nvim
-    catppuccin-nvim
-    (withSrc alpha-nvim inputs.alpha-nvim-src)
+    catppuccin
+    alpha-nvim
     nvim-web-devicons
     indent-blankline-nvim
-    (withSrc gitsigns-nvim inputs.gitsigns-src)
-    (withSrc nvim-colorizer-lua inputs.nvim-colorizer-src)
+    gitsigns-nvim
+    nvim-colorizer-lua
 
     # Fuzzy finder
-    (withSrc telescope-nvim inputs.telescope-nvim-src)
+    telescope-nvim
     plenary-nvim
     popup-nvim
     telescope-fzf-native-nvim
     telescope-file-browser-nvim
-    telescope-dap-nvim
 
     # add some syntax highlighting
-    nvim-treesitter-master
+    nvim-treesitter
 
     # functionality
     toggleterm-nvim
@@ -62,8 +61,8 @@ in
     null-ls-nvim
 
     # add lsp config
-    (withSrc nvim-lspconfig inputs.nvim-lspconfig-src)
-    (withSrc nvim-lightbulb inputs.nvim-lightbulb-src)
+    nvim-lspconfig
+    nvim-lightbulb
     neodev-nvim
 
     # nice plugins
@@ -93,9 +92,11 @@ in
 
     diffview-nvim
 
-    # motion
-    (withSrc flash-nvim inputs.flash-nvim-src)
-
     # rainbow
-    rainbow-delimiters
+    rainbow-delimiters-nvim
+
+    # testing
+    FixCursorHold-nvim
+    neotest
+    neotest-go
   ]
