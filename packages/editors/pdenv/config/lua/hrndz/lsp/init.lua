@@ -10,6 +10,15 @@ if has_lsplines then
   lsp_lines.setup()
 end
 
+require("neodev").setup({
+  override = function(root_dir, library)
+    if require("neodev.util").has_file(root_dir, "packages/editors/pdenv/default.nix") then
+      library.enabled = true
+      library.plugins = true
+    end
+  end,
+})
+
 local capabilities = vim.tbl_deep_extend(
   "force",
   {},
@@ -31,9 +40,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     -- enable capabilities based on available server capabilities
-    require("hrndz.plugins.lsp.caps").on_attach(client, bufnr)
+    require("hrndz.lsp.caps").on_attach(client, bufnr)
     -- setup lsp keymaps
-    require("hrndz.plugins.lsp.keymap").on_attach(client, bufnr)
+    require("hrndz.lsp.keymaps").on_attach(client, bufnr)
   end,
 })
 

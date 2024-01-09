@@ -111,24 +111,6 @@ wk.register({
   ["[w"] = { diagnostic_goto(false, "WARN"), "Prev Warning" },
 })
 
--- osc52 copy
-local has_osc52, osc52 = pcall(require, "osc52")
-if has_osc52 then
-  local function copy(lines, _)
-    osc52.copy(table.concat(lines, "\n"))
-  end
-
-  local function paste()
-    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
-  end
-
-  vim.g.clipboard = {
-    name = "osc52",
-    copy = { ["+"] = copy, ["*"] = copy },
-    paste = { ["+"] = paste, ["*"] = paste },
-  }
-end
-
 -- file operations
 wk.register({
   ["<leader>fs"] = { "<Cmd>update<CR>", "Save changes" },

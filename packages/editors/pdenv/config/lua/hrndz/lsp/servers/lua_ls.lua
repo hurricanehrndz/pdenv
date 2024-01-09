@@ -1,32 +1,12 @@
-local M = {}
-
-M.setup = function(capabilities)
-  local lspconfig = require("lspconfig")
-  local has_neodev, neodev = pcall(require, "neodev")
-  if not has_neodev then
-    return
-  end
-  neodev.setup({
-    override = function(root_dir, library)
-      if require("neodev.util").has_file(root_dir, "users/profiles/nvim/default.nix") then
-        library.enabled = true
-        library.plugins = true
-      end
-    end,
-  })
-  lspconfig.lua_ls.setup({
-    settings = {
-      Lua = {
-        workspace = {
-          checkThirdParty = false,
-        },
-        completion = {
-          callSnippet = "Replace",
-        },
+return {
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+      },
+      completion = {
+        callSnippet = "Replace",
       },
     },
-    capabilities = capabilities,
-  })
-end
-
-return M
+  },
+}

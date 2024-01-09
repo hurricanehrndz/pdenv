@@ -10,14 +10,13 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
-
+  require("hrndz.plugins.osc52")
 
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.completion")
   require("hrndz.lsp")
 
   require("hrndz.plugins.statusline")
-  require("hrndz.plugins.whitespace")
   require("hrndz.plugins.dap")
   -- merge conflicts
   require("diffview").setup({})

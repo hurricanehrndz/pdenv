@@ -3,7 +3,6 @@ local telescope = require("telescope")
 local plenary_ft = require("plenary.filetype")
 plenary_ft.add_file("defs")
 
-local ts_builtin = require("telescope.builtin")
 telescope.setup({
   extensions = {
     file_browser = {
@@ -41,28 +40,19 @@ telescope.setup({
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
-local find_files = function()
-  ts_builtin.find_files()
-end
-
-local find_buffers = function()
-  ts_builtin.buffers()
-end
-
 local file_browser = function()
   ---@diagnostic disable-next-line: param-type-mismatch
   telescope.extensions.file_browser.file_browser({ path = vim.fn.expand("%:p:h", false, false) })
 end
 
-local map = require("hrndz.utils").map
-map("n", "<space>fw", "<Cmd>Telescope grep_string<CR>", "Find word")
-map("n", "<space>fg", "<Cmd>Telescope live_grep<CR>", "Live grep")
-map("n", "<space>ff", find_files, "Find files")
-map("n", "<space>fp", "<Cmd>Telescope git_files<CR>", "Git files")
-map("n", "<space>fh", "<cmd>Telescope help_tags<CR>", "Help")
-map("n", "<space>fn", "<cmd>Telescope notify<CR>", "Notifications")
-map("n", "<space>fb", find_buffers, "Find buffers")
-map("n", "<space>fr", "<cmd>Telescope oldfiles<cr>", "Recent files")
-map("n", "<space>f'", "<cmd>Telescope registers<cr>", "Registers")
-map("n", "<space>fe", file_browser, "Open explorer")
-map("n", "<space>fc", "<cmd>Telescope commands<cr>", "Commands")
+local map = vim.keymap.set
+map("n", "<leader>ff", require("telescope.builtin").find_files, {desc = "Find Files"})
+map("n", "<leader>fp", require("telescope.builtin").git_files, {desc = "Find Git Files"})
+map("n", "<leader>fb", require("telescope.builtin").buffers, {desc = "Find Buffers"})
+map("n", "<leader>fg", require("telescope.builtin").live_grep, {desc = "Live Grep"})
+map("n", "<leader>fh", require("telescope.builtin").help_tags, {desc = "Find Help"})
+map("n", "<leader>fw", require("telescope.builtin").grep_string, {desc = "Find Word"})
+map("n", "<leader>fc", require("telescope.builtin").command_history, {desc = "Find Recent Commands"})
+map("n", "<leader>fr", require("telescope.builtin").oldfiles, {desc = "Find Recent Files"})
+map("n", "<leader>fe", file_browser, {desc = "Open explorer"})
+map("n", "<space>fn", "<cmd>Telescope notify<CR>", { desc = "Find recent Notifications"})
