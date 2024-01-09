@@ -25,7 +25,6 @@ wk.setup({
 wk.register({
   mode = { "n", "v" },
   ["g"] = { name = "+goto" },
-  ["gs"] = { name = "+surround" },
   ["]"] = { name = "+next" },
   ["["] = { name = "+prev" },
   ["<leader>f"] = { name = "+file/find" },
