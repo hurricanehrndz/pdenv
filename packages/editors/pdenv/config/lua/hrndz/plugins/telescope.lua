@@ -8,11 +8,11 @@ telescope.setup({
     file_browser = {
       initial_mode = "normal",
       layout_strategy = "horizontal",
-      sorting_strategy = "ascending",
+      -- sorting_strategy = "ascending",
       layout_config = {
         mirror = false,
         height = 0.9,
-        prompt_position = "top",
+        -- prompt_position = "top",
         preview_cutoff = 120,
         width = 0.9,
         preview_width = 0.55,
@@ -27,10 +27,10 @@ telescope.setup({
       width = 0.95,
       height = 0.95,
       preview_width = 0.6,
-      prompt_position = "top",
+      -- prompt_position = "top",
     },
     border = true,
-    sorting_strategy = "ascending",
+    -- sorting_strategy = "ascending",
     path_display = {
       truncate = 3
     },
@@ -45,14 +45,29 @@ local file_browser = function()
   telescope.extensions.file_browser.file_browser({ path = vim.fn.expand("%:p:h", false, false) })
 end
 
+local wk = require("which-key")
+wk.register({
+  ["<leader>fw"] = { "+word" },
+})
 local map = vim.keymap.set
-map("n", "<leader>ff", require("telescope.builtin").find_files, {desc = "Find Files"})
-map("n", "<leader>fp", require("telescope.builtin").git_files, {desc = "Find Git Files"})
-map("n", "<leader>fb", require("telescope.builtin").buffers, {desc = "Find Buffers"})
-map("n", "<leader>fg", require("telescope.builtin").live_grep, {desc = "Live Grep"})
-map("n", "<leader>fh", require("telescope.builtin").help_tags, {desc = "Find Help"})
-map("n", "<leader>fw", require("telescope.builtin").grep_string, {desc = "Find Word"})
-map("n", "<leader>fc", require("telescope.builtin").command_history, {desc = "Find Recent Commands"})
-map("n", "<leader>fr", require("telescope.builtin").oldfiles, {desc = "Find Recent Files"})
+local builtin = require("telescope.builtin")
+map("n", "<leader>ff", builtin.find_files, {desc = "Find Files"})
+map("n", "<leader>fp", builtin.git_files, {desc = "Find Git Files"})
+map("n", "<leader>fb", builtin.buffers, {desc = "Find Buffers"})
+map("n", "<leader>fg", builtin.live_grep, {desc = "Live Grep"})
+map("n", "<leader>fh", builtin.help_tags, {desc = "Find Help"})
+map("n", "<leader>fww", builtin.grep_string, {desc = "Find Word"})
+map("n", "<leader>fc", builtin.command_history, {desc = "Find Recent Commands"})
+map("n", "<leader>fr", builtin.oldfiles, {desc = "Find Recent Files"})
 map("n", "<leader>fe", file_browser, {desc = "Open explorer"})
-map("n", "<space>fn", "<cmd>Telescope notify<CR>", { desc = "Find recent Notifications"})
+map("n", "<leader>fn", "<cmd>Telescope notify<CR>", { desc = "Find recent Notifications"})
+
+-- primeagen
+map("n", "<leader>fwc", function()
+  local word = vim.fn.expand("<cword>")
+  builtin.grep_string({ search = word })
+end, { desc = "Find cword"})
+map("n", "<leader>fwC", function()
+  local word = vim.fn.expand("<cWORD>")
+  builtin.grep_string({ search = word })
+end, { desc = "Find cWORD"})
