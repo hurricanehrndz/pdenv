@@ -1,6 +1,7 @@
 if vim.g.vscode == nil then
   require("hrndz.plugins.alpha")
   require("hrndz.plugins.theme")
+  require("hrndz.plugins.whichkey")
   require("hrndz.plugins.indentblankline")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
@@ -10,7 +11,6 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
 
-  require("hrndz.plugins.whichkey")
 
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.completion")
@@ -21,8 +21,9 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.dap")
   -- merge conflicts
   require("diffview").setup({})
+
+  require("hrndz.plugins.neotest")
 end
 
 -- text manipulation
-require("hrndz.plugins.comment")
 require("hrndz.plugins.mini")

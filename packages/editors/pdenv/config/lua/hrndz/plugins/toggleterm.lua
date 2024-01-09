@@ -38,20 +38,22 @@ end
 
 local opts = { noremap = true, silent = true }
 local lg_toggle = [[<Cmd>lua _LAZYGIT_TOGGLE()<CR>]]
-local lg_term_toggle = [[q]]
-vim.keymap.set("n", "<C-g>", lg_toggle, opts)
-vim.keymap.set("t", "<C-g>", lg_term_toggle, opts)
+local wk = require("which-key")
+wk.register({
+  ["<leader>g"] = { name = "+git" },
+  ["<leader>gg"] = { lg_toggle, "Lazygit" },
+})
 
 local term_open_group = vim.api.nvim_create_augroup("HrndzTermOpen", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = { "term://*" },
   callback = function()
     local bufopts = { buffer = 0, noremap = true, silent = true }
-    vim.keymap.set("t", "<M-/>", [[<cmd>lua vim.cmd('stopinsert')<CR>]], bufopts)
-    vim.keymap.set("t", "<M-h>", [[<cmd>wincmd h<CR>]], bufopts)
-    vim.keymap.set("t", "<M-j>", [[<cmd>wincmd j<CR>]], bufopts)
-    vim.keymap.set("t", "<M-k>", [[<cmd>wincmd k<CR>]], bufopts)
-    vim.keymap.set("t", "<M-l>", [[<cmd>wincmd l<CR>]], bufopts)
+    vim.keymap.set("t", "<esc><esc>", [[<cmd>lua vim.cmd('stopinsert')<CR>]], bufopts)
+    -- vim.keymap.set("t", "<C-h>", [[<cmd>wincmd h<CR>]], bufopts)
+    -- vim.keymap.set("t", "<C-j>", [[<cmd>wincmd j<CR>]], bufopts)
+    -- vim.keymap.set("t", "<C-k>", [[<cmd>wincmd k<CR>]], bufopts)
+    -- vim.keymap.set("t", "<C-l>", [[<cmd>wincmd l<CR>]], bufopts)
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
   end,

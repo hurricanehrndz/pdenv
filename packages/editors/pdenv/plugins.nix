@@ -9,6 +9,10 @@
 in
   with pkgs.vimExtraPlugins;
   with pkgs.vimPlugins; [
+    # Some good defaults
+    lazy-nvim
+    LazyVim
+
     # Theme
     tokyonight-nvim
     catppuccin
@@ -17,6 +21,9 @@ in
     indent-blankline-nvim
     gitsigns-nvim
     nvim-colorizer-lua
+    todo-comments-nvim
+    nvim-window
+    nvim-ts-context-commentstring
 
     # Fuzzy finder
     telescope-nvim
@@ -30,10 +37,6 @@ in
 
     # functionality
     toggleterm-nvim
-
-    # comment
-    comment-nvim
-    nvim-window
 
     # which key did I just hit
     which-key-nvim
@@ -58,7 +61,7 @@ in
     vim-snippets
 
     # formatters, linters
-    null-ls-nvim
+    conform-nvim # Required by LazyVim
 
     # add lsp config
     nvim-lspconfig
@@ -74,8 +77,6 @@ in
     # feline-nvim
     lualine-nvim
     mini-nvim
-
-    vim-better-whitespace
 
     # pictograms
     lspkind-nvim

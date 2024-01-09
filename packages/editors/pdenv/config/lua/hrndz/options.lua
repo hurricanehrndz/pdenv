@@ -12,58 +12,7 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 g.filetype_pp = "puppet"
 
--- disable editorconfig autolaoding
-g.loaded_editorconfig = 1
+require("lazyvim.config.options")
 
-local options = {
-  -- >> window-scoped options <<--
-  -- show line numbers
-  number = true,
-  -- show relative numbers
-  relativenumber = true,
-  -- always have sign column
-  signcolumn = "yes",
-  -- disable line wrap
-  wrap = false,
-  -- enable color column
-  colorcolumn = "+1",
-
-  -- >> edior options <<--
-  -- cursor
-  guicursor = "",
-  -- abandon buffer when unloading
-  hidden = true,
-  -- refresh rate of diagnostic msg, completion
-  updatetime = 100,
-  -- split new window below current
-  splitbelow = true,
-  -- split new window right of current
-  splitright = true,
-  -- case insensitive search
-  ignorecase = true,
-  -- highlight searches
-  hlsearch = true,
-  -- copy-paste with system clipboard, no copy to unnamed on put (*)
-  clipboard = "",
-  -- some language servers don't like backup files
-  backup = false,
-  writebackup = false,
-  -- scrolling "bounding"
-  scrolloff = 5,
-  sidescrolloff = 10,
-  smartcase = true,
-  -- enable undofile - persistent undo
-  undofile = true,
-  -- round indent
-  shiftround = true,
-
-  -- >> buffer-scoped options <<--
-  shiftwidth = 2, -- smarttab enable by default, ts sts ignored,
-  expandtab = true,
-  smartindent = false,
-  autoindent = true,
-}
-
-for k, v in pairs(options) do
-  vim.opt[k] = v
-end
+g.mapleader = " "
+g.maplocalleader = ","

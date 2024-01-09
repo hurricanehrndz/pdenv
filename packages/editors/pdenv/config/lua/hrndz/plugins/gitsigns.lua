@@ -1,56 +1,36 @@
-local has_gitsigns, gitsigns = pcall(require, "gitsigns")
+local gitsigns = require("gitsigns")
+local wk = require("which-key")
 
-if has_gitsigns then
-  gitsigns.setup({
-    on_attach = function(bufnr)
-      local gs = package.loaded.gitsigns
-      local function bufmap(mode, l, r, desc, opts)
-        opts = opts or {}
-        opts.desc = desc
-        opts.buffer = bufnr
-        vim.keymap.set(mode, l, r, opts)
-      end
+gitsigns.setup({
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
 
-      -- Navigation
-      bufmap("n", "]c", function()
-        if vim.wo.diff then
-          return "]c"
-        end
-        vim.schedule(function()
-          gs.next_hunk()
-        end)
-        return "<Ignore>"
-      end, "Next change", { expr = true })
+    local function map(mode, l, r, desc, opts)
+      opts = opts or {}
+      opts.desc = desc
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
 
-      bufmap("n", "[c", function()
-        if vim.wo.diff then
-          return "[c"
-        end
-        vim.schedule(function()
-          gs.prev_hunk()
-        end)
-        return "<Ignore>"
-      end, "Next change", { expr = true })
+    -- Navigation
+    map('n', ']h', gs.next_hunk, "Next Hunk")
+    map('n', '[h', gs.prev_hunk, "Prev Hunk")
 
-      -- Actions
-      bufmap({ "n", "v" }, "<space>hs", ":Gitsigns stage_hunk<CR>", "Stage hunk")
-      bufmap({ "n", "v" }, "<space>hr", ":Gitsigns reset_hunk<CR>", "Reset hunk")
-      bufmap("n", "<space>hS", gs.stage_buffer, "Stage buffer")
-      bufmap("n", "<space>hu", gs.undo_stage_hunk, "Unstage hunk")
-      bufmap("n", "<space>hR", gs.reset_buffer, "Reset buffer")
-      bufmap("n", "<space>hp", gs.preview_hunk, "Preview hunk")
-      bufmap("n", "<space>hb", function()
-        gs.blame_line({ full = true })
-      end, "Git blame")
-      bufmap("n", "<space>hB", gs.toggle_current_line_blame, "Toggle line blame")
-      bufmap("n", "<space>hd", gs.diffthis, "Diff HEAD")
-      bufmap("n", "<space>hD", function()
-        gs.diffthis("~")
-      end, "Diff HEAD~1")
-      bufmap("n", "<space>hg", gs.toggle_deleted, "Ghost deleted")
-
-      -- Text object
-      bufmap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
-    end,
-  })
-end
+    -- Actions
+    wk.register({
+      ["<leader>h"] = { name = "+hunks" },
+      ["<leader>hS"] = { gs.stage_buffer,  "Stage Buffer"},
+      ["<leader>hu"] = { gs.undo_stage_hunk, "Undo Stage Hunk"},
+      ["<leader>hR"] = { gs.reset_buffer, "Reset Buffer" },
+      ['<leader>hp'] = { gs.preview_hunk, "Preview Hunk" },
+      ["<leader>hb"] = { function() gs.blame_line({ full = true }) end, "Blame Line" },
+      ["<leader>hd"] = { gs.diffthis, "Diff This" },
+      ["<leader>hD"] = { function() gs.diffthis('~') end, "Diff This ~" },
+      ["<leader>hg"] = { gs.toggle_deleted, "View Deleted" }
+    })
+    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+    -- Text object
+    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+  end
+})

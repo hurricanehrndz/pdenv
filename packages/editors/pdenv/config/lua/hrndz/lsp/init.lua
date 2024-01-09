@@ -1,5 +1,5 @@
 -- Setup lspconfig.
-local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
+local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 local has_lsplines, lsp_lines = pcall(require, "lsp_lines")
 
 if not has_cmp then
@@ -10,71 +10,34 @@ if has_lsplines then
   lsp_lines.setup()
 end
 
-local map = require("hrndz.utils").map
-map("n", "<space>lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
-map("n", "<space>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>",  "Code Action")
-map("n", "<space>ld", "<Cmd>lua vim.diagnostic.open_float()<CR>", "Diagnostic float")
-map("n", "<space>lt", "<Cmd>TroubleToggle<CR>", "Diagnostics")
-map("n", "<space>lw", "<Cmd>Telescope diagnostics<CR>", "Workspace Diagnostics")
-map("n", "<space>li", "<Cmd>LspInfo<CR>", "Info")
-map("n", "<space>ll", [[<Cmd>lua require("lsp_lines").toggle()<CR>]], "Toggle lsp lines")
+local capabilities = vim.tbl_deep_extend(
+  "force",
+  {},
+  vim.lsp.protocol.make_client_capabilities(),
+  has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+)
 
-local util = require("vim.lsp.util")
-local formatting_callback = function(client, bufnr)
-  vim.keymap.set("n", "<space>lf", function()
-    local params = util.make_formatting_params({})
-    client.request("textDocument/formatting", params, nil, bufnr)
-  end, { buffer = bufnr, desc = "Format" })
+local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "pyright", "gopls", "terraformls" }
+for _, server_name in ipairs(lsp_servers) do
+  local has_opts, opts = pcall(require, "hrndz.lsp.servers." .. server_name)
+  local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities) }, has_opts and opts or {})
+  require("lspconfig")[server_name].setup(server_opts)
 end
 
-local function try_attach_inlay_hints(client, bufnr)
-  if client.server_capabilities.inlayHintProvider then
-    vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    vim.api.nvim_create_autocmd("InsertEnter", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.inlay_hint(bufnr, true)
-      end,
-      group = "lsp_augroup",
-    })
-    vim.api.nvim_create_autocmd("InsertLeave", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.inlay_hint(bufnr, false)
-      end,
-      group = "lsp_augroup",
-    })
-  end
-end
+    -- enable capabilities based on available server capabilities
+    require("hrndz.plugins.lsp.caps").on_attach(client, bufnr)
+    -- setup lsp keymaps
+    require("hrndz.plugins.lsp.keymap").on_attach(client, bufnr)
+  end,
+})
 
-local custom_attach = function(client, bufnr)
-  local function bufmap(mode, l, r, desc)
-    local opts = {}
-    opts.desc = desc
-    opts.buffer = bufnr
-    vim.keymap.set(mode, l, r, opts)
-  end
-
-  bufmap("n", "gd", "<Cmd>Telescope lsp_definitions<CR>", "Show lsp definitions")
-  bufmap("n", "gD", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition")
-  bufmap("n", "gI", "<Cmd>Telescope lsp_implementations<CR>", "Show lsp implementations")
-  bufmap("n", "gr", "<Cmd>Telescope lsp_references<CR>", "Show lsp references")
-  bufmap("n", "gs", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help")
-  bufmap("n", "gy", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", "Search for symbol")
-
-  bufmap("n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic")
-  bufmap("n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", "Go to prev diagnostic")
-
-  local codelens_enabled = (client.server_capabilities.codeLensProvider ~= false)
-  if not codelens_enabled then
-    vim.lsp.codelens.refresh()
-  end
-end
-
-local capabilities = cmp.default_capabilities()
-
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = require("hrndz.icons").diagnostics
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -96,15 +59,5 @@ vim.diagnostic.config({
 })
 
 require("nvim-lightbulb").setup({
-  autocmd = { enabled = true }
+  autocmd = { enabled = true },
 })
-
-local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "null-ls", "pyright", "go", "terraformls" }
-for _, server_name in ipairs(lsp_servers) do
-  local has_custom_setup, server = pcall(require, "hrndz.lsp.servers." .. server_name)
-  if has_custom_setup then
-    server.setup(custom_attach, formatting_callback, capabilities)
-  else
-    require("hrndz.lsp.servers.default").setup(custom_attach, formatting_callback, capabilities, server_name)
-  end
-end
