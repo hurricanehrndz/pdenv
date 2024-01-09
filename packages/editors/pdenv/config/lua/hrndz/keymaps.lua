@@ -125,7 +125,3 @@ map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
--- map("n", ",dt", "<cmd>DiffviewToggleFiles<CR>", "Toggle file tree")
--- map("n", ",do", "<cmd>DiffviewOpen<CR>", "Open")
--- map("n", ",dx", "<cmd>DiffviewClose<CR>", "Close")
--- map("n", ",dr", "<cmd>DiffviewRefresh<CR>", "Refresh")

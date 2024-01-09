@@ -11,6 +11,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
   require("hrndz.plugins.osc52")
+  require("hrndz.plugins.diffview")
 
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.completion")

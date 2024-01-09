@@ -1,39 +1,16 @@
-local has_dap, dap = pcall(require, "dap")
-
-if not has_dap then
-  return
+local icons = require("hrndz.icons")
+vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+for name, sign in pairs(icons) do
+  sign = type(sign) == "table" and sign or { sign }
+  vim.fn.sign_define(
+    "Dap" .. name,
+    { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+  )
 end
 
-local signs = {
-  breakpoint = {
-    text = "🧘",
-    texthl = "LspDiagnosticsSignError",
-    linehl = "",
-    numhl = "",
-  },
-  breakpoint_rejected = {
-    text = "",
-    texthl = "LspDiagnosticsSignHint",
-    linehl = "",
-    numhl = "",
-  },
-  stopped = {
-    text = "🏃",
-    texthl = "LspDiagnosticsSignInformation",
-    linehl = "DiagnosticUnderlineInfo",
-    numhl = "LspDiagnosticsSignInformation",
-  },
-}
-vim.fn.sign_define("DapBreakpoint", signs.breakpoint)
-vim.fn.sign_define("DapBreakpointRejected", signs.breakpoint_rejected)
-vim.fn.sign_define("DapStopped", signs.stopped)
-
-local has_dapui, dapui = pcall(require, "dapui")
-if not has_dapui then
-  return
-end
-
-require("dapui").setup()
+local dap = require("dap")
+local dapui = require("dapui")
+dapui.setup()
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open({})
 end
@@ -45,27 +22,35 @@ end
 -- end
 
 -- enable virtual text
-local has_dap_virtual_txt, dap_virtual_txt = pcall(require, "nvim-dap-virtual-text")
-if has_dap_virtual_txt then
-  dap_virtual_txt.setup({})
-end
+require("nvim-dap-virtual-text").setup({})
+-- enable dap integration for telescope
+require('telescope').load_extension('dap')
 
 -- keybinds
-local map = require("hrndz.utils").map
-
-map("n", "<space>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle breakpoint")
-map("n", "<space>dc", "<Cmd>lua require'dap'.continue()<CR>", "Continue")
-map("n", "<space>dC", "<Cmd>Telescope dap commands<CR>", "Commands")
-map("n", "<space>df", "<Cmd>Telescope dap frames<CR>", "Frames")
-map("n", "<space>dB", "<Cmd>Telescope dap list_breakpoints<CR>", "Breakpoints")
-map("n", "<space>dv", "<Cmd>Telescope dap variables<CR>", "Variables")
-map("n", "<space>di", "<Cmd>lua require'dap'.step_into()<CR>", "Into")
-map("n", "<space>do", "<Cmd>lua require'dap'.step_over()<CR>", "Over")
-map("n", "<space>dO", "<Cmd>lua require'dap'.step_out()<CR>", "Out")
-map("n", "<space>dr", "<Cmd>lua require'dap'.repl.toggle()<CR>", "Repl")
-map("n", "<space>dl", "<Cmd>lua require'dap'.run_last()<CR>", "Last")
-map("n", "<space>du", "<Cmd>lua require'dapui'.toggle()<CR>", "UI")
-map("n", "<space>dx", "<Cmd>lua require'dap'.terminate()<CR>", "Exit")
+local map = vim.keymap.set
+local wk = require("which-key")
+wk.register({
+  ["<leader>d"] = { name = "+debug" },
+})
+map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle breakpoint" })
+map("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue" })
+map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Step Into" })
+map("n", "<leader>do", function() require("dap").step_over() end, { desc = "Step Over" })
+map("n", "<leader>dO", function() require("dap").step_out() end, { desc = "Step Out" })
+map("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Toggle REPL" })
+map("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run Last" })
+map("n", "<leader>dx", function() require("dap").terminate() end, { desc = "Terminate" })
+map("n", "<leader>dp", function() require("dap").pause() end, { desc = "Pause" })
+map("n", "<leader>ds", function() require("dap").session() end, { desc = "Session" })
+-- telescope
+map("n", "<leader>dv", "<Cmd>Telescope dap variables<CR>", { desc = "Variables" })
+map("n", "<leader>dC", "<Cmd>Telescope dap commands<CR>", { desc = "Commands" })
+map("n", "<leader>df", "<Cmd>Telescope dap frames<CR>", { desc = "Frames" })
+map("n", "<leader>dB", "<Cmd>Telescope dap list_breakpoints<CR>", { desc = "List Breakpoints" })
+-- ui
+map("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "Dap UI" })
+map({ "n", "v" }, "<leader>de", function() require("dapui").eval() end, { desc = "Eval" })
+map("n", "<leader>dw", function() require("dap.ui.widgets").hover() end, { desc = "Widgets" })
 
 local dap_python = require("dap-python")
 dap_python.setup(vim.g.nix_dap_python)

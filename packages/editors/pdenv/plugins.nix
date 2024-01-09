@@ -1,103 +1,106 @@
-{
-  inputs,
-  pkgs,
-  packages,
-  nvimPython,
-  ...
-}: let
-  withSrc = pkg: src: pkg.overrideAttrs (_: {inherit src;});
+{ inputs
+, pkgs
+, packages
+, nvimPython
+, ...
+}:
+let
+  withSrc = pkg: src: pkg.overrideAttrs (_: { inherit src; });
 in
-  with pkgs.vimExtraPlugins;
-  with pkgs.vimPlugins; [
-    # Some good defaults
-    lazy-nvim
-    LazyVim
+with pkgs.vimExtraPlugins;
+with pkgs.vimPlugins; [
+  # Some good defaults
+  lazy-nvim
+  LazyVim
 
-    # Theme
-    tokyonight-nvim
-    catppuccin
-    alpha-nvim
-    nvim-web-devicons
-    indent-blankline-nvim
-    gitsigns-nvim
-    nvim-colorizer-lua
-    todo-comments-nvim
-    nvim-window
-    nvim-ts-context-commentstring
+  # Theme
+  tokyonight-nvim
+  catppuccin
+  alpha-nvim
+  nvim-web-devicons
+  indent-blankline-nvim
+  gitsigns-nvim
+  nvim-colorizer-lua
+  todo-comments-nvim
+  nvim-window
+  nvim-ts-context-commentstring
 
-    # Fuzzy finder
-    telescope-nvim
-    plenary-nvim
-    popup-nvim
-    telescope-fzf-native-nvim
-    telescope-file-browser-nvim
+  # Fuzzy finder
+  telescope-nvim
+  plenary-nvim
+  popup-nvim
+  telescope-fzf-native-nvim
+  telescope-file-browser-nvim
 
-    # add some syntax highlighting
-    nvim-treesitter
+  # add some syntax highlighting
+  nvim-treesitter
 
-    # functionality
-    toggleterm-nvim
+  # functionality
+  toggleterm-nvim
 
-    # which key did I just hit
-    which-key-nvim
-    # what's did I do wrong
-    trouble-nvim
+  # which key did I just hit
+  which-key-nvim
+  # what's did I do wrong
+  trouble-nvim
 
-    # add completion
-    nvim-cmp
-    cmp-nvim-lsp
-    cmp-nvim-lua
-    cmp-path
-    cmp-buffer
-    cmp-cmdline
-    cmp-zsh # next is required
-    deol-nvim
-    lsp_lines-nvim
+  # add completion
+  nvim-cmp
+  cmp-nvim-lsp
+  cmp-nvim-lua
+  cmp-path
+  cmp-buffer
+  cmp-cmdline
+  cmp-zsh # next is required
+  deol-nvim
+  lsp_lines-nvim
 
-    # snippets
-    luasnip
-    cmp_luasnip
-    friendly-snippets
-    vim-snippets
+  # snippets
+  luasnip
+  cmp_luasnip
+  friendly-snippets
+  vim-snippets
 
-    # formatters, linters
-    conform-nvim # Required by LazyVim
+  # formatters, linters
+  conform-nvim # Required by LazyVim
 
-    # add lsp config
-    nvim-lspconfig
-    nvim-lightbulb
-    neodev-nvim
+  # add lsp config
+  nvim-lspconfig
+  nvim-lightbulb
+  neodev-nvim
 
-    # nice plugins
-    nvim-osc52
-    vim-tmux-navigator
-    nvim-notify
-    undotree
+  # nice plugins
+  nvim-osc52
+  vim-tmux-navigator
+  nvim-notify
+  undotree
 
-    # feline-nvim
-    lualine-nvim
-    mini-nvim
+  # feline-nvim
+  lualine-nvim
+  mini-nvim
 
-    # pictograms
-    lspkind-nvim
+  # pictograms
+  lspkind-nvim
 
-    # debugging
-    nvim-dap
-    nvim-dap-ui
-    nvim-dap-virtual-text
-    nvim-dap-python
+  # debugging
+  nvim-dap
+  nvim-dap-ui
+  nvim-dap-virtual-text
+  nvim-dap-python
+  telescope-dap-nvim
 
-    # filetype
-    Jenkinsfile-vim-syntax
-    vim-puppet
+  # filetype
+  Jenkinsfile-vim-syntax
+  vim-puppet
 
-    diffview-nvim
+  diffview-nvim
 
-    # rainbow
-    rainbow-delimiters-nvim
+  # rainbow
+  rainbow-delimiters-nvim
 
-    # testing
-    FixCursorHold-nvim
-    neotest
-    neotest-go
-  ]
+  # testing
+  FixCursorHold-nvim
+  neotest
+  neotest-go
+
+  vim-repeat
+]
