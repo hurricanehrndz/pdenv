@@ -1,8 +1,9 @@
 if vim.g.vscode == nil then
+  require("hrndz.plugins.whitespace")
   require("hrndz.plugins.alpha")
   require("hrndz.plugins.theme")
   require("hrndz.plugins.whichkey")
-  require("hrndz.plugins.indentblankline")
+  -- require("hrndz.plugins.indentblankline")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
   require("nvim-web-devicons").setup({ defualt = true })
@@ -12,6 +13,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.winpicker")
   require("hrndz.plugins.osc52")
   require("hrndz.plugins.diffview")
+  require("hrndz.plugins.conform")
 
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.completion")

@@ -29,7 +29,7 @@ wk.register({
   ["["] = { name = "+prev" },
   ["<leader>f"] = { name = "+file/find" },
   ["<leader>b"] = { name = "+buffer" },
-  ["<leader>c"] = { name = "+code" },
+  ["<leader>l"] = { name = "+lsp" },
   ["<leader>w"] = { name = "+windows" },
   ["<leader>t"] = { name = "+tests" },
   ["<leader>u"] = { name = "+ui" },

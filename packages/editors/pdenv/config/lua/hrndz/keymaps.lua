@@ -69,21 +69,15 @@ map("v", ">", ">gv")
 local qf_list_toggle = function()
   local qf_exists = false
   for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      qf_exists = true
-    end
+    if win["quickfix"] == 1 then qf_exists = true end
   end
   if qf_exists == true then
     vim.cmd("cclose")
     return
   end
-  if not vim.tbl_isempty(vim.fn.getqflist()) then
-    vim.cmd("copen")
-  end
+  if not vim.tbl_isempty(vim.fn.getqflist()) then vim.cmd("copen") end
 end
-local qf_list_clear = function()
-  vim.fn.setqflist({})
-end
+local qf_list_clear = function() vim.fn.setqflist({}) end
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 wk.register({
@@ -97,12 +91,10 @@ wk.register({
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+  return function() go({ severity = severity }) end
 end
 wk.register({
-  ["<leader>cd"] = { vim.diagnostic.open_float, "Line Diagnostics" },
+  ["<leader>ld"] = { vim.diagnostic.open_float, "Line Diagnostics" },
   ["]d"] = { diagnostic_goto(true), "Next Diagnostic" },
   ["[d"] = { diagnostic_goto(false), "Prev Diagnostic" },
   ["]e"] = { diagnostic_goto(true, "ERROR"), "Next Error" },
@@ -112,10 +104,7 @@ wk.register({
 })
 
 -- file operations
-wk.register({
-  ["<leader>fs"] = { "<Cmd>update<CR>", "Save changes" },
-  ["<leader>fw"] = { require("mini.trailspace").trim, "Trim whitespace" },
-})
+map("n", "<leader>fs", "<Cmd>update<CR>", { desc = "Save changes" })
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
@@ -124,4 +113,3 @@ map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
-

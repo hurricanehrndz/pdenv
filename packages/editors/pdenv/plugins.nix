@@ -9,10 +9,6 @@ let
 in
 with pkgs.vimExtraPlugins;
 with pkgs.vimPlugins; [
-  # Some good defaults
-  lazy-nvim
-  LazyVim
-
   # Theme
   tokyonight-nvim
   catppuccin
@@ -61,7 +57,8 @@ with pkgs.vimPlugins; [
   vim-snippets
 
   # formatters, linters
-  conform-nvim # Required by LazyVim
+  conform-nvim
+  vim-better-whitespace
 
   # add lsp config
   nvim-lspconfig

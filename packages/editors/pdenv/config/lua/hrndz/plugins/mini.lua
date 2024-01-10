@@ -1,7 +1,6 @@
 require("mini.misc").setup({})
 require("mini.ai").setup({}) -- extended creations of a/i text objects
 require("mini.align").setup({}) -- align text
-require("mini.trailspace").setup({}) -- whitespace
 
 -- setup comment
 -- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment

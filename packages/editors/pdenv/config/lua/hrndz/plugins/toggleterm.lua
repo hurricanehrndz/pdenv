@@ -28,21 +28,17 @@ local lazygit = Terminal:new({
   start_in_insert = true,
   on_open = function(term)
     local map_opts = { buffer = term.bufnr, noremap = true, silent = true }
-    vim.keymap.set("n", "q", "<cmd>close<CR>", map_opts)
+    vim.keymap.set("n", "q", function() return vim.cmd('stopinsert') end, map_opts)
   end,
 })
 
-function _LAZYGIT_TOGGLE()
+function LazygitToggle()
   lazygit:toggle()
 end
 
 local opts = { noremap = true, silent = true }
-local lg_toggle = [[<Cmd>lua _LAZYGIT_TOGGLE()<CR>]]
-local wk = require("which-key")
-wk.register({
-  ["<leader>g"] = { name = "+git" },
-  ["<leader>gg"] = { lg_toggle, "Lazygit" },
-})
+vim.keymap.set("n", "<C-g>", LazygitToggle, opts)
+vim.keymap.set("t", "<C-g>", LazygitToggle, opts)
 
 local term_open_group = vim.api.nvim_create_augroup("HrndzTermOpen", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
@@ -50,10 +46,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     local bufopts = { buffer = 0, noremap = true, silent = true }
     vim.keymap.set("t", "<esc><esc>", [[<cmd>lua vim.cmd('stopinsert')<CR>]], bufopts)
-    -- vim.keymap.set("t", "<C-h>", [[<cmd>wincmd h<CR>]], bufopts)
-    -- vim.keymap.set("t", "<C-j>", [[<cmd>wincmd j<CR>]], bufopts)
-    -- vim.keymap.set("t", "<C-k>", [[<cmd>wincmd k<CR>]], bufopts)
-    -- vim.keymap.set("t", "<C-l>", [[<cmd>wincmd l<CR>]], bufopts)
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
   end,
