@@ -24,8 +24,7 @@ function M.on_attach(_, buffer)
     { desc = "Goto T[y]pe Definition", buffer = buffer }
   )
   map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer })
-  map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
-  map("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
+  map({ "i", "n" }, "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
   map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
   map(
     "n",
