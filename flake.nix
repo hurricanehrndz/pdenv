@@ -33,8 +33,6 @@
     # golang support tools
     go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
     go-enum-src.flake = false;
-    goimports-reviser-src.url = "github:incu6us/goimports-reviser?ref=v3.3.1";
-    goimports-reviser-src.flake = false;
     gomvp-src.url = "github:abenz1267/gomvp";
     gomvp-src.flake = false;
     json-to-struct-src.url = "github:tmc/json-to-struct";

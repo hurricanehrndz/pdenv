@@ -110,23 +110,6 @@
         "type": "github"
       }
     },
-    "goimports-reviser-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1677501112,
-        "narHash": "sha256-JIXBC7fk/Bd3tTHiK+qtB+5CdAATaB/j1nvKOJrz4n4=",
-        "owner": "incu6us",
-        "repo": "goimports-reviser",
-        "rev": "9eea91a962913b2c13c0fb5b8b70eab01982f8c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "incu6us",
-        "ref": "v3.3.1",
-        "repo": "goimports-reviser",
-        "type": "github"
-      }
-    },
     "gomvp-src": {
       "flake": false,
       "locked": {
@@ -305,7 +288,6 @@
         "devshell": "devshell",
         "flake-parts": "flake-parts",
         "go-enum-src": "go-enum-src",
-        "goimports-reviser-src": "goimports-reviser-src",
         "gomvp-src": "gomvp-src",
         "json-to-struct-src": "json-to-struct-src",
         "neovim-flake": "neovim-flake",

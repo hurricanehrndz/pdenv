@@ -30,13 +30,6 @@
         src = inputs.go-enum-src;
         vendorHash = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
       };
-      goimports-reviser = pkgs.buildGoModule rec {
-        name = "goimports-reviser";
-        src = inputs.goimports-reviser-src;
-        vendorHash = "sha256-lyV4HlpzzxYC6OZPGVdNVL2mvTFE9yHO37zZdB/ePBg=";
-        excludedPackages = [ "linter" ];
-        doCheck = false;
-      };
       gomvp = pkgs.buildGoModule {
         name = "gomvp";
         src = inputs.gomvp-src;
