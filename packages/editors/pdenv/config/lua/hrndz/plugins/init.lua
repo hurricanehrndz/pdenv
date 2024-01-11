@@ -14,6 +14,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.osc52")
   require("hrndz.plugins.diffview")
   require("hrndz.plugins.conform")
+  require("hrndz.plugins.lint")
 
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.completion")

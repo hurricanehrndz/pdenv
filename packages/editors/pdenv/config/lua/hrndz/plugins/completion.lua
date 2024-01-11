@@ -1,30 +1,28 @@
 -- completion settings
 -- vim.o.completeopt = "menu,menuone,noinsert"
-vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+-- vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+vim.opt.completeopt = { "menu,menuone,noselect" }
 -- disable insert completion menu messages
-vim.opt.shortmess:append("c")
+-- vim.opt.shortmess:append("c")
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 -- completion menu height
-vim.opt.pumheight = 10
+vim.opt.pumblend = 10 -- Popup blend
+vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 
 local has_words_before = function()
+  unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local has_cmp, cmp = pcall(require, "cmp")
-if not has_cmp then
-  return
-end
+if not has_cmp then return end
 
 local has_luasnip, luasnip = pcall(require, "luasnip")
-if not has_luasnip then
-  return
-end
+if not has_luasnip then return end
 
 local has_lspkind, lspkind = pcall(require, "lspkind")
-if not has_lspkind then
-  return
-end
+if not has_lspkind then return end
 
 -- Load snippets
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -92,9 +90,7 @@ require("cmp_zsh").setup({
 
 cmp.setup({
   snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+    expand = function(args) luasnip.lsp_expand(args.body) end,
   },
   mapping = cmp.mapping.preset.insert(cmp_keymaps),
   sources = cmp.config.sources({
@@ -123,7 +119,7 @@ cmp.setup({
 })
 
 -- Use buffer source for `/`.
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },

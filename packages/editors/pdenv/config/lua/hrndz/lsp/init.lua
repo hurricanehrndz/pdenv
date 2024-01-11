@@ -2,13 +2,13 @@
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 local has_lsplines, lsp_lines = pcall(require, "lsp_lines")
 
-if not has_cmp then
-  return
-end
+if not has_cmp then return end
 
 if has_lsplines then
   lsp_lines.setup()
+  vim.keymap.set("n", "<space>ll", require("lsp_lines").toggle, { desc = "Toggle lsp lines" })
 end
+
 
 require("neodev").setup({
   override = function(root_dir, library)
@@ -29,7 +29,8 @@ local capabilities = vim.tbl_deep_extend(
 local lsp_servers = { "lua_ls", "rnix", "sourcekit", "bashls", "pyright", "gopls", "terraformls" }
 for _, server_name in ipairs(lsp_servers) do
   local has_opts, opts = pcall(require, "hrndz.lsp.servers." .. server_name)
-  local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities) }, has_opts and opts or {})
+  local server_opts =
+    vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities) }, has_opts and opts or {})
   require("lspconfig")[server_name].setup(server_opts)
 end
 
@@ -55,7 +56,9 @@ end
 vim.diagnostic.config({
   underline = true,
   signs = true,
-  virtual_text = false,
+  virtual_text = {
+    prefix = "●",
+  },
   virtual_lines = false,
   float = {
     show_header = true,

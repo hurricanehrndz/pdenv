@@ -33,6 +33,5 @@ wk.register({
   ["<leader>w"] = { name = "+windows" },
   ["<leader>t"] = { name = "+tests" },
   ["<leader>u"] = { name = "+ui" },
-  ["<leader>y"] = { name = "+clipboard" },
   ["<leader>x"] = { name = "+diagnostics/quickfix" },
 })

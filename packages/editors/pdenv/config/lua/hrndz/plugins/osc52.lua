@@ -15,5 +15,5 @@ vim.g.clipboard = {
 
 -- copy to clipboard
 local map = vim.keymap.set
-map({ "n", "v" }, "<leader>yy", [["+y]], { desc = "Copy to clipboard" })
-map("n", "<leader>yY", [["+Y]], { desc = "Copy line to clipboard" })
+map({ "n", "v" }, ",y", [["+y]], { desc = "Copy to clipboard" })
+map("n", ",Y", [["+Y]], { desc = "Copy line to clipboard" })

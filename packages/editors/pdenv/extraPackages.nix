@@ -10,6 +10,7 @@ with packages; [
   gofumpt
   golines
   golangci-lint
+  revive
   gotools
   gopls
   reftools

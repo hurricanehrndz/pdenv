@@ -3,6 +3,7 @@ require("conform").setup({
     lua = { "stylua" },
     python = { "isort", "black" },
     javascript = { { "prettierd", "prettier" } },
+    go = { "goimports", "gofumpt" },
   },
 })
 

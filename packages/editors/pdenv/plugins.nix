@@ -59,6 +59,7 @@ with pkgs.vimPlugins; [
   # formatters, linters
   conform-nvim
   vim-better-whitespace
+  nvim-lint
 
   # add lsp config
   nvim-lspconfig
