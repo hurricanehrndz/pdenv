@@ -3,7 +3,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.alpha")
   require("hrndz.plugins.theme")
   require("hrndz.plugins.whichkey")
-  -- require("hrndz.plugins.indentblankline")
+  require("hrndz.plugins.fidget")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
   require("nvim-web-devicons").setup({ defualt = true })

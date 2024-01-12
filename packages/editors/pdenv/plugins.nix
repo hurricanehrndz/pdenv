@@ -14,12 +14,12 @@ with pkgs.vimPlugins; [
   catppuccin
   alpha-nvim
   nvim-web-devicons
-  indent-blankline-nvim
   gitsigns-nvim
   nvim-colorizer-lua
-  todo-comments-nvim
   nvim-window
-  nvim-ts-context-commentstring
+  fidget-nvim
+  lualine-nvim
+  todo-comments-nvim
 
   # Fuzzy finder
   telescope-nvim
@@ -38,6 +38,7 @@ with pkgs.vimPlugins; [
   which-key-nvim
   # what's did I do wrong
   trouble-nvim
+  diffview-nvim
 
   # add completion
   nvim-cmp
@@ -71,10 +72,9 @@ with pkgs.vimPlugins; [
   vim-tmux-navigator
   nvim-notify
   undotree
-
-  # feline-nvim
-  lualine-nvim
+  vim-repeat
   mini-nvim
+  nvim-ts-context-commentstring
 
   # pictograms
   lspkind-nvim
@@ -90,15 +90,10 @@ with pkgs.vimPlugins; [
   Jenkinsfile-vim-syntax
   vim-puppet
 
-  diffview-nvim
-
-  # rainbow
-  rainbow-delimiters-nvim
 
   # testing
   FixCursorHold-nvim
   neotest
   neotest-go
 
-  vim-repeat
 ]
