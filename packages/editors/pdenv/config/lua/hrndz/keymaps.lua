@@ -62,8 +62,8 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- better indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+-- map("v", "<", "<gv")
+-- map("v", ">", ">gv")
 
 -- location/quickfix list
 local qf_list_toggle = function()
