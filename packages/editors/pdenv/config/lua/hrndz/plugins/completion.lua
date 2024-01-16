@@ -42,7 +42,7 @@ local cmp_formatting = {
       zsh = "[zpty]",
       path = "[path]",
       luasnip = "[snip]",
-      -- dictionary = "[dic]",
+      dictionary = "[dict]",
     },
   }),
 }
@@ -84,6 +84,15 @@ local cmp_keymaps = {
   ),
 }
 
+local dict = require("cmp_dictionary")
+dict.setup({})
+
+dict.switcher({
+  spelllang = {
+    en = vim.g.user_provided_dict,
+  },
+})
+
 require("cmp_zsh").setup({
   filetypes = { "zsh" }, -- Filetypes to enable cmp_zsh source. default: {"*"}
 })
@@ -101,6 +110,11 @@ cmp.setup({
     { name = "luasnip" },
     {
       name = "buffer",
+      keyword_length = 3,
+      max_item_count = 5,
+    },
+    {
+      name = "dictionary",
       keyword_length = 3,
       max_item_count = 5,
     },

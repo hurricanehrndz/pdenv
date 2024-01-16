@@ -7,6 +7,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
   require("nvim-web-devicons").setup({ defualt = true })
+  require("Comment").setup()
   require("hrndz.plugins.telescope")
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.toggleterm")

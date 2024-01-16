@@ -47,6 +47,7 @@ with pkgs.vimPlugins; [
   cmp-path
   cmp-buffer
   cmp-cmdline
+  cmp-dictionary
   cmp-zsh # next is required
   deol-nvim
   lsp_lines-nvim
@@ -75,6 +76,7 @@ with pkgs.vimPlugins; [
   vim-repeat
   mini-nvim
   nvim-ts-context-commentstring
+  comment-nvim
 
   # pictograms
   lspkind-nvim
