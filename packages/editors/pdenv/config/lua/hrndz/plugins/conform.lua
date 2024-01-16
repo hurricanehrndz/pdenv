@@ -4,9 +4,15 @@ require("conform").setup({
     python = { "isort", "black" },
     go = { "goimports", "gofumpt" },
     javascript = { { "prettierd", "prettier" } },
+    sh = { "shfmt" },
   },
 })
 
+require("conform").formatters.shfmt = {
+  prepend_args = { "-i", "4", "-ci" },
+  -- The base args are { "-filename", "$FILENAME" } so the final args will be
+  -- { "-i", "2", "-filename", "$FILENAME" }
+}
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 local map = vim.keymap.set
