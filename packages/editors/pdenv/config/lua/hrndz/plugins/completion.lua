@@ -85,11 +85,13 @@ local cmp_keymaps = {
 }
 
 local dict = require("cmp_dictionary")
-dict.setup({})
-
-dict.switcher({
-  spelllang = {
-    en = vim.g.user_provided_dict,
+dict.setup({
+  paths = { vim.g.user_provided_dict },
+  exact_length = 2,
+  first_case_insensitive = true,
+  document = {
+    enable = true,
+    command = { "wn", "${label}", "-over" },
   },
 })
 
