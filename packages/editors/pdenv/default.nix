@@ -2,7 +2,6 @@
 , lib
 , pkgs
 , packages
-, neovim
 , ...
 }:
 let
@@ -88,4 +87,5 @@ let
   ]);
   LuaConfig = neovimConfig // { inherit wrapperArgs; };
 in
-pkgs.wrapNeovimUnstable neovim LuaConfig
+# wrap my neovim pkg override
+pkgs.wrapNeovimUnstable packages.neovim LuaConfig

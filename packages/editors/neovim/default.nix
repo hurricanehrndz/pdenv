@@ -1,43 +1,36 @@
-{
-  neovim,
-  pkgs,
-  lib,
-  ...
-}: let
+{ neovim
+, pkgs
+, lib
+, fetchFromGitHub
+, fetchurl
+, rustPlatform
+, ...
+}:
+let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
-  liblpeg = pkgs.stdenv.mkDerivation {
-    pname = "liblpeg";
-    inherit (pkgs.luajitPackages.lpeg) version meta src;
-
-    buildInputs = [pkgs.luajit];
-
-    buildPhase = ''
-      sed -i makefile -e "s/CC = gcc/CC = clang/"
-      sed -i makefile -e "s/-bundle/-dynamiclib/"
-
-      make macosx
-    '';
-
-    installPhase = ''
-      mkdir -p $out/lib
-      mv lpeg.so $out/lib/lpeg.dylib
-    '';
-
-    nativeBuildInputs = [pkgs.fixDarwinDylibNames];
+  version = "0.20.9";
+  sha256 = "sha256-NxWqpMNwu5Ajffw1E2q9KS4TgkCH6M+ctFyi9Jp0tqQ=";
+  src = fetchFromGitHub {
+    owner = "tree-sitter";
+    repo = "tree-sitter";
+    rev = "v${version}";
+    inherit sha256;
+    fetchSubmodules = true;
   };
+  tree-sitter = pkgs.tree-sitter.overrideAttrs (drv: rec {
+    name = "tree-sitter";
+    inherit src version;
+    cargoDeps = rustPlatform.importCargoLock {
+      lockFile = fetchurl {
+        url =
+          "https://raw.githubusercontent.com/tree-sitter/tree-sitter/v${version}/Cargo.lock";
+        sha256 = "sha256-CVxS6AAHkySSYI9vY9k1DLrffZC39nM7Bc01vfjMxWk=";
+      };
+      allowBuiltinFetchGit = true;
+    };
+  });
 in
-  neovim.overrideAttrs (o: {
-    patches = builtins.filter (p:
-      (
-        if builtins.typeOf p == "set"
-        then baseNameOf p.name
-        else baseNameOf
-      )
-      != "use-the-correct-replacement-args-for-gsub-directive.patch")
-    o.patches;
-    postInstall = ''
-      rm -rf $out/lib/nvim/parser
-      rm -rf $out/share/nvim/runtime/queries/bash/highlights.scm
-    '';
-    nativeBuildInputs = o.nativeBuildInputs ++ lib.optionals isDarwin [liblpeg];
-  })
+#  neovim/neovim contrib flake
+neovim.overrideAttrs (o: {
+  buildInputs = [ tree-sitter ] ++ o.buildInputs;
+})
