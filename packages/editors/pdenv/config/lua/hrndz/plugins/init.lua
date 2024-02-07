@@ -1,4 +1,5 @@
 if vim.g.vscode == nil then
+  require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
   require("hrndz.plugins.alpha")
   require("hrndz.plugins.theme")
@@ -9,7 +10,6 @@ if vim.g.vscode == nil then
   require("nvim-web-devicons").setup({ defualt = true })
   require("Comment").setup()
   require("hrndz.plugins.telescope")
-  require("hrndz.plugins.treesitter")
   require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
   require("hrndz.plugins.osc52")

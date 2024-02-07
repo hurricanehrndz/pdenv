@@ -67,6 +67,7 @@ let
           -- Global vars
           vim.g.nix_dap_python = "${nvimPython}/bin/python"
           vim.g.user_provided_dict = "${nvimDict}/en.dict"
+          vim.opt.runtimepath:append("${treesitter-parsers}")
         end
 
         return M
@@ -81,7 +82,7 @@ let
     ":"
     "${extraPackagesBinPath}"
     "--add-flags"
-    ''--cmd "set rtp^=${treesitter-parsers},${nvimrc}"''
+    ''--cmd "set rtp^=${nvimrc}"''
     "--add-flags"
     "-u ${nvimrc}/init.lua"
   ]);
