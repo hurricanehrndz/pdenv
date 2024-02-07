@@ -10,7 +10,7 @@ function M.on_attach(_, buffer)
     { desc = "Goto Definition", buffer = buffer }
   )
   map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
-  map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration", buffer = buffer })
+  map("n", "gD", "<cmd>Lspsaga goto_definition<cr>", { desc = "Goto Defintion", buffer = buffer })
   map(
     "n",
     "gI",
@@ -23,25 +23,27 @@ function M.on_attach(_, buffer)
     function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
     { desc = "Goto T[y]pe Definition", buffer = buffer }
   )
-  map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer })
-  map({ "i", "n" }, "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
-  map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
+  map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover", buffer = buffer })
+  map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Code Action", buffer = buffer })
+  map(
+    { "n", "v" },
+    "<leader>lA",
+    require("actions-preview").code_actions,
+    { desc = "Code Action Preview", buffer = buffer }
+  )
+  map(
+    { "n" },
+    "<C-k>",
+    function() require("lsp_signature").toggle_float_win() end,
+    { silent = true, noremap = true, desc = "toggle signature" }
+  )
+  map("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "Rename" })
   map(
     "n",
-    "<leader>lA",
-    function()
-      vim.lsp.buf.code_action({
-        context = {
-          only = {
-            "source",
-          },
-          diagnostics = {},
-        },
-      })
-    end,
-    { desc = "Source Action", buffer = buffer }
+    "<leader>lh",
+    function() vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled()) end,
+    { desc = "Toggle hints" }
   )
-  map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
 end
 
 return M

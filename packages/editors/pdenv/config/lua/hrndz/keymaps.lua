@@ -88,19 +88,10 @@ wk.register({
 })
 
 -- diagnostic
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function() go({ severity = severity }) end
-end
 wk.register({
   ["<leader>ld"] = { vim.diagnostic.open_float, "Line Diagnostics" },
-  ["]d"] = { diagnostic_goto(true), "Next Diagnostic" },
-  ["[d"] = { diagnostic_goto(false), "Prev Diagnostic" },
-  ["]e"] = { diagnostic_goto(true, "ERROR"), "Next Error" },
-  ["[e"] = { diagnostic_goto(false, "ERROR"), "Prev Error" },
-  ["]w"] = { diagnostic_goto(true, "WARN"), "Next Warning" },
-  ["[w"] = { diagnostic_goto(false, "WARN"), "Prev Warning" },
+  ["]d"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
+  ["[d"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic" },
 })
 
 -- file operations

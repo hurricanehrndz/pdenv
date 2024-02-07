@@ -9,7 +9,6 @@ if has_lsplines then
   vim.keymap.set("n", "<space>ll", require("lsp_lines").toggle, { desc = "Toggle lsp lines" })
 end
 
-
 require("neodev").setup({
   override = function(root_dir, library)
     if require("neodev.util").has_file(root_dir, "packages/editors/pdenv/default.nix") then
@@ -70,6 +69,16 @@ vim.diagnostic.config({
   severity_sort = true, -- default to false
 })
 
-require("nvim-lightbulb").setup({
-  autocmd = { enabled = true },
+require("lspsaga").setup({
+  lightbulb = {
+    enable = false;
+  }
+})
+require("lsp_signature").setup({
+  bind = true,
+  handler_opts = {
+    border = "rounded",
+  },
+  floating_window = false,
+  toggle_key = '<C-k>'
 })

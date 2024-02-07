@@ -65,7 +65,9 @@ with pkgs.vimPlugins; [
 
   # add lsp config
   nvim-lspconfig
-  nvim-lightbulb
+  lspsaga-nvim
+  lsp-signature-nvim
+  actions-preview-nvim
   neodev-nvim
 
   # nice plugins

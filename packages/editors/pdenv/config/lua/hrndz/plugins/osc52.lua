@@ -4,6 +4,7 @@ local function copy(lines, _)
 end
 
 local function paste()
+---@diagnostic disable-next-line: param-type-mismatch
   return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
 end
 

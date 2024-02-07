@@ -70,6 +70,7 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 opt.colorcolumn = "+1" -- enable color column
+opt.exrc = true -- enable project base configs
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
