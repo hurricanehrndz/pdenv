@@ -40,7 +40,7 @@ let
   nvimDict = pkgs.stdenv.mkDerivation rec {
     name = "nvimDict";
     dontUnpack = true;
-    buildInputs = with pkgs; [ (aspellWithDicts (d: [d.en])) ];
+    buildInputs = with pkgs; [ (aspellWithDicts (d: [ d.en ])) ];
     installPhase = ''
       mkdir -p $out/
       aspell -d en dump master | aspell -l en expand > $out/en.dict
@@ -84,7 +84,7 @@ let
     "--add-flags"
     ''--cmd "set rtp^=${nvimrc}"''
     "--add-flags"
-    "-u ${nvimrc}/init.lua"
+    ''--cmd "luafile ${nvimrc}/init.lua"''
   ]);
   LuaConfig = neovimConfig // { inherit wrapperArgs; };
 in

@@ -6,6 +6,18 @@ require("conform").setup({
     javascript = { { "prettierd", "prettier" } },
     sh = { "shfmt" },
   },
+  formatters = {
+    isort = {
+      condition = function(_)
+        return not vim.g.conform_disable_isort
+      end,
+    },
+    black = {
+      condition = function(_)
+        return not vim.g.conform_disable_black
+      end,
+    },
+  },
 })
 
 require("conform").formatters.shfmt = {

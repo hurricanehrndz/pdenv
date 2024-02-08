@@ -10,9 +10,9 @@ function M.on_attach(client, buffer)
     vim.bo[buffer].tagfunc = "v:lua.vim.lsp.tagfunc"
   end
 
-  -- if client.server_capabilities.inlayHintProvider then
-  --   vim.lsp.inlay_hint.enable(buffer, true)
-  -- end
+  if client.name == "ruff_lsp" then
+    client.server_capabilities.hoverProvider = false
+  end
 end
 
 return M
