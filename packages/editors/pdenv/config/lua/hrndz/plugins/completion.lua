@@ -1,10 +1,7 @@
 -- completion settings
--- vim.o.completeopt = "menu,menuone,noinsert"
--- vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
-vim.opt.completeopt = { "menu,menuone,noselect" }
+vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 -- disable insert completion menu messages
--- vim.opt.shortmess:append("c")
-vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+vim.opt.shortmess:append({ I = true, c = true, C = true })
 -- completion menu height
 vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
@@ -87,11 +84,10 @@ local cmp_keymaps = {
 local dict = require("cmp_dictionary")
 dict.setup({
   paths = { vim.g.user_provided_dict },
-  exact_length = 2,
+  exact_length = 3,
   first_case_insensitive = true,
   document = {
-    enable = true,
-    command = { "wn", "${label}", "-over" },
+    enable = false,
   },
 })
 

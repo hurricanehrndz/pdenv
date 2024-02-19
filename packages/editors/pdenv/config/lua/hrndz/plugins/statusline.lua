@@ -31,7 +31,7 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
-    lualine_c = {},
+    lualine_c = { "filename" },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "location" },
@@ -45,37 +45,5 @@ require("lualine").setup({
     lualine_z = {},
   },
   tabline = {},
-  -- winbar = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = {
-  --     -- {
-  --     --   "filename",
-  --     --   file_status = false,
-  --     --   newfile_status = false,
-  --     --   path = 1,
-  --     --   shorting_target = 40,
-  --     -- },
-  --   },
-  --   lualine_x = {},
-  --   lualine_y = {},
-  --   lualine_z = {},
-  -- },
-  -- inactive_winbar = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = {
-  --     {
-  --       "filename",
-  --       file_status = false,
-  --       newfile_status = false,
-  --       path = 1,
-  --       shorting_target = 40,
-  --     },
-  --   },
-  --   lualine_x = {},
-  --   lualine_y = {},
-  --   lualine_z = {},
-  -- },
   extensions = {},
 })
