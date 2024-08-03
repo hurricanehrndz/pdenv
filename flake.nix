@@ -27,7 +27,7 @@
 
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
     neovim-flake = {
-      url = "github:neovim/neovim?dir=contrib";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # golang support tools

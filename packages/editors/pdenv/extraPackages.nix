@@ -33,7 +33,6 @@ with packages; [
   stylua
 
   # nix
-  rnix-lsp
   alejandra
   nixpkgs-fmt
 
@@ -58,7 +57,7 @@ with packages; [
 
   # python
   black
-  nodePackages.pyright
+  pyright
   nvimPython
 
   # terraform

@@ -15,6 +15,7 @@
         neovim = pkgs.callPackage ./editors/neovim { inherit neovim; };
         pdenv = pkgs.callPackage ./editors/pdenv {
           inherit (self') packages;
+          inherit inputs';
           inherit inputs;
         };
         default = config.packages.pdenv;
