@@ -80,18 +80,18 @@ end
 local qf_list_clear = function() vim.fn.setqflist({}) end
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
-wk.register({
-  ["<leader>xl"] = { "<cmd>lopen<cr>", "Location List" },
-  ["<leader>xq"] = { qf_list_toggle, "Quickfix toggle" },
-  ["<leader>xQ"] = { qf_list_clear, "Quickfix clear" },
-  ["<leader>xu"] = { "<Cmd>UndotreeToggle<CR>", "Undotree" },
+wk.add({
+  { "<leader>xl", "<cmd>lopen<cr>", desc = "Location List" },
+  { "<leader>xq", qf_list_toggle, desc = "Quickfix toggle" },
+  { "<leader>xQ", qf_list_clear, desc = "Quickfix clear" },
+  { "<leader>xu", "<Cmd>UndotreeToggle<CR>", desc = "Undotree" },
 })
 
 -- diagnostic
-wk.register({
-  ["<leader>ld"] = { vim.diagnostic.open_float, "Line Diagnostics" },
-  ["]d"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
-  ["[d"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic" },
+wk.add({
+  { "<leader>ld", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+  { "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
+  { "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Prev Diagnostic" },
 })
 
 -- file operations

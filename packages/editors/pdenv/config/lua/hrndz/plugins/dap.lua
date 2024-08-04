@@ -29,8 +29,8 @@ require('telescope').load_extension('dap')
 -- keybinds
 local map = vim.keymap.set
 local wk = require("which-key")
-wk.register({
-  ["<leader>d"] = { name = "+debug" },
+wk.add({
+  { "<leader>d", group = "+debug" },
 })
 map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle breakpoint" })
 map("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue" })

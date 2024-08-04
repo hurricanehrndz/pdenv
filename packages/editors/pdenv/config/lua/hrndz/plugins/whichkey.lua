@@ -22,16 +22,16 @@ wk.setup({
 })
 
 -- add labels to prefixes
-wk.register({
+wk.add({
   mode = { "n", "v" },
-  ["g"] = { name = "+goto" },
-  ["]"] = { name = "+next" },
-  ["["] = { name = "+prev" },
-  ["<leader>f"] = { name = "+file/find" },
-  ["<leader>b"] = { name = "+buffer" },
-  ["<leader>l"] = { name = "+lsp" },
-  ["<leader>w"] = { name = "+windows" },
-  ["<leader>t"] = { name = "+tests" },
-  ["<leader>u"] = { name = "+ui" },
-  ["<leader>x"] = { name = "+diagnostics/quickfix" },
+  { "g", group = "+goto" },
+  { "]", group = "+next" },
+  { "[", group = "+prev" },
+  { "<leader>f", group = "+file/find" },
+  { "<leader>b", group = "+buffer" },
+  { "<leader>l", group = "+lsp" },
+  { "<leader>w", group = "+windows" },
+  { "<leader>t", group = "+tests" },
+  { "<leader>u", group = "+ui" },
+  { "<leader>x", group = "+diagnostics/quickfix" },
 })

@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 local wk = require("which-key")
-wk.register({
-  ["<leader>gd"] = { name = "+DiffView" },
+wk.add({
+  { "<leader>gd", group = "+DiffView" },
 })
 map("n", "<leader>gdt", "<cmd>DiffviewToggleFiles<CR>", { desc = "Toggle file tree" })
 map("n", "<leader>gdo", "<cmd>DiffviewOpen<CR>",  { desc = "Open" })

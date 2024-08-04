@@ -21,9 +21,9 @@ require("mini.surround").setup({
 -- incompatible with vscode
 if vim.g.vscode == nil then
   local wk = require("which-key")
-  wk.register({
+  wk.add({
     mode = { "n", "v" },
-    ["s"] = { name = "+surround" },
+    { "s", group = "+surround" },
   })
   require("mini.bufremove").setup({}) -- help deleting buffers
 

@@ -46,8 +46,8 @@ local file_browser = function()
 end
 
 local wk = require("which-key")
-wk.register({
-  ["<leader>fw"] = { "+word" },
+wk.add({
+  { "<leader>fw", desc = "+word" },
 })
 local map = vim.keymap.set
 local builtin = require("telescope.builtin")
