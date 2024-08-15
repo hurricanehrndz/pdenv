@@ -9,7 +9,7 @@ function M.on_attach(_, buffer)
     function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,
     { desc = "Goto Definition", buffer = buffer }
   )
-  map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
+  map("n", "grt", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
   map("n", "gD", "<cmd>Lspsaga goto_definition<cr>", { desc = "Goto Defintion", buffer = buffer })
   map(
     "n",
@@ -25,11 +25,17 @@ function M.on_attach(_, buffer)
   )
   map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover", buffer = buffer })
   map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Code Action", buffer = buffer })
+  -- map(
+  --   { "n", "v" },
+  --   "<leader>lA",
+  --   require("actions-preview").code_actions,
+  --   { desc = "Code Action Preview", buffer = buffer }
+  -- )
   map(
-    { "n", "v" },
-    "<leader>lA",
-    require("actions-preview").code_actions,
-    { desc = "Code Action Preview", buffer = buffer }
+    "n",
+    "<leader>ca",
+    function() require("tiny-code-action").code_action() end,
+    { desc = "Code Action Preview", buffer = buffer, noremap = true, silent = true }
   )
   map(
     { "n" },
@@ -41,7 +47,7 @@ function M.on_attach(_, buffer)
   map(
     "n",
     "<leader>lh",
-    function() vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled()) end,
+    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled() ) end,
     { desc = "Toggle hints" }
   )
 end

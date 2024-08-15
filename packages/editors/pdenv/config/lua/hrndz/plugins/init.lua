@@ -24,6 +24,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.statusline")
   require("hrndz.plugins.dap")
   require("hrndz.plugins.actionspreview")
+  require("hrndz.plugins.endhints")
   -- merge conflicts
   require("diffview").setup({})
 

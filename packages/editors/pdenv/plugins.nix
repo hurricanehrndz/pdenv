@@ -67,7 +67,8 @@ with pkgs.vimPlugins; [
   nvim-lspconfig
   lspsaga-nvim
   lsp-signature-nvim
-  actions-preview-nvim
+  nvim-lsp-endhints
+  tiny-code-action-nvim
   neodev-nvim
 
   # nice plugins
