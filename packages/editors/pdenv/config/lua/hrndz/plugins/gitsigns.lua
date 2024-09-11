@@ -20,20 +20,34 @@ gitsigns.setup({
     end, { expr = true, desc = "Prev Change", buffer = bufnr })
 
     -- Actions
-    wk.register({
-      ["<leader>h"] = { name = "+hunks" },
-      ["<leader>hS"] = { gs.stage_buffer, "Stage Buffer" },
-      ["<leader>hu"] = { gs.undo_stage_hunk, "Undo Stage Hunk" },
-      ["<leader>hR"] = { gs.reset_buffer, "Reset Buffer" },
-      ["<leader>hp"] = { gs.preview_hunk, "Preview Hunk" },
-      ["<leader>hb"] = { function() gs.blame_line({ full = true }) end, "Blame Line" },
-      ["<leader>hd"] = { gs.diffthis, "Diff This" },
-      ["<leader>hD"] = { function() gs.diffthis("~") end, "Diff This ~" },
-      ["<leader>hg"] = { gs.toggle_deleted, "View Deleted" },
-    }, { mode = "n", buffer = bufnr, silent = true, noremap =  true })
-    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Stage Hunk", buffer = bufnr })
-    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Reset Hunk", buffer = bufnr })
-    -- Text object
-    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "GitSigns Select Hunk", buffer = bufnr })
+    wk.add({
+      {
+        mode = "n",
+        buffer = bufnr,
+        silent = true,
+        noremap = true,
+        { "<leader>h", group = "+hunks" },
+        { "<leader>hS", gs.stage_buffer, desc = "Stage Buffer" },
+        { "<leader>hu", gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
+        { "<leader>hR", gs.reset_buffer, desc = "Reset Buffer" },
+        { "<leader>hp", gs.preview_hunk, desc = "Preview Hunk" },
+        { "<leader>hb", function() gs.blame_line({ full = true }) end, desc = "Blame Line" },
+        { "<leader>hd", gs.diffthis, desc = "Diff This" },
+        { "<leader>hD", function() gs.diffthis("~") end, desc = "Diff This ~" },
+        { "<leader>hg", gs.toggle_deleted, desc = "View Deleted" },
+        { "<leader>hs", ":Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
+        { "<leader>hr", ":Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
+      },
+      {
+        mode = "v",
+        buffer = bufnr,
+        silent = true,
+        noremap = true,
+        { "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, desc = "Stage Hunk" },
+        { "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, desc = "Reset Hunk" },
+      },
+      -- Text object
+      { mode = { "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", desc = "GitSigns Select Hunk", buffer = bufnr },
+    })
   end,
 })
