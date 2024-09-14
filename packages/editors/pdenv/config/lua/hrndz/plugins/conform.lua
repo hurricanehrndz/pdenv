@@ -5,6 +5,8 @@ require("conform").setup({
     go = { "goimports", "gofumpt" },
     javascript = { { "prettierd", "prettier" } },
     sh = { "shfmt" },
+    nix = { "alejandra" },
+    swift = { "swiftformat" },
   },
   formatters = {
     isort = {

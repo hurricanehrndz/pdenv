@@ -33,6 +33,7 @@ with packages; [
   stylua
 
   # nix
+  nil
   alejandra
   nixpkgs-fmt
 

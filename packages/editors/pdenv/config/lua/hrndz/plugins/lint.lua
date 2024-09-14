@@ -1,5 +1,6 @@
 require("lint").linters_by_ft = {
   go = { "revive" },
+  swift = { "swiftlint" },
 }
 
 -- local golangcilint = require("lint").linters.golangcilint
