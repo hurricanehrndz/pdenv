@@ -76,5 +76,4 @@ with packages; [
   findutils
   fzf
   gawk
-
 ]
