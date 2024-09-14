@@ -47,11 +47,6 @@ with packages; [
   nodePackages.markdownlint-cli
   vale
 
-  # swift
-  swiftlint
-  swiftformat
-  # sourcekit-lsp
-
   # yaml
   yamlfixer
   yamllint
