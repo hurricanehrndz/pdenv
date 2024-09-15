@@ -13,6 +13,15 @@ function M.on_attach(client, buffer)
   if client.name == "ruff_lsp" then
     client.server_capabilities.hoverProvider = false
   end
+
+  if client.name == "sourcekit" then
+    client.server_capabilities.inlayHintProvider = true
+  end
+
+  if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+    -- Enable inlay hints by default
+    vim.lsp.inlay_hint.enable()
+  end
 end
 
 return M
