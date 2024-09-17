@@ -53,21 +53,16 @@ map({ "n", "v" }, "<leader>de", function() require("dapui").eval() end, { desc =
 map("n", "<leader>dw", function() require("dap.ui.widgets").hover() end, { desc = "Widgets" })
 
 local dap_python = require("dap-python")
+local codelldbPath = os.getenv("HOME") .. "/.local/share/codelldb/extension/adapter/codelldb"
 dap_python.setup(vim.g.nix_dap_python)
--- dap.adapters.codelldb = {
---   type = "server",
---   port = "''${port}",
---   executable = {
---     command = vim.g.nix_codelldb_bin,
---     args = {
---       "--port",
---       "''${port}",
---       "--liblldb",
---       -- TODO: fix for linux
---       "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
---     },
---   },
--- }
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = codelldbPath,
+    args = {"--port", "${port}"},
+  },
+}
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -76,8 +71,9 @@ dap.configurations.cpp = {
     program = function()
       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
     end,
-    cwd = "''${workspaceFolder}",
+    cwd = "${workspaceFolder}",
     stopOnEntry = false,
   },
 }
 dap.configurations.swift = dap.configurations.cpp
+dap.configurations.c = dap.configurations.cpp
