@@ -1,19 +1,43 @@
-require("trouble").setup({
-  auto_fold = true,
-  icons = true,
-  use_diagnostic_signs = true,
-})
+require("trouble").setup({})
 
 local map = vim.keymap.set
-map("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "Workspace Diagnostics (Trouble)" })
-map(
-  "n",
-  "<leader>xd",
-  function() require("trouble").toggle("document_diagnostics") end,
-  { desc = "Document Diagnostics (Trouble)" }
-)
-map("n", "<leader>xq", function() require("trouble").toggle("quickfix") end, { desc = "Quickfix List (Trouble)" })
-map("n", "<leader>xl", function() require("trouble").toggle("loclist") end, { desc = "Location List (Trouble)" })
+local troubleKeys = {
+  {
+    "<leader>xx",
+    "<cmd>Trouble diagnostics toggle<cr>",
+    desc = "Diagnostics (Trouble)",
+  },
+  {
+    "<leader>xX",
+    "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+    desc = "Buffer Diagnostics (Trouble)",
+  },
+  {
+    "<leader>cs",
+    "<cmd>Trouble symbols toggle focus=false<cr>",
+    desc = "Symbols (Trouble)",
+  },
+  {
+    "<leader>cl",
+    "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+    desc = "LSP Definitions / references / ... (Trouble)",
+  },
+  {
+    "<leader>xl",
+    "<cmd>Trouble loclist toggle<cr>",
+    desc = "Location List (Trouble)",
+  },
+  {
+    "<leader>xq",
+    "<cmd>Trouble qflist toggle<cr>",
+    desc = "Quickfix List (Trouble)",
+  },
+}
+
+for _, x in ipairs(troubleKeys) do
+  map("n", x[1], x[2], { desc = x.desc})
+end
+
 map("n", "[q", function()
   if require("trouble").is_open() then
     require("trouble").previous({ skip_groups = true, jump = true })
