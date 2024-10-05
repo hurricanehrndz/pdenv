@@ -3,13 +3,14 @@ require("lint").linters_by_ft = {
   swift = { "swiftlint" },
 }
 
--- local golangcilint = require("lint").linters.golangcilint
--- golangcilint.append_fname = true
--- golangcilint.args = {
---   "run",
---   "--out-format",
---   "json",
--- }
+local golangcilint = require("lint").linters.golangcilint
+golangcilint.append_fname = true
+golangcilint.args = {
+  "run",
+  "--out-format",
+  "json",
+  "--fast",
+}
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function() require("lint").try_lint() end,
