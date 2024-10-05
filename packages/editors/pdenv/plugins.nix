@@ -29,7 +29,7 @@ with pkgs.vimPlugins; [
   telescope-file-browser-nvim
 
   # add some syntax highlighting
-  nvim-treesitter
+  (withSrc nvim-treesitter inputs.nvim-treesitter-src)
 
   # functionality
   toggleterm-nvim

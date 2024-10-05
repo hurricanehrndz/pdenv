@@ -393,6 +393,22 @@
         "type": "github"
       }
     },
+    "nvim-treesitter-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728146126,
+        "narHash": "sha256-jJbYL96SZUr0EZrbtCPLrRBY6lMmQ703Ss+td04QVW8=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "7821feb7e7d55a76b7ffeeb6b0bfb7b8f499ce94",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": [
@@ -433,6 +449,7 @@
           "nixpkgs-master"
         ],
         "nixpkgs-master": "nixpkgs-master",
+        "nvim-treesitter-src": "nvim-treesitter-src",
         "yamlfixer-src": "yamlfixer-src",
         "yamllint-src": "yamllint-src"
       }

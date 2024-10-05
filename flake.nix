@@ -49,6 +49,10 @@
     yamlfixer-src.flake = false;
 
     # neovim-plugins
+    nvim-treesitter-src = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
