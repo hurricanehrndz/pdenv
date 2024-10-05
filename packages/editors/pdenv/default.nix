@@ -90,4 +90,4 @@ let
   LuaConfig = neovimConfig // { inherit wrapperArgs; };
 in
 # wrap my neovim pkg override
-pkgs.wrapNeovimUnstable inputs'.neovim-flake.packages.default LuaConfig
+pkgs.wrapNeovimUnstable packages.neovim LuaConfig

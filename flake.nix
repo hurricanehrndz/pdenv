@@ -26,6 +26,10 @@
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
+    neovim-src = {
+      url = "github:neovim/neovim";
+      flake = false;
+    };
     neovim-flake = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +47,8 @@
     yamllint-src.flake = false;
     yamlfixer-src.url = "github:opt-nc/yamlfixer";
     yamlfixer-src.flake = false;
+
+    # neovim-plugins
   };
 
   outputs = inputs @ {flake-parts, ...}:
