@@ -53,10 +53,6 @@
       url = "github:nvim-treesitter/nvim-treesitter";
       flake = false;
     };
-    nvim-telescope-src = {
-      url = "github:nvim-telescope/telescope.nvim";
-      flake = false;
-    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
