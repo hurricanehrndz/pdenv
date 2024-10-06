@@ -31,7 +31,7 @@ in
     telescope-file-browser-nvim
 
     # add some syntax highlighting
-    (withSrc nvim-treesitter inputs.nvim-treesitter-src)
+    (withSrc nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
 
     # functionality
     toggleterm-nvim
