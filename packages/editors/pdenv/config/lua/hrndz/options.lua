@@ -85,11 +85,7 @@ if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end
 
--- Folding
-opt.foldlevel = 99
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-
-
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+vim.cmd("filetype plugin indent on")
