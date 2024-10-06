@@ -1,36 +1,109 @@
-{ neovim
-, pkgs
-, lib
-, fetchFromGitHub
-, fetchurl
-, rustPlatform
-, ...
-}:
-let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin;
-  version = "0.20.9";
-  sha256 = "sha256-NxWqpMNwu5Ajffw1E2q9KS4TgkCH6M+ctFyi9Jp0tqQ=";
-  src = fetchFromGitHub {
-    owner = "tree-sitter";
-    repo = "tree-sitter";
-    rev = "v${version}";
-    inherit sha256;
-    fetchSubmodules = true;
-  };
-  tree-sitter = pkgs.tree-sitter.overrideAttrs (drv: rec {
-    name = "tree-sitter";
-    inherit src version;
-    cargoDeps = rustPlatform.importCargoLock {
-      lockFile = fetchurl {
-        url =
-          "https://raw.githubusercontent.com/tree-sitter/tree-sitter/v${version}/Cargo.lock";
-        sha256 = "sha256-CVxS6AAHkySSYI9vY9k1DLrffZC39nM7Bc01vfjMxWk=";
-      };
-      allowBuiltinFetchGit = true;
+{
+  neovim-src,
+  lib,
+  pkgs,
+  ...
+}: let
+  src = neovim-src;
+
+  deps = lib.pipe "${src}/cmake.deps/deps.txt" [
+    builtins.readFile
+    (lib.splitString "\n")
+    (map (builtins.match "([A-Z0-9_]+)_(URL|SHA256)[[:space:]]+([^[:space:]]+)[[:space:]]*"))
+    (lib.remove null)
+    (lib.flip builtins.foldl' {}
+      (acc: matches: let
+        name = lib.toLower (builtins.elemAt matches 0);
+        key = lib.toLower (builtins.elemAt matches 1);
+        value = lib.toLower (builtins.elemAt matches 2);
+      in
+        acc
+        // {
+          ${name} =
+            acc.${name}
+            or {}
+            // {
+              ${key} = value;
+            };
+        }))
+    (builtins.mapAttrs (lib.const pkgs.fetchurl))
+  ];
+
+  # The following overrides will only take effect for linux hosts
+  linuxOnlyOverrides = lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
+    gettext = pkgs.gettext.overrideAttrs {
+      src = deps.gettext;
     };
-  });
+
+    # pkgs.libiconv.src is pointing at the darwin fork of libiconv.
+    # Hence, overriding its source does not make sense on darwin.
+    libiconv = pkgs.libiconv.overrideAttrs {
+      src = deps.libiconv;
+    };
+  };
+
+  overrides =
+    {
+      # FIXME: this has been causing problems, see;
+      # https://github.com/nix-community/neovim-nightly-overlay/issues/538
+      # libuv = pkgs.libuv.overrideAttrs {
+      #   src = deps.libuv;
+      # };
+      lua = pkgs.luajit;
+      tree-sitter =
+        (pkgs.tree-sitter.override {
+          rustPlatform =
+            pkgs.rustPlatform
+            // {
+              buildRustPackage = args:
+                pkgs.rustPlatform.buildRustPackage (args
+                  // {
+                    version = "bundled";
+                    src = deps.treesitter;
+                    cargoHash = "sha256-DkV/cQNl/7rkI5AFRwQf+IEIP0okK177y3zi3b1cJNE=";
+                  });
+            };
+        })
+        .overrideAttrs (oa: {
+          postPatch = ''
+            ${oa.postPatch}
+            sed -e 's/playground::serve(.*$/println!("ERROR: web-ui is not available in this nixpkgs build; enable the webUISupport"); std::process::exit(1);/' \
+                -i cli/src/main.rs
+          '';
+        });
+      treesitter-parsers = let
+        grammars = lib.filterAttrs (name: _: lib.hasPrefix "treesitter_" name) deps;
+      in
+        lib.mapAttrs'
+        (
+          name: value:
+            lib.nameValuePair
+            (lib.removePrefix "treesitter_" name)
+            {src = value;}
+        )
+        grammars;
+    }
+    // linuxOnlyOverrides;
 in
-#  neovim/neovim contrib flake
-neovim.overrideAttrs (o: {
-  buildInputs = [ tree-sitter ] ++ o.buildInputs;
-})
+  (
+    pkgs.neovim-unwrapped.override
+    overrides
+  )
+  .overrideAttrs (oa: {
+    version = "nightly";
+    inherit src;
+
+    preConfigure = ''
+      ${oa.preConfigure}
+      sed -i cmake.config/versiondef.h.in -e 's/@NVIM_VERSION_PRERELEASE@/-nightly+${neovim-src.shortRev or "dirty"}/'
+    '';
+
+    buildInputs = with pkgs;
+      [
+        # TODO: remove once upstream nixpkgs updates the base drv
+        (utf8proc.overrideAttrs (_: {
+          src = deps.utf8proc;
+        }))
+      ]
+      ++ oa.buildInputs;
+  })

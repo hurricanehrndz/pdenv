@@ -1,40 +1,10 @@
 { inputs
-, inputs'
 , lib
 , pkgs
 , packages
 , ...
 }:
 let
-  treesitter-parsers = pkgs.symlinkJoin {
-    name = "treesitter-parsers";
-    paths =
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-        p.bash
-        p.c
-        p.comment
-        p.cpp
-        p.go
-        p.gomod
-        p.gowork
-        p.gosum
-        p.hcl
-        p.javascript
-        p.lua
-        p.make
-        p.markdown
-        p.nix
-        p.puppet
-        p.python
-        p.query
-        p.terraform
-        p.tsx
-        p.typescript
-        p.vim
-        p.vimdoc
-        p.yaml
-      ])).dependencies;
-  };
   nvimPython = pkgs.python3.withPackages (ps: with ps; [ debugpy flake8 ]);
   extraPackages = import ./extraPackages.nix { inherit pkgs packages nvimPython; };
   extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
@@ -68,7 +38,6 @@ let
           -- Global vars
           vim.g.nix_dap_python = "${nvimPython}/bin/python"
           vim.g.user_provided_dict = "${nvimDict}/en.dict"
-          vim.opt.runtimepath:append("${treesitter-parsers}")
         end
 
         return M
@@ -90,4 +59,4 @@ let
   LuaConfig = neovimConfig // { inherit wrapperArgs; };
 in
 # wrap my neovim pkg override
-pkgs.wrapNeovimUnstable inputs'.neovim-flake.packages.default LuaConfig
+pkgs.wrapNeovimUnstable packages.neovim LuaConfig
