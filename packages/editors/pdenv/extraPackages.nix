@@ -76,4 +76,6 @@ with packages; [
   findutils
   fzf
   gawk
+  gitlint
+  codespell
 ]

@@ -1,6 +1,7 @@
 require("lint").linters_by_ft = {
   go = { "golangcilint" },
   swift = { "swiftlint" },
+  gitcommit = { "gitlint" },
 }
 
 local golangcilint = require("lint").linters.golangcilint
@@ -12,8 +13,25 @@ golangcilint.args = {
   "--fast",
 }
 
+local gitlint = require("lint").linters.gitlint
+gitlint.args = {
+  "--contrib=CT1",
+  "--ignore",
+  "body-is-missing,T3",
+  "-c",
+  "title-max-length.line-length=50",
+  "-c",
+  "body-max-line-length.line-legth=72",
+  "--staged",
+  "--msg-filename",
+  function() return vim.api.nvim_buf_get_name(0) end,
+}
+
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function() require("lint").try_lint() end,
+  callback = function()
+    require("lint").try_lint()
+    require("lint").try_lint("codespell")
+  end,
 })
 
 local map = vim.keymap.set

@@ -27,5 +27,24 @@ Personal Development Environment - design for me by me to meet my needs.
     ~/.local/tmp/nix run github:hurricanehrndz/pdenv --accept-flake-config
     ```
 
+## Notes:
+
+- How to get 50/72 rule enable in gitcommit TS
+
+```
+:TSEditQueryUserAfter highlight gitcommit
+# Hit 1 for new file and paste
+;; extends
+
+((subject) @comment.error
+  (#vim-match? @comment.error ".\{50,}")
+  (#offset! @comment.error 0 50 0 0))
+
+((message_line) @comment.error
+  (#vim-match? @comment.error ".\{72,}")
+  (#offset! @comment.error 0 72 0 0))
+```
+
 [nix-hydra]: https://hydra.nixos.org/project/nix
 [nix-install]: https://nixos.org/download.html
+
