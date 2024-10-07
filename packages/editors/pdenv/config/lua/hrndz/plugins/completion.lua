@@ -1,7 +1,9 @@
 -- completion settings
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 -- disable insert completion menu messages
-vim.opt.shortmess:append({ I = true, c = true, C = true })
+vim.opt.shortmess:append({ I = true,  c = true, C = true })
+-- I disable intro - good when using alpha
+-- vim.opt.shortmess:append({  c = true, C = true })
 -- completion menu height
 vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup

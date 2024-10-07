@@ -6,10 +6,8 @@
   ...
 }: let
   withSrc = pkg: src: pkg.overrideAttrs (_: {inherit src;});
-  telescope-nvim = withSrc pkgs.vimPlugins.telescope-nvim inputs.telescope-nvim-src;
 in
-  with pkgs.vimExtraPlugins;
-  with pkgs.vimPlugins; [
+  with pkgs.vimExtraPlugins; [
     # Theme
     tokyonight-nvim
     catppuccin
@@ -25,13 +23,12 @@ in
     # Fuzzy finder
     plenary-nvim
     popup-nvim
-    (telescope-fzf-native-nvim.overrideAttrs (oa: {
-      dependencies = [telescope-nvim];
-    }))
+    (withSrc pkgs.vimPlugins.telescope-nvim inputs.telescope-nvim-src)
+    telescope-fzf-native-nvim
     telescope-file-browser-nvim
 
     # add some syntax highlighting
-    (withSrc nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
+    (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
 
     # functionality
     toggleterm-nvim
@@ -51,18 +48,18 @@ in
     cmp-cmdline
     cmp-dictionary
     cmp-zsh # next is required
-    deol-nvim
-    lsp_lines-nvim
+    pkgs.vimPlugins.deol-nvim
+    pkgs.vimPlugins.lsp_lines-nvim
 
     # snippets
-    luasnip
-    cmp_luasnip
+    pkgs.vimPlugins.luasnip
+    pkgs.vimPlugins.cmp_luasnip
     friendly-snippets
-    vim-snippets
+    pkgs.vimPlugins.vim-snippets
 
     # formatters, linters
     conform-nvim
-    vim-better-whitespace
+    pkgs.vimPlugins.vim-better-whitespace
     nvim-lint
 
     # add lsp config
@@ -75,13 +72,13 @@ in
 
     # nice plugins
     nvim-osc52
-    vim-tmux-navigator
+    pkgs.vimPlugins.vim-tmux-navigator
     nvim-notify
     undotree
     vim-repeat
     mini-nvim
     nvim-ts-context-commentstring
-    comment-nvim
+    pkgs.vimPlugins.comment-nvim
 
     # pictograms
     lspkind-nvim
@@ -91,14 +88,15 @@ in
     nvim-dap-ui
     nvim-dap-virtual-text
     nvim-dap-python
-    telescope-dap-nvim
+    nvim-nio
+    pkgs.vimPlugins.telescope-dap-nvim
 
     # filetype
-    Jenkinsfile-vim-syntax
-    vim-puppet
+    pkgs.vimPlugins.Jenkinsfile-vim-syntax
+    pkgs.vimPlugins.vim-puppet
 
     # testing
-    FixCursorHold-nvim
+    pkgs.vimPlugins.FixCursorHold-nvim
     neotest
-    neotest-go
+    pkgs.vimPlugins.neotest-go
   ]
