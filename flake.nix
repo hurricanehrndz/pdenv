@@ -57,6 +57,15 @@
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
     };
+    chocolatier-nvim-src = {
+      url = "github:qaptoR-nvim/chocolatier.nvim";
+      flake = false;
+    };
+    #NLKNguyen/papercolor-theme
+    papercolor-src = {
+      url = "github:NLKNguyen/papercolor-theme";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:

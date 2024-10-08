@@ -6,9 +6,23 @@
   ...
 }: let
   withSrc = pkg: src: pkg.overrideAttrs (_: {inherit src;});
+  # Chocolatier.nvim
+  chocolatier = pkgs.vimUtils.buildVimPlugin {
+    name = "chocolatier";
+    src = inputs.chocolatier-nvim-src;
+  };
+  papercolor = pkgs.vimUtils.buildVimPlugin {
+    name = "papercolor";
+    src = inputs.papercolor-src;
+  };
 in
   with pkgs.vimExtraPlugins; [
     # Theme
+    themery-nvim
+    rose-pine
+    chocolatier
+    papercolor
+    everforest-nvim
     tokyonight-nvim
     catppuccin
     alpha-nvim
