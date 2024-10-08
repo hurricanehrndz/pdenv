@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "chocolatier-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725443276,
+        "narHash": "sha256-P9VeK++mjh2PoY9SCo7M8ZY/WtZB9MMYCFVpo5RkB+o=",
+        "owner": "qaptoR-nvim",
+        "repo": "chocolatier.nvim",
+        "rev": "9ca8cfd945733768ac0d2be3eb746e1641a115f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "qaptoR-nvim",
+        "repo": "chocolatier.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -262,11 +278,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728330985,
-        "narHash": "sha256-MQ78KUjQUpU2KW3nNIRSzCAliaSEooA+c0Xttxn2pR0=",
+        "lastModified": 1728347393,
+        "narHash": "sha256-yNxM7SsGOOtr7wA45sJgDLSMYyTmJAPXN7YnhHyFvkY=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "bef496fbc363a8fdf16f4565d295d9f46fdaabe3",
+        "rev": "b94afbd252534154fbe970699d7eef7ba8189df3",
         "type": "github"
       },
       "original": {
@@ -278,11 +294,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1728084038,
-        "narHash": "sha256-mI48HU2JOWwgri9Jc8Y+nl+wTuyRZ2nikzn32vy51XI=",
+        "lastModified": 1728343329,
+        "narHash": "sha256-rxYdIoJ8fsqboSvoa/RD4ATSIPtV5bdqKvrLAkraabk=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "ab98c5b5a0fdc9aad87feaf230239454f0a5e532",
+        "rev": "60e1862ccba744c4252d30f043bb077c2c657427",
         "type": "github"
       },
       "original": {
@@ -294,11 +310,11 @@
     "neovim-src_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1728343329,
-        "narHash": "sha256-rxYdIoJ8fsqboSvoa/RD4ATSIPtV5bdqKvrLAkraabk=",
+        "lastModified": 1728398540,
+        "narHash": "sha256-vkA2e+SweLNCaO8IkkywWonQYLH7z5UGcWmxT4aZieg=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "60e1862ccba744c4252d30f043bb077c2c657427",
+        "rev": "214ce8d33c11f75b3500212258f09b58b3d42e80",
         "type": "github"
       },
       "original": {
@@ -379,11 +395,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1728346091,
-        "narHash": "sha256-P4vGg3H3l2K79ZpWpRhZybN2pO/0fdJyZuXNRLw53es=",
+        "lastModified": 1728418294,
+        "narHash": "sha256-GMx1UB4qHR3I4jrGVa9Jwalbn5YmWuJ1P6/OvobEKVo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "beff8e9b414ab6a3b7045585d85c8b8cf58a6ac7",
+        "rev": "47913dd80e2348aa3856674a5b3f7e425969a19b",
         "type": "github"
       },
       "original": {
@@ -396,16 +412,32 @@
     "nvim-treesitter-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1728284361,
-        "narHash": "sha256-cWFgvS9HrWlZHymj5LvpwGPcV2TJBxRPOGVnFIL+7rY=",
+        "lastModified": 1728370737,
+        "narHash": "sha256-YBqo2dUFb9KVlTMU6tr0nXhdfaEX8sKLdNDZVzGt6eU=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "45e0d66246f31306d890b91301993fa1623e79f1",
+        "rev": "86c10df7ef77daf45a0e4a918934bb59083db1e1",
         "type": "github"
       },
       "original": {
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
+    "papercolor-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710230717,
+        "narHash": "sha256-JXB6hQgvJ3VfSY/tnSlZd7CRtts7l/hfTCeTmOkp0vA=",
+        "owner": "NLKNguyen",
+        "repo": "papercolor-theme",
+        "rev": "0cfe64ffb24c21a6101b5f994ca342a74c977aef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NLKNguyen",
+        "repo": "papercolor-theme",
         "type": "github"
       }
     },
@@ -437,6 +469,7 @@
     },
     "root": {
       "inputs": {
+        "chocolatier-nvim-src": "chocolatier-nvim-src",
         "devshell": "devshell",
         "flake-parts": "flake-parts",
         "go-enum-src": "go-enum-src",
@@ -450,6 +483,7 @@
         ],
         "nixpkgs-master": "nixpkgs-master",
         "nvim-treesitter-src": "nvim-treesitter-src",
+        "papercolor-src": "papercolor-src",
         "telescope-nvim-src": "telescope-nvim-src",
         "yamlfixer-src": "yamlfixer-src",
         "yamllint-src": "yamllint-src"
