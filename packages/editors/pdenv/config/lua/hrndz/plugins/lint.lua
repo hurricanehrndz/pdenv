@@ -14,14 +14,14 @@ golangcilint.args = {
 }
 
 local gitlint = require("lint").linters.gitlint
+gitlint.stdin = true
 gitlint.args = {
-  "--contrib=CT1",
+  "-c",
+  "T1.line-length=50",
+  "-c",
+  "B1.line-length=72",
   "--ignore",
   "body-is-missing,T3",
-  "-c",
-  "title-max-length.line-length=50",
-  "-c",
-  "body-max-line-length.line-legth=72",
   "--staged",
   "--msg-filename",
   function() return vim.api.nvim_buf_get_name(0) end,
