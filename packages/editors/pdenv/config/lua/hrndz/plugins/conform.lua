@@ -7,6 +7,8 @@ require("conform").setup({
     sh = { "shfmt" },
     nix = { "alejandra" },
     swift = { "swiftformat" },
+    json = { "jq" },
+    xml = { "xmllint" },
   },
   formatters = {
     isort = {
