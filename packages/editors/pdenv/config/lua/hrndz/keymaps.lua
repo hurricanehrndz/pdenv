@@ -12,10 +12,10 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = t
 -- tmux/window navigator
 vim.g.tmux_navigator_no_mappings = 1
 -- Ctrl+[hjkl] navigate windows
-map({ "n", "t" }, "<A-h>", [[<cmd>TmuxNavigateLeft<CR>]], { desc = "Go to left window" })
-map({ "n", "t" }, "<A-j>", [[<cmd>TmuxNavigateDown<CR>]], { desc = "Go to lower window" })
-map({ "n", "t" }, "<A-k>", [[<cmd>TmuxNavigateUp<CR>]], { desc = "Go to upper window" })
-map({ "n", "t" }, "<A-l>", [[<cmd>TmuxNavigateRight<CR>]], { desc = "Go to right window" })
+map({ "n", "t" }, "<C-h>", [[<cmd>TmuxNavigateLeft<CR>]], { desc = "Go to left window" })
+map({ "n", "t" }, "<C-j>", [[<cmd>TmuxNavigateDown<CR>]], { desc = "Go to lower window" })
+map({ "n", "t" }, "<C-k>", [[<cmd>TmuxNavigateUp<CR>]], { desc = "Go to upper window" })
+map({ "n", "t" }, "<C-l>", [[<cmd>TmuxNavigateRight<CR>]], { desc = "Go to right window" })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
