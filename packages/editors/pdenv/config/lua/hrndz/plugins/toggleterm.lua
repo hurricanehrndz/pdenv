@@ -1,7 +1,5 @@
 local status_ok, toggleterm = pcall(require, "toggleterm")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 -- Set git editor in toggleterm
 vim.env.GIT_EDITOR = "nvr --remote-tab-wait +'set bufhidden=wipe'"
@@ -28,13 +26,11 @@ local lazygit = Terminal:new({
   start_in_insert = true,
   on_open = function(term)
     local map_opts = { buffer = term.bufnr, noremap = true, silent = true }
-    vim.keymap.set("n", "q", function() return vim.cmd('stopinsert') end, map_opts)
+    vim.keymap.set("n", "q", function() return vim.cmd("stopinsert") end, map_opts)
   end,
 })
 
-function LazygitToggle()
-  lazygit:toggle()
-end
+function LazygitToggle() lazygit:toggle() end
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<C-g>", LazygitToggle, opts)
@@ -52,11 +48,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = term_open_group,
 })
 
-for i = 1, 3 do
-  local keymap = string.format("<C-%s>", i)
-  local normal_action = string.format([[<cmd>lua require('toggleterm').toggle(%s)<CR>]], i)
-  local term_action = [[<Cmd>lua vim.cmd('stopinsert')<CR>]] .. normal_action
-  vim.keymap.set("n", keymap, normal_action, opts)
-  vim.keymap.set("t", keymap, term_action, opts)
+-- local normal_action = string.format([[<cmd>lua require('toggleterm').toggle(%s)<CR>]], i)
+-- local term_action = [[<Cmd>lua vim.cmd('stopinsert')<CR>]] .. normal_action
+local function toggleterm_toggle()
+  local count = vim.v.count > 0 and vim.v.count or 1
+  require("toggleterm").toggle(count)
 end
-
+vim.keymap.set({ "n", "t" }, "<C-f>", toggleterm_toggle, opts)
