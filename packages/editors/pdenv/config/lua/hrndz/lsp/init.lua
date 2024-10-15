@@ -6,7 +6,7 @@ if not has_cmp then return end
 
 if has_lsplines then
   lsp_lines.setup()
-  vim.keymap.set("n", "<space>ll", require("lsp_lines").toggle, { desc = "Toggle lsp lines" })
+  vim.keymap.set("n", "<leader>ll", require("lsp_lines").toggle, { desc = "Toggle lsp lines" })
 end
 
 require("neodev").setup({

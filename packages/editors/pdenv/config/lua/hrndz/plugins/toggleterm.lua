@@ -48,10 +48,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = term_open_group,
 })
 
--- local normal_action = string.format([[<cmd>lua require('toggleterm').toggle(%s)<CR>]], i)
--- local term_action = [[<Cmd>lua vim.cmd('stopinsert')<CR>]] .. normal_action
 local function toggleterm_toggle()
   local count = vim.v.count > 0 and vim.v.count or 1
   require("toggleterm").toggle(count)
 end
-vim.keymap.set({ "n", "t" }, "<C-f>", toggleterm_toggle, opts)
+vim.keymap.set({ "n", "t" }, "<C-/>", toggleterm_toggle, opts)
+vim.keymap.set({ "n", "t" }, "<C-_>", toggleterm_toggle, opts)
