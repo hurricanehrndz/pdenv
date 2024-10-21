@@ -1,17 +1,17 @@
 require("lint").linters_by_ft = {
-  go = { "golangcilint" },
+  go = { "revive" },
   swift = { "swiftlint" },
   gitcommit = { "gitlint" },
 }
 
-local golangcilint = require("lint").linters.golangcilint
-golangcilint.append_fname = true
-golangcilint.args = {
-  "run",
-  "--out-format",
-  "json",
-  "--fast",
-}
+-- local golangcilint = require("lint").linters.golangcilint
+-- golangcilint.append_fname = true
+-- golangcilint.args = {
+--   "run",
+--   "--out-format",
+--   "json",
+--   "--fast",
+-- }
 
 local gitlint = require("lint").linters.gitlint
 gitlint.stdin = true
