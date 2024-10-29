@@ -7,7 +7,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.fidget")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
-  require("nvim-web-devicons").setup({ defualt = true })
+  require("nvim-web-devicons").setup({ default = true })
   require("Comment").setup()
   require("hrndz.plugins.telescope")
   require("hrndz.plugins.toggleterm")
@@ -29,6 +29,9 @@ if vim.g.vscode == nil then
   require("diffview").setup({})
 
   require("hrndz.plugins.neotest")
+  require("render-markdown").setup({
+    render_modes = { "n", "c" },
+  })
 end
 
 -- text manipulation

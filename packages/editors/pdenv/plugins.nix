@@ -93,6 +93,9 @@ in
     mini-nvim
     nvim-ts-context-commentstring
     pkgs.vimPlugins.comment-nvim
+    markdown-meandering-programmer
+    markdown-togglecheck
+    treesitter-utils
 
     # pictograms
     lspkind-nvim
