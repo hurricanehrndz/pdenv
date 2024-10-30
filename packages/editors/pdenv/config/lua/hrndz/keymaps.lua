@@ -13,14 +13,6 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = t
 map({"n"}, "<leader>q", "q", { desc = "Record macro" })
 map({"n"}, "q", "<Nop>", { desc = "Record macro" })
 
--- tmux/window navigator
-vim.g.tmux_navigator_no_mappings = 1
--- Ctrl+[hjkl] navigate windows
-map({ "n", "t" }, "<A-h>", [[<cmd>TmuxNavigateLeft<CR>]], { desc = "Go to left window" })
-map({ "n", "t" }, "<A-j>", [[<cmd>TmuxNavigateDown<CR>]], { desc = "Go to lower window" })
-map({ "n", "t" }, "<A-k>", [[<cmd>TmuxNavigateUp<CR>]], { desc = "Go to upper window" })
-map({ "n", "t" }, "<A-l>", [[<cmd>TmuxNavigateRight<CR>]], { desc = "Go to right window" })
-
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -114,3 +106,5 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 vim.keymap.set('n', '<leader>nn', require('markdown-togglecheck').toggle, { desc = 'Toggle Checkmark' });
 -- toggle checkbox (it doesn't remember toggle state and always creates [ ])
 vim.keymap.set('n', '<leader>nN', require('markdown-togglecheck').toggle_box, { desc = 'Toggle Checkbox' });
+-- render-markdown
+vim.keymap.set('n', '<leader>uM', require('render-markdown').toggle(), { desc = 'Toggle Render MD' });

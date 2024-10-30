@@ -86,7 +86,6 @@ in
 
     # nice plugins
     nvim-osc52
-    pkgs.vimPlugins.vim-tmux-navigator
     nvim-notify
     undotree
     vim-repeat
