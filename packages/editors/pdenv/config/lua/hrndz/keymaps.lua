@@ -106,5 +106,3 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 vim.keymap.set('n', '<leader>nn', require('markdown-togglecheck').toggle, { desc = 'Toggle Checkmark' });
 -- toggle checkbox (it doesn't remember toggle state and always creates [ ])
 vim.keymap.set('n', '<leader>nN', require('markdown-togglecheck').toggle_box, { desc = 'Toggle Checkbox' });
--- render-markdown
-vim.keymap.set('n', '<leader>uM', require('render-markdown').toggle(), { desc = 'Toggle Render MD' });

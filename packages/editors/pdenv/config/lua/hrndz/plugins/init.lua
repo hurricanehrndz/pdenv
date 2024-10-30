@@ -29,9 +29,7 @@ if vim.g.vscode == nil then
   require("diffview").setup({})
 
   require("hrndz.plugins.neotest")
-  require("render-markdown").setup({
-    render_modes = { "n", "c" },
-  })
+  require("hrndz.plugins.md")
 end
 
 -- text manipulation
