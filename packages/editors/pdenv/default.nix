@@ -1,17 +1,18 @@
-{ inputs
-, lib
-, pkgs
-, packages
-, ...
-}:
-let
-  nvimPython = pkgs.python3.withPackages (ps: with ps; [ debugpy flake8 ]);
-  extraPackages = import ./extraPackages.nix { inherit pkgs packages nvimPython; };
+{
+  inputs,
+  inputs',
+  lib,
+  pkgs,
+  packages,
+  ...
+}: let
+  nvimPython = pkgs.python3.withPackages (ps: with ps; [debugpy flake8]);
+  extraPackages = import ./extraPackages.nix {inherit pkgs packages nvimPython;};
   extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   nvimDict = pkgs.stdenv.mkDerivation rec {
     name = "nvimDict";
     dontUnpack = true;
-    buildInputs = with pkgs; [ (aspellWithDicts (d: [ d.en ])) ];
+    buildInputs = with pkgs; [(aspellWithDicts (d: [d.en]))];
     installPhase = ''
       mkdir -p $out/
       aspell -d en dump master | aspell -l en expand > $out/en.dict
@@ -22,7 +23,7 @@ let
     withPython3 = false;
     viAlias = true;
     vimAlias = true;
-    plugins = import ./plugins.nix { inherit pkgs packages inputs nvimPython; };
+    plugins = import ./plugins.nix {inherit pkgs packages inputs nvimPython;};
     wrapRc = false;
   };
   nvimrc = pkgs.stdenv.mkDerivation rec {
@@ -47,16 +48,16 @@ let
   # convert to string to stop doublbing of args
   wrapperArgs = lib.escapeShellArgs (neovimConfig.wrapperArgs
     ++ [
-    "--suffix"
-    "PATH"
-    ":"
-    "${extraPackagesBinPath}"
-    "--add-flags"
-    ''--cmd "set rtp^=${nvimrc}"''
-    "--add-flags"
-    ''--cmd "luafile ${nvimrc}/init.lua"''
-  ]);
-  LuaConfig = neovimConfig // { inherit wrapperArgs; };
+      "--suffix"
+      "PATH"
+      ":"
+      "${extraPackagesBinPath}"
+      "--add-flags"
+      ''--cmd "set rtp^=${nvimrc}"''
+      "--add-flags"
+      ''--cmd "luafile ${nvimrc}/init.lua"''
+    ]);
+  LuaConfig = neovimConfig // {inherit wrapperArgs;};
 in
-# wrap my neovim pkg override
-pkgs.wrapNeovimUnstable packages.neovim LuaConfig
+  # wrap my neovim pkg override
+  pkgs.wrapNeovimUnstable inputs'.neovim-flake.packages.default LuaConfig
