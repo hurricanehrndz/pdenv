@@ -34,4 +34,6 @@ wk.add({
   { "<leader>t", group = "+tests" },
   { "<leader>u", group = "+ui" },
   { "<leader>x", group = "+diagnostics/quickfix" },
+  { "<leader>z", group = "+zettelkasten" },
+  { "<leader>zn", group = "+new-zet" },
 })

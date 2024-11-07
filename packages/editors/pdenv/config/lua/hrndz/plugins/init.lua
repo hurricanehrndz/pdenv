@@ -30,6 +30,7 @@ if vim.g.vscode == nil then
 
   require("hrndz.plugins.neotest")
   require("hrndz.plugins.md")
+  require("hrndz.plugins.zk")
 end
 
 -- text manipulation

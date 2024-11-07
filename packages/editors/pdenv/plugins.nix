@@ -115,4 +115,7 @@ in
     pkgs.vimPlugins.FixCursorHold-nvim
     neotest
     pkgs.vimPlugins.neotest-go
+
+    # notes
+    zk-nvim
   ]

@@ -20,13 +20,13 @@ require("zk").setup({
 
 local wk = require("which-key")
 wk.add({
-  { "<leader>zl", function() require("zk.commands").get("ZkNotes")({ dir = "notes" }) end, desc = "notes" },
-  { "<leader>zp", function() require("zk.commands").get("ZkNotes")({ dir = "posts" }) end, desc = "posts" },
+  { "<leader>zl", function() require("zk").edit({ hrefs = { "notes" } }, { title = "Zk Notes" }) end, desc = "notes" },
+  { "<leader>zp", function() require("zk").edit({ hrefs = { "posts" } }, { title = "Zk Posts" }) end, desc = "posts" },
   {
     "<leader>zr",
-    function() require("zk.commands").get("ZkNotes")({ createdAfter = "2 weeks ago" }) end,
+    function() require("zk").edit({ createdAfter = "2 weeks ago", hrefs = { "notes" } }, { title = "Zk Recent" }) end,
     desc = "recent",
   },
-  { "<leader>znn", function() require("zk.commands").get("ZkNew")({}) end, desc = "posts" },
-  { "<leader>znp", function() require("zk.commands").get("ZkNew")({ group = "posts" }) end, desc = "posts" },
+  { "<leader>znn", function() require("zk.commands").get("ZkNew")({}) end, desc = "new note" },
+  { "<leader>znp", function() require("zk.commands").get("ZkNew")({ group = "posts" }) end, desc = "new post" },
 })
