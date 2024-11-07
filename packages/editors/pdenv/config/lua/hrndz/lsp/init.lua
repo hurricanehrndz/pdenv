@@ -25,7 +25,7 @@ local capabilities = vim.tbl_deep_extend(
   has_cmp and cmp_nvim_lsp.default_capabilities() or {}
 )
 
-local lsp_servers = { "lua_ls", "nil_ls", "sourcekit", "bashls", "pyright", "gopls", "terraformls", "ruff_lsp" }
+local lsp_servers = { "lua_ls", "nil_ls", "sourcekit", "bashls", "pyright", "gopls", "terraformls", "ruff" }
 for _, server_name in ipairs(lsp_servers) do
   local has_opts, opts = pcall(require, "hrndz.lsp.servers." .. server_name)
   local server_opts =

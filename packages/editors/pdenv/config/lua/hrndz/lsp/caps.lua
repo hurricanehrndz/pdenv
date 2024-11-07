@@ -10,7 +10,7 @@ function M.on_attach(client, buffer)
     vim.bo[buffer].tagfunc = "v:lua.vim.lsp.tagfunc"
   end
 
-  if client.name == "ruff_lsp" then
+  if client.name == "ruff" then
     client.server_capabilities.hoverProvider = false
   end
 
