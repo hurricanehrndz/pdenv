@@ -34,12 +34,6 @@
     gettext = pkgs.gettext.overrideAttrs {
       src = deps.gettext;
     };
-
-    # pkgs.libiconv.src is pointing at the darwin fork of libiconv.
-    # Hence, overriding its source does not make sense on darwin.
-    libiconv = pkgs.libiconv.overrideAttrs {
-      src = deps.libiconv;
-    };
   };
 
   overrides =
@@ -71,6 +65,7 @@
                 -i cli/src/main.rs
           '';
         });
+
       treesitter-parsers = let
         grammars = lib.filterAttrs (name: _: lib.hasPrefix "treesitter_" name) deps;
       in
@@ -95,55 +90,16 @@ in
 
     preConfigure = ''
       ${oa.preConfigure}
-      sed -i cmake.config/versiondef.h.in -e 's/@NVIM_VERSION_PRERELEASE@/-nightly+${neovim-src.shortRev or "dirty"}/'
+      substituteAll cmake.config/versiondef.h.in \
+        --replace-fail '@NVIM_VERSION_PRERELEASE@' '-nightly+${neovim-src.shortRev or "dirty"}'
     '';
 
-    buildInputs = let
-      nvim-lpeg-dylib = luapkgs:
-        if pkgs.stdenv.hostPlatform.isDarwin
-        then
-          (luapkgs.lpeg.overrideAttrs (oa: {
-            preConfigure = ''
-              # neovim wants clang .dylib
-              sed -i makefile -e "s/CC = gcc/CC = clang/"
-              sed -i makefile -e "s/-bundle/-dynamiclib/"
-              sed -i makefile -e "s/lpeg.so/lpeg.dylib/"
-              sed -i makefile -e '/^linux:$/ {N; d;}'
-            '';
-            preBuild = ''
-              # there seems to be implicit calls to Makefile from luarocks, we need to
-              # add a stage to build our dylib
-              make macosx
-              mkdir -p $out/lib/lua/5.1
-              mv lpeg.dylib $out/lib/lua/5.1/lpeg.dylib
-            '';
-            postInstall = ''
-              rm -f $out/lib/lua/5.1/lpeg.so
-            '';
-            nativeBuildInputs =
-              oa.nativeBuildInputs
-              ++ (
-                lib.optional pkgs.stdenv.hostPlatform.isDarwin pkgs.fixDarwinDylibNames
-              );
-          }))
-        else luapkgs.lpeg;
-      requiredLuaPkgs = ps: (
-        with ps; [
-          (nvim-lpeg-dylib ps)
-          luabitop
-          mpack
-        ]
-      );
-    in
-      with pkgs;
-        [
-          # TODO: remove once upstream nixpkgs updates the base drv
-          (utf8proc.overrideAttrs (_: {
-            src = deps.utf8proc;
-          }))
-        ]
-        ++ builtins.filter (input: builtins.match "luajit-.*-env" input.name == null) oa.buildInputs
-        ++ [
-          (pkgs.luajit.withPackages requiredLuaPkgs)
-        ];
+    buildInputs = with pkgs;
+      [
+        # TODO: remove once upstream nixpkgs updates the base drv
+        (utf8proc.overrideAttrs (_: {
+          src = deps.utf8proc;
+        }))
+      ]
+      ++ oa.buildInputs;
   })
