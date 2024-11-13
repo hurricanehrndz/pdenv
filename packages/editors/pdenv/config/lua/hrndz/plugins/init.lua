@@ -33,5 +33,9 @@ if not vim.g.vscode then
   require("hrndz.plugins.zk")
 end
 
+if vim.g.vscode then require("lsp-endhints").setup({
+  autoEnableHints = false,
+}) end
+
 -- text manipulation
 require("hrndz.plugins.mini")
