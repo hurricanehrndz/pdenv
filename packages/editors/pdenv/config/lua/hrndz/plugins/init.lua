@@ -1,4 +1,4 @@
-if ! vim.g.vscode then
+if not vim.g.vscode then
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
   require("hrndz.plugins.alpha")
