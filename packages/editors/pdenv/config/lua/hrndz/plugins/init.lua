@@ -1,4 +1,8 @@
-if not vim.g.vscode then
+if vim.g.vscode then
+  require("vscode").notify('Running in vscode')
+end
+
+if vim.g.vscode == nil then
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
   require("hrndz.plugins.alpha")
@@ -33,9 +37,9 @@ if not vim.g.vscode then
   require("hrndz.plugins.zk")
 end
 
-if vim.g.vscode then require("lsp-endhints").setup({
-  autoEnableHints = false,
-}) end
+-- if vim.g.vscode then require("lsp-endhints").setup({
+--   autoEnableHints = false,
+-- }) end
 
 -- text manipulation
 require("hrndz.plugins.mini")

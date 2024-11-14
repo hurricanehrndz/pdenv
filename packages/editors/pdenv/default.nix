@@ -55,7 +55,7 @@
       "--add-flags"
       ''--cmd "set rtp^=${nvimrc}"''
       "--add-flags"
-      ''--cmd "luafile ${nvimrc}/init.lua"''
+      ''-u "${nvimrc}/init.lua"''
     ]);
   LuaConfig = neovimConfig // {inherit wrapperArgs;};
 in
