@@ -95,6 +95,7 @@ in
     markdown-meandering-programmer
     markdown-togglecheck
     treesitter-utils
+    pkgs.vimPlugins.vim-tmux-navigator
 
     # pictograms
     lspkind-nvim

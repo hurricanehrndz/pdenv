@@ -9,6 +9,14 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- tmux/window navigator
+vim.g.tmux_navigator_no_mappings = 1
+-- Ctrl+[hjkl] navigate windows
+map({ "n", "t" }, "<A-h>", [[<cmd>TmuxNavigateLeft<CR>]], { desc = "Go to left window" })
+map({ "n", "t" }, "<A-j>", [[<cmd>TmuxNavigateDown<CR>]], { desc = "Go to lower window" })
+map({ "n", "t" }, "<A-k>", [[<cmd>TmuxNavigateUp<CR>]], { desc = "Go to upper window" })
+map({ "n", "t" }, "<A-l>", [[<cmd>TmuxNavigateRight<CR>]], { desc = "Go to right window" })
+
 -- macro recording
 map({"n"}, "<leader>q", "q", { desc = "Record macro" })
 map({"n"}, "q", "<Nop>", { desc = "Record macro" })
