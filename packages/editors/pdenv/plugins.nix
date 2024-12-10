@@ -96,6 +96,7 @@ in
     markdown-togglecheck
     treesitter-utils
     pkgs.vimPlugins.vim-tmux-navigator
+    no-neck-pain-nvim
 
     # pictograms
     lspkind-nvim
