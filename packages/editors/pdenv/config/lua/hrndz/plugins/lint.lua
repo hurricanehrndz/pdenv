@@ -21,7 +21,7 @@ gitlint.args = {
   "-c",
   "B1.line-length=72",
   "--ignore",
-  "body-is-missing,T3",
+  "body-is-missing,T3,T5",
   "--staged",
   "--msg-filename",
   function() return vim.api.nvim_buf_get_name(0) end,
