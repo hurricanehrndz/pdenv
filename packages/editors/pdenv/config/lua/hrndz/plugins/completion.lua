@@ -1,7 +1,7 @@
 -- completion settings
-vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect", "preview" }
 -- disable insert completion menu messages
-vim.opt.shortmess:append({ I = true,  c = true, C = true })
+vim.opt.shortmess:append({ I = true, c = true, C = true })
 -- I disable intro - good when using alpha
 -- vim.opt.shortmess:append({  c = true, C = true })
 -- completion menu height
@@ -100,6 +100,10 @@ require("cmp_zsh").setup({
 cmp.setup({
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end,
+  },
+  preselect = cmp.PreselectMode.None,
+  completion = {
+    completeopt = "menu,menuone,noselect,noinsert,preview",
   },
   mapping = cmp.mapping.preset.insert(cmp_keymaps),
   sources = cmp.config.sources({
