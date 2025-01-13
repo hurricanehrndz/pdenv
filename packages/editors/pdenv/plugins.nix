@@ -120,4 +120,9 @@ in
 
     # notes
     zk-nvim
+
+    # ai
+    packages.avante-nvim
+    dressing-nvim
+    nui-nvim
   ]

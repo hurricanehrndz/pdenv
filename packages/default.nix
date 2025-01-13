@@ -15,6 +15,7 @@
         inherit inputs;
       };
       default = config.packages.pdenv;
+      avante-nvim = pkgs.callPackage ./vimPlugins/avante-nvim.nix {inherit (inputs) avante-nvim-src;};
 
       yamlfixer = with pkgs.python3Packages;
         buildPythonApplication {

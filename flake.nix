@@ -61,6 +61,10 @@
       url = "github:qaptoR-nvim/chocolatier.nvim";
       flake = false;
     };
+    avante-nvim-src = {
+      url = "github:yetone/avante.nvim";
+      flake = false;
+    };
     #NLKNguyen/papercolor-theme
     papercolor-src = {
       url = "github:NLKNguyen/papercolor-theme";

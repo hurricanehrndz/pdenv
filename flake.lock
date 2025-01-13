@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "avante-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736614581,
+        "narHash": "sha256-HeziIPEMe91Gkmql7iguNYuqwkwvjKjn27LQf/4rzO0=",
+        "owner": "yetone",
+        "repo": "avante.nvim",
+        "rev": "ba9f014b7563760ed217ad665a6f45c051f119d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yetone",
+        "repo": "avante.nvim",
+        "type": "github"
+      }
+    },
     "chocolatier-nvim-src": {
       "flake": false,
       "locked": {
@@ -470,6 +486,7 @@
     },
     "root": {
       "inputs": {
+        "avante-nvim-src": "avante-nvim-src",
         "chocolatier-nvim-src": "chocolatier-nvim-src",
         "devshell": "devshell",
         "flake-parts": "flake-parts",

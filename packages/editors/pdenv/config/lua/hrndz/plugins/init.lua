@@ -35,6 +35,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.neotest")
   require("hrndz.plugins.md")
   require("hrndz.plugins.zk")
+  require("hrndz.plugins.avante")
 end
 
 -- if vim.g.vscode then require("lsp-endhints").setup({
