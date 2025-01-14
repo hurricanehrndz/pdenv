@@ -28,7 +28,7 @@ in
     alpha-nvim
     nvim-web-devicons
     gitsigns-nvim
-    nvim-colorizer-lua
+    nvim-colorizer-catgoose
     nvim-window
     fidget-nvim
     lualine-nvim
@@ -122,7 +122,7 @@ in
     zk-nvim
 
     # ai
-    packages.avante-nvim
+    pkgs.vimPlugins.avante-nvim
     dressing-nvim
     nui-nvim
   ]
