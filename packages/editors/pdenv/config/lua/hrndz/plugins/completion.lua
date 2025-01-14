@@ -35,6 +35,7 @@ local cmp_formatting = {
     mode = "symbol",
     maxwidth = 50,
     menu = {
+      copilot = "[co]",
       buffer = "[buf]",
       nvim_lsp = "[LSP]",
       nvim_lua = "[api]",
@@ -107,6 +108,7 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert(cmp_keymaps),
   sources = cmp.config.sources({
+    { name = "copilot" },
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "path" },

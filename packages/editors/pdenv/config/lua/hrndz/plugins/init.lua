@@ -36,6 +36,7 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.md")
   require("hrndz.plugins.zk")
   require("hrndz.plugins.avante")
+  require("hrndz.plugins.copilot")
 end
 
 -- if vim.g.vscode then require("lsp-endhints").setup({

@@ -78,4 +78,7 @@ with packages; [
   gawk
   gitlint
   codespell
+
+  # copilot
+  nodejs
 ]
