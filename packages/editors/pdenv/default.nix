@@ -4,10 +4,11 @@
   lib,
   pkgs,
   packages,
+  system,
   ...
 }: let
   nvimPython = pkgs.python3.withPackages (ps: with ps; [debugpy flake8]);
-  extraPackages = import ./extraPackages.nix {inherit pkgs packages nvimPython;};
+  extraPackages = import ./extraPackages.nix {inherit pkgs packages nvimPython inputs system;};
   extraPackagesBinPath = "${lib.makeBinPath extraPackages}";
   nvimDict = pkgs.stdenv.mkDerivation rec {
     name = "nvimDict";
@@ -26,6 +27,11 @@
     plugins = import ./plugins.nix {inherit pkgs packages inputs nvimPython;};
     wrapRc = false;
   };
+  # add debugserver
+  # see: https://discourse.nixos.org/t/integrating-vadimcn-codelldb-with-neovim-on-nixos-python-module-error/56639/2
+  ext = inputs.nix-vscode-extensions.extensions.${system};
+  codelldb = ext.vscode-marketplace-release.vadimcn.vscode-lldb;
+  debugserverPath = "${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
   nvimrc = pkgs.stdenv.mkDerivation rec {
     name = "nvimrc";
     src = ./config;
@@ -39,6 +45,7 @@
           -- Global vars
           vim.g.nix_dap_python = "${nvimPython}/bin/python"
           vim.g.user_provided_dict = "${nvimDict}/en.dict"
+          vim.g.nix_dap_codelldb  = "${debugserverPath}"
         end
 
         return M
