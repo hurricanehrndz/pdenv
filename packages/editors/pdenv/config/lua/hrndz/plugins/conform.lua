@@ -3,7 +3,7 @@ require("conform").setup({
     lua = { "stylua" },
     python = { "isort", "black" },
     go = { "goimports", "gofumpt" },
-    javascript = { { "prettierd", "prettier" } },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
     sh = { "shfmt" },
     nix = { "alejandra" },
     swift = { "swiftformat" },
@@ -25,7 +25,7 @@ require("conform").setup({
 })
 
 require("conform").formatters.shfmt = {
-  prepend_args = { "-i", "4", "-ci" },
+  ptepend_args = { "-i", "4", "-ci" },
   -- The base args are { "-filename", "$FILENAME" } so the final args will be
   -- { "-i", "2", "-filename", "$FILENAME" }
 }
