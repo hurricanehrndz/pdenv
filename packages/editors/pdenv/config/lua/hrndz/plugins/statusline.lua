@@ -31,7 +31,7 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
-    lualine_c = { "filename" },
+    lualine_c = { { "filename", path = 3 } },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "location" },
