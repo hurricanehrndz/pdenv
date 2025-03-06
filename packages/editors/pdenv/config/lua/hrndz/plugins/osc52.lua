@@ -13,8 +13,3 @@ vim.g.clipboard = {
   copy = { ["+"] = copy, ["*"] = copy },
   paste = { ["+"] = paste, ["*"] = paste },
 }
-
--- copy to clipboard
-local map = vim.keymap.set
-map({ "n", "v" }, ",y", [["+y]], { desc = "Copy to clipboard" })
-map("n", ",Y", [["+Y]], { desc = "Copy line to clipboard" })

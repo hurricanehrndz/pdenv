@@ -39,9 +39,9 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.copilot")
 end
 
--- if vim.g.vscode then require("lsp-endhints").setup({
---   autoEnableHints = false,
--- }) end
+-- if vim.g.vscode then
+--
+-- end
 
 -- text manipulation
 require("hrndz.plugins.mini")
