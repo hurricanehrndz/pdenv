@@ -5,8 +5,8 @@ require("avante").setup({
   -- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
   openai = {
     endpoint = baseURL,
-    model = "sonnet-3.5-v2",
+    model = "code-writer",
     temperature = 0,
-    max_tokens = 4096,
+    max_tokens = 200000,
   },
 })
