@@ -7,6 +7,6 @@ require("avante").setup({
     endpoint = baseURL,
     model = "code-writer",
     temperature = 0,
-    max_tokens = 200000,
+    max_tokens = 130000,
   },
 })
