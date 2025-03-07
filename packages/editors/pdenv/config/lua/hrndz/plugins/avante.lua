@@ -7,6 +7,6 @@ require("avante").setup({
     endpoint = baseURL,
     model = "sonnet-3.7",
     temperature = 0,
-    max_tokens = 200000,
+    max_tokens = 131072,
   },
 })
