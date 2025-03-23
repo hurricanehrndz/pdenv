@@ -11,9 +11,7 @@ end
 local dap = require("dap")
 local dapui = require("dapui")
 dapui.setup()
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open({})
-end
+dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open({}) end
 -- dap.listeners.before.event_terminated["dapui_config"] = function()
 --   dapui.close({})
 -- end
@@ -24,7 +22,9 @@ end
 -- enable virtual text
 require("nvim-dap-virtual-text").setup({})
 -- enable dap integration for telescope
-require('telescope').load_extension('dap')
+require("telescope").load_extension("dap")
+-- go dap
+require("dap-go").setup({})
 
 -- keybinds
 local map = vim.keymap.set
@@ -59,7 +59,7 @@ dap.adapters.codelldb = {
   port = "${port}",
   executable = {
     command = vim.g.nix_dap_codelldb,
-    args = {"--port", "${port}"},
+    args = { "--port", "${port}" },
   },
 }
 dap.configurations.cpp = {
@@ -67,9 +67,7 @@ dap.configurations.cpp = {
     name = "Launch file",
     type = "codelldb",
     request = "launch",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-    end,
+    program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
   },

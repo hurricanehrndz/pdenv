@@ -106,6 +106,7 @@ in
     nvim-dap-ui
     nvim-dap-virtual-text
     nvim-dap-python
+    nvim-dap-go
     nvim-nio
     pkgs.vimPlugins.telescope-dap-nvim
 

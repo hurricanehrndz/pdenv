@@ -25,7 +25,7 @@ telescope.setup({
       preview_cutoff = 40,
       width = 0.95,
       height = 0.95,
-      preview_width = 0.6,
+      -- preview_width = 0.6,
       -- prompt_position = "top",
     },
     border = true,
