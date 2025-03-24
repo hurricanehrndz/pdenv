@@ -63,7 +63,7 @@ in
     cmp-dictionary
     cmp-zsh # next is required
     pkgs.vimPlugins.deol-nvim
-    pkgs.vimPlugins.lsp_lines-nvim
+    # pkgs.vimPlugins.lsp_lines-nvim
 
     # snippets
     pkgs.vimPlugins.luasnip

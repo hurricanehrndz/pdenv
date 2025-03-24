@@ -1,13 +1,6 @@
 -- Setup lspconfig.
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-local has_lsplines, lsp_lines = pcall(require, "lsp_lines")
-
 if not has_cmp then return end
-
-if has_lsplines then
-  lsp_lines.setup()
-  vim.keymap.set("n", "<leader>ll", require("lsp_lines").toggle, { desc = "Toggle lsp lines" })
-end
 
 require("neodev").setup({
   override = function(root_dir, library)

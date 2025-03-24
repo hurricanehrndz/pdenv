@@ -1,5 +1,5 @@
 require("lint").linters_by_ft = {
-  go = { "revive" },
+  go = { "golangcilint" },
   swift = { "swiftlint" },
   gitcommit = { "gitlint" },
 }
