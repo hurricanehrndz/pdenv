@@ -6,7 +6,7 @@
   system,
   ...
 }: let
-  vscode-ext = inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace-release;
+  vscode-ext = inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace;
 in
   with pkgs;
   with packages; [

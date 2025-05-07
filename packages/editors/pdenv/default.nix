@@ -30,7 +30,7 @@
   # add debugserver
   # see: https://discourse.nixos.org/t/integrating-vadimcn-codelldb-with-neovim-on-nixos-python-module-error/56639/2
   ext = inputs.nix-vscode-extensions.extensions.${system};
-  codelldb = ext.vscode-marketplace-release.vadimcn.vscode-lldb;
+  codelldb = ext.vscode-marketplace.vadimcn.vscode-lldb;
   debugserverPath = "${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
   nvimrc = pkgs.stdenv.mkDerivation rec {
     name = "nvimrc";
