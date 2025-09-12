@@ -20,6 +20,8 @@
           name = "yamlfixer";
           src = inputs.yamlfixer-src;
           doCheck = false;
+          pyproject = true;
+          build-system = [ setuptools ];
           propagatedBuildInputs = [setuptools yamllint];
         };
       go-enum = pkgs.buildGoModule {
