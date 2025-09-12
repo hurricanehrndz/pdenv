@@ -30,13 +30,11 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.actionspreview")
   require("hrndz.plugins.endhints")
   -- merge conflicts
-  require("diffview").setup({})
+  require("diffview").setup()
 
   require("hrndz.plugins.neotest")
   require("hrndz.plugins.md")
   require("hrndz.plugins.zk")
-  require("hrndz.plugins.avante")
-  require("hrndz.plugins.copilot")
 end
 
 -- if vim.g.vscode then
