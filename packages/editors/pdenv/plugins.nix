@@ -121,11 +121,4 @@ in
 
     # notes
     zk-nvim
-
-    # ai
-    pkgs.vimPlugins.avante-nvim
-    dressing-nvim
-    nui-nvim
-    copilot-lua
-    copilot-cmp
   ]
