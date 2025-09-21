@@ -5,7 +5,6 @@ end
 if vim.g.vscode == nil then
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
-  require("hrndz.plugins.alpha")
   require("hrndz.plugins.theme")
   require("hrndz.plugins.whichkey")
   require("hrndz.plugins.fidget")

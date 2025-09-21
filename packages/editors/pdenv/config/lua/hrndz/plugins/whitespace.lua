@@ -9,7 +9,6 @@ vim.g.better_whitespace_filetypes_blacklist = {
   "markdown",
   "fugitive",
   "toggleterm",
-  "alpha",
 }
 vim.g.strip_only_modified_lines = 1
 vim.g.better_whitespace_enabled = 1
