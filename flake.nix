@@ -24,7 +24,7 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/pull/133/head";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
     neovim-src = {
