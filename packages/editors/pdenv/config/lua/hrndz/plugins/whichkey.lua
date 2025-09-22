@@ -3,6 +3,8 @@ wk.setup({
   preset = "modern",
   triggers = {
     { "<auto>", mode = "nixsotc" },
+    -- Auto triggers will never be created for existing keymaps (s -- subtitue). That includes every valid single key
+    -- Neovim builtin mapping. If you want to trigger on a builtin keymap, you have to add it manually.
     { "s", mode = { "n", "v" } },
   },
   plugins = {
