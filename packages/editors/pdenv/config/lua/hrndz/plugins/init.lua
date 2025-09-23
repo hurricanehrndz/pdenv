@@ -3,6 +3,7 @@ if vim.g.vscode then
 end
 
 if vim.g.vscode == nil then
+  require("hrndz.plugins.snacks")
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
   require("hrndz.plugins.theme")

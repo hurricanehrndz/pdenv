@@ -32,6 +32,7 @@ in
     fidget-nvim
     lualine-nvim
     todo-comments-nvim
+    snacks-nvim
 
     # Fuzzy finder
     plenary-nvim
