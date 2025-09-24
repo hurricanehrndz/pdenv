@@ -83,8 +83,8 @@ in
     gitlint
     codespell
 
-    # copilot
-    nodejs
+    # snacks dashboard
+    dwt1-shell-color-scripts
 
     # cpp, c, swift
     vscode-ext.vadimcn.vscode-lldb
