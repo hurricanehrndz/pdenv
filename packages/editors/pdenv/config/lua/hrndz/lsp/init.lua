@@ -18,12 +18,13 @@ local capabilities = vim.tbl_deep_extend(
   has_cmp and cmp_nvim_lsp.default_capabilities() or {}
 )
 
-local lsp_servers = { "lua_ls", "nil_ls", "sourcekit", "bashls", "pyright", "gopls", "terraformls", "ruff" }
+local lsp_servers = { "lua_ls", "nil_ls", "sourcekit", "bashls", "pyright", "gopls", "terraformls" }
 for _, server_name in ipairs(lsp_servers) do
   local has_opts, opts = pcall(require, "hrndz.lsp.servers." .. server_name)
   local server_opts =
     vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities) }, has_opts and opts or {})
-  require("lspconfig")[server_name].setup(server_opts)
+  vim.lsp.config(server_name, server_opts)
+  vim.lsp.enable(server_name)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
