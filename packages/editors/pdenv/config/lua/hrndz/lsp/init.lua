@@ -2,15 +2,6 @@
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not has_cmp then return end
 
-require("neodev").setup({
-  override = function(root_dir, library)
-    if require("neodev.util").has_file(root_dir, "packages/editors/pdenv/default.nix") then
-      library.enabled = true
-      library.plugins = true
-    end
-  end,
-})
-
 local capabilities = vim.tbl_deep_extend(
   "force",
   {},
