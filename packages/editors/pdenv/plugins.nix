@@ -33,6 +33,9 @@ in
     lualine-nvim
     todo-comments-nvim
     snacks-nvim
+    # required for noice
+    nui-nvim
+    noice-nvim
 
     # Fuzzy finder
     plenary-nvim
@@ -86,7 +89,6 @@ in
 
     # nice plugins
     nvim-osc52
-    nvim-notify
     undotree
     vim-repeat
     mini-nvim
