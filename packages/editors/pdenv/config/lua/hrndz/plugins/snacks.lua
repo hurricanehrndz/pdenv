@@ -1,4 +1,7 @@
 require("snacks").setup({
+  bigfile = {
+    enabled = true;
+  },
   dashboard = {
     enabled = true,
     preset = {
