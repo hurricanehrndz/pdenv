@@ -9,7 +9,7 @@ require("noice").setup({
     enabled = false,
   },
   messages = {
-    enabled = true,
+    enabled = false,
   },
   routes = {
     {
