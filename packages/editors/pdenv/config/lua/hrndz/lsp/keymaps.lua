@@ -3,26 +3,6 @@ local M = {}
 function M.on_attach(_, buffer)
   local map = vim.keymap.set
   map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = buffer })
-  map(
-    "n",
-    "gd",
-    function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,
-    { desc = "Goto Definition", buffer = buffer }
-  )
-  map("n", "grt", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
-  map("n", "gD", "<cmd>Lspsaga goto_definition<cr>", { desc = "Goto Defintion", buffer = buffer })
-  map(
-    "n",
-    "gI",
-    function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,
-    { desc = "Goto Implementation", buffer = buffer }
-  )
-  map(
-    "n",
-    "gy",
-    function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
-    { desc = "Goto T[y]pe Definition", buffer = buffer }
-  )
   map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover", buffer = buffer })
   map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Code Action", buffer = buffer })
   -- map(

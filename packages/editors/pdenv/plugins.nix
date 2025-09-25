@@ -37,13 +37,6 @@ in
     nui-nvim
     noice-nvim
 
-    # Fuzzy finder
-    plenary-nvim
-    popup-nvim
-    (withSrc pkgs.vimPlugins.telescope-nvim inputs.telescope-nvim-src)
-    telescope-fzf-native-nvim
-    telescope-file-browser-nvim
-
     # add some syntax highlighting
     (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
 
@@ -85,7 +78,6 @@ in
     lsp-signature-nvim
     nvim-lsp-endhints
     tiny-code-action-nvim
-    neodev-nvim
 
     # nice plugins
     nvim-osc52
@@ -110,7 +102,6 @@ in
     nvim-dap-python
     nvim-dap-go
     nvim-nio
-    pkgs.vimPlugins.telescope-dap-nvim
 
     # filetype
     pkgs.vimPlugins.Jenkinsfile-vim-syntax

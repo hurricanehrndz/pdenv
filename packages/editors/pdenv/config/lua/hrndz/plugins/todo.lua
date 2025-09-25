@@ -5,5 +5,3 @@ map("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Ne
 map("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
 map("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { desc = "Todo (Trouble)" })
 map("n", "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", { desc = "Todo/Fix/Fixme (Trouble)" })
-map("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo" })
-map("n", "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", { desc = "Todo/Fix/Fixme" })

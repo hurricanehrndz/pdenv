@@ -21,8 +21,6 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open({}
 
 -- enable virtual text
 require("nvim-dap-virtual-text").setup({})
--- enable dap integration for telescope
-require("telescope").load_extension("dap")
 -- go dap
 require("dap-go").setup({})
 
@@ -42,11 +40,8 @@ map("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run L
 map("n", "<leader>dx", function() require("dap").terminate() end, { desc = "Terminate" })
 map("n", "<leader>dp", function() require("dap").pause() end, { desc = "Pause" })
 map("n", "<leader>ds", function() require("dap").session() end, { desc = "Session" })
--- telescope
-map("n", "<leader>dv", "<Cmd>Telescope dap variables<CR>", { desc = "Variables" })
-map("n", "<leader>dC", "<Cmd>Telescope dap commands<CR>", { desc = "Commands" })
-map("n", "<leader>df", "<Cmd>Telescope dap frames<CR>", { desc = "Frames" })
-map("n", "<leader>dB", "<Cmd>Telescope dap list_breakpoints<CR>", { desc = "List Breakpoints" })
+--
+
 -- ui
 map("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "Dap UI" })
 map({ "n", "v" }, "<leader>de", function() require("dapui").eval() end, { desc = "Eval" })
