@@ -32,6 +32,8 @@ in
     fidget-nvim
     lualine-nvim
     todo-comments-nvim
+    # folke stuff
+    lazydev-nvim
     snacks-nvim
     # required for noice
     nui-nvim

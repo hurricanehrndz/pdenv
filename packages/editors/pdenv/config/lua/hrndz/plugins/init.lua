@@ -4,6 +4,7 @@ end
 
 if vim.g.vscode == nil then
   require("hrndz.plugins.snacks")
+  require("hrndz.plugins.lazydev")
   require("hrndz.plugins.noice")
   require("hrndz.plugins.treesitter")
   require("hrndz.plugins.whitespace")
