@@ -9,25 +9,31 @@ require("noice").setup({
     enabled = false,
   },
   messages = {
-    enabled = false,
+    enabled = true,
   },
   routes = {
-    {
-      filter = { event = "msg_show", kind = "search_count" },
-      opts = { skip = true },
-    },
     {
       view = "split",
       filter = { event = "msg_show", kind = { "shell_out", "shell_err" } },
       opts = {
+        enter = true,
         level = "info",
         skip = false,
         replace = false,
       },
-      {
-        view = "split",
-        filter = { event = "msg_show", min_height = 10 },
+    },
+    {
+      view = "split",
+      filter = {
+        event = "msg_show",
+        find = "stack traceback:",
       },
+      opts = { enter = true },
+    },
+    {
+      view = "split",
+      filter = { event = "msg_show", min_height = 10 },
+      opts = { enter = true },
     },
   },
   presets = {
