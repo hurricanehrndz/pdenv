@@ -1,6 +1,7 @@
+local notify = vim.notify
 require("snacks").setup({
   bigfile = {
-    enabled = true;
+    enabled = true,
   },
   dashboard = {
     enabled = true,
@@ -48,4 +49,33 @@ require("snacks").setup({
   input = {
     enabled = true,
   },
+  explorer = {
+    enabled = true,
+    replace_netrw = true,
+  },
+  picker = {
+    enabled = true,
+    sources = {
+      -- https://www.reddit.com/r/neovim/comments/1mvlp86/lazyvim_snacks_picker_how_to_turn_on_preview/
+      notifications = {
+        win = {
+          preview = {
+            wo = {
+              wrap = true,
+            },
+          },
+        },
+      },
+    },
+  },
 })
+vim.notify = notify
+
+local map = vim.keymap.set
+-- most commonly use keybinds
+map("n", "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
+map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+map("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "<leader>fc", function() Snacks.picker.command_history() end, { desc = "Command History" })
+map("n", "<leader>fe", function() Snacks.explorer() end, { desc = "File Explorer" })
+map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
