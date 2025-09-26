@@ -12,6 +12,7 @@ require("noice").setup({
     enabled = true,
   },
   routes = {
+    -- https://github.com/folke/noice.nvim/issues/1097
     {
       view = "split",
       filter = { event = "msg_show", kind = { "shell_out", "shell_err" } },
