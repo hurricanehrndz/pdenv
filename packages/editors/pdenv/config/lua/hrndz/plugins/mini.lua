@@ -3,6 +3,7 @@ vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 
 require("mini.misc").setup({})
 require("mini.ai").setup({}) -- extended creations of a/i text objects
+require("mini.indentscope").setup({}) -- extended creations of a/i text objects
 require("mini.align").setup({}) -- align text
 
 require("mini.surround").setup({
