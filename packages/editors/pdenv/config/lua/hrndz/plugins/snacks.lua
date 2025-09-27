@@ -68,6 +68,33 @@ require("snacks").setup({
       },
     },
   },
+  lazygit = {
+    -- and integrate edit with the current neovim instance
+    configure = true,
+    config = {
+      os = { editPreset = "nvim-remote" },
+      gui = {
+        nerdFontsVersion = "3",
+      },
+    },
+    theme_path = svim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
+    -- Theme for lazygit
+    theme = {
+      [241] = { fg = "Special" },
+      activeBorderColor = { fg = "MatchParen", bold = true },
+      cherryPickedCommitBgColor = { fg = "Identifier" },
+      cherryPickedCommitFgColor = { fg = "Function" },
+      defaultFgColor = { fg = "Normal" },
+      inactiveBorderColor = { fg = "FloatBorder" },
+      optionsTextColor = { fg = "Function" },
+      searchingActiveBorderColor = { fg = "MatchParen", bold = true },
+      selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+      unstagedChangesColor = { fg = "DiagnosticError" },
+    },
+    win = {
+      style = "lazygit",
+    },
+  },
 })
 vim.notify = notify
 
@@ -79,3 +106,26 @@ map("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Grep" })
 map("n", "<leader>fc", function() Snacks.picker.command_history() end, { desc = "Command History" })
 map("n", "<leader>fe", function() Snacks.explorer() end, { desc = "File Explorer" })
 map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
+
+-- Lazygit
+map("n", "<C-g>", function() Snacks.lazygit() end, { desc = "Lazygit" })
+-- commit in parent Git
+vim.env.GIT_EDITOR = "nvr --remote-tab-wait +'set bufhidden=wipe'"
+-- https://github.com/folke/snacks.nvim/issues/1403
+local term_open_group = vim.api.nvim_create_augroup("HrndzTermOpen", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = { "term://*" },
+  callback = function()
+    local bufopts = { buffer = 0, noremap = true, silent = true }
+    vim.keymap.set("t", "<esc><esc>", [[<cmd>lua vim.cmd('stopinsert')<CR>]], bufopts)
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+    local term_title = vim.b.term_title
+    if term_title and term_title:match("lazygit") then
+      -- Create lazygit specific mappings
+      vim.keymap.set("t", "<C-g>", "<cmd>close<cr>", { buffer = true })
+    end
+  end,
+  group = term_open_group,
+})
+
