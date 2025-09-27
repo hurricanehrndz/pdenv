@@ -1,0 +1,3 @@
+[codespell]
+# Ignore a comma-separated list of words
+ignore-words-list = noice
