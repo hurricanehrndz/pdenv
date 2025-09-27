@@ -94,6 +94,9 @@ require("snacks").setup({
     win = {
       style = "lazygit",
     },
+    terminal = {
+      enabled = true,
+    },
   },
 })
 vim.notify = notify
@@ -129,3 +132,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = term_open_group,
 })
 
+-- Terminal
+map({ "n", "t"}, "<C-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
+map({ "n", "t"}, "<C-_>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
