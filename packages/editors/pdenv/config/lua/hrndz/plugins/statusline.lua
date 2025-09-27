@@ -32,7 +32,18 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
     lualine_c = { { "filename", path = 3 } },
-    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_x = {
+      ---@diagnostic disable
+      {
+        require("noice").api.statusline.mode.get,
+        cond = require("noice").api.statusline.mode.has,
+        color = { fg = "#ff9e64" },
+      },
+      ---@diagnostic enable
+      "encoding",
+      "fileformat",
+      "filetype",
+    },
     lualine_y = { "progress" },
     lualine_z = { "location" },
   },
