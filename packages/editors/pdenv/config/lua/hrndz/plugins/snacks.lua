@@ -95,9 +95,6 @@ require("snacks").setup({
       style = "lazygit",
     },
   },
-  terminal = {
-    enabled = true,
-  },
   bufdelete = {
     enabled = true,
   },
@@ -108,10 +105,14 @@ local map = vim.keymap.set
 -- most commonly use keybinds
 map("n", "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-map("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "<leader>f/", function() Snacks.picker.grep() end, { desc = "Grep" })
 map("n", "<leader>fc", function() Snacks.picker.command_history() end, { desc = "Command History" })
 map("n", "<leader>fe", function() Snacks.explorer() end, { desc = "File Explorer" })
 map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
+
+-- more find
+map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
+map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 
 -- Lazygit
 map("n", "<C-g>", function() Snacks.lazygit() end, { desc = "Lazygit" })
@@ -141,3 +142,29 @@ map({ "n", "t" }, "<C-_>", function() Snacks.terminal() end, { desc = "Toggle Te
 
 -- Buffers
 map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
+
+-- scartch butter
+map("n", "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch Buffer" })
+map("n", "<leader>S", function() Snacks.scratch.select() end, { desc = "Select Scratch Buffer" })
+
+-- toggles
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map("<leader>uc")
+Snacks.toggle.treesitter():map("<leader>uT")
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+Snacks.toggle.inlay_hints():map("<leader>uh")
+
+-- git
+map("n", "<leader>gb", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
+map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log" })
+map("n", "<leader>gL", function() Snacks.picker.git_log_line() end, { desc = "Git Log Line" })
+map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+map("n", "<leader>gS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
+-- map("n", "<leader>gd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
+map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })
