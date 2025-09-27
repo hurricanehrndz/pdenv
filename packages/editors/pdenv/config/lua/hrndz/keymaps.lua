@@ -17,10 +17,6 @@ map({ "n", "t" }, "<A-j>", [[<cmd>TmuxNavigateDown<CR>]], { desc = "Go to lower 
 map({ "n", "t" }, "<A-k>", [[<cmd>TmuxNavigateUp<CR>]], { desc = "Go to upper window" })
 map({ "n", "t" }, "<A-l>", [[<cmd>TmuxNavigateRight<CR>]], { desc = "Go to right window" })
 
--- macro recording
-map({"n"}, "<leader>q", "q", { desc = "Record macro" })
-map({"n"}, "q", "<Nop>", { desc = "Record macro" })
-
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
