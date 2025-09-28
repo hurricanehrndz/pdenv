@@ -42,6 +42,9 @@ in
     # add some syntax highlighting
     (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
 
+    # functionality
+    toggleterm-nvim
+
     # which key did I just hit
     which-key-nvim
     # what's did I do wrong

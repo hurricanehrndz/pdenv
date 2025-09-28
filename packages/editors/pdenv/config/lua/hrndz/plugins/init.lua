@@ -15,6 +15,7 @@ if vim.g.vscode == nil then
   require("colorizer").setup()
   require("nvim-web-devicons").setup({ default = true })
   require("Comment").setup()
+  require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
   require("hrndz.plugins.osc52")
   require("hrndz.plugins.diffview")
