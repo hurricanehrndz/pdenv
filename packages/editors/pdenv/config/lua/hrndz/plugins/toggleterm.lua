@@ -24,17 +24,12 @@ local lazygit = Terminal:new({
   close_on_exit = true,
   persist_mode = false,
   start_in_insert = true,
-  on_open = function(term)
-    local map_opts = { buffer = term.bufnr, noremap = true, silent = true }
-    vim.keymap.set("n", "q", function() return vim.cmd("stopinsert") end, map_opts)
-  end,
 })
 
 function LazygitToggle() lazygit:toggle() end
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<C-g>", LazygitToggle, opts)
-vim.keymap.set("t", "<C-g>", LazygitToggle, opts)
+vim.keymap.set({ "t", "n" }, "<C-g>", LazygitToggle, opts)
 
 local term_open_group = vim.api.nvim_create_augroup("HrndzTermOpen", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
