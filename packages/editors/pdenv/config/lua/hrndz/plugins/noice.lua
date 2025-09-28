@@ -1,16 +1,4 @@
 require("noice").setup({
-  cmdline = {
-    enabled = true,
-  },
-  health = {
-    checker = true,
-  },
-  notify = {
-    enabled = false,
-  },
-  messages = {
-    enabled = true,
-  },
   routes = {
     -- https://github.com/folke/noice.nvim/issues/1097
     {
@@ -31,13 +19,22 @@ require("noice").setup({
       },
       opts = { enter = true },
     },
+    -- lazyvim -- https://sourcegraph.com/github.com/LazyVim/LazyVim/-/blob/lua/lazyvim/plugins/ui.lua?L206
     {
-      view = "split",
-      filter = { event = "msg_show", min_height = 10 },
-      opts = { enter = true },
+      filter = {
+        event = "msg_show",
+        any = {
+          { find = "%d+L, %d+B" },
+          { find = "; after #%d+" },
+          { find = "; before #%d+" },
+        },
+      },
+      view = "mini",
     },
   },
   presets = {
+    bottom_search = true,
+    command_palette = true,
     long_message_to_split = true,
     lsp_doc_border = true,
   },
