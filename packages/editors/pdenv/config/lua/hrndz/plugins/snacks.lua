@@ -1,3 +1,4 @@
+-- preserve noice
 local notify = vim.notify
 require("snacks").setup({
   bigfile = {
