@@ -74,7 +74,8 @@ require("snacks").setup({
     config = {
       os = {
         edit = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr {{filename}}]],
-        editAtLine = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr +{{line}} -- {{filename}}]]
+        editAtLine = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr +{{line}} -- {{filename}}]],
+        openDirInEditor = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr {{dir}}]],
       },
       gui = {
         nerdFontsVersion = "3",
@@ -178,7 +179,6 @@ Snacks.toggle
   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
   :map("<leader>uc")
 Snacks.toggle.treesitter():map("<leader>uT")
--- cause an error when deleted -- check lazyvim distro for treesitter settings
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.inlay_hints():map("<leader>uh")
 
