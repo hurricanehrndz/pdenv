@@ -68,6 +68,36 @@ require("snacks").setup({
       },
     },
   },
+  lazygit = {
+    -- and integrate edit with the current neovim instance
+    configure = true,
+    config = {
+      os = {
+        edit = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr {{filename}}]],
+        editAtLine = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr +{{line}} -- {{filename}}]]
+      },
+      gui = {
+        nerdFontsVersion = "3",
+      },
+    },
+    theme_path = svim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
+    -- Theme for lazygit
+    theme = {
+      [241] = { fg = "Special" },
+      activeBorderColor = { fg = "MatchParen", bold = true },
+      cherryPickedCommitBgColor = { fg = "Identifier" },
+      cherryPickedCommitFgColor = { fg = "Function" },
+      defaultFgColor = { fg = "Normal" },
+      inactiveBorderColor = { fg = "FloatBorder" },
+      optionsTextColor = { fg = "Function" },
+      searchingActiveBorderColor = { fg = "MatchParen", bold = true },
+      selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+      unstagedChangesColor = { fg = "DiagnosticError" },
+    },
+    win = {
+      style = "lazygit",
+    },
+  },
   image = {
     enabled = true,
   },
@@ -86,6 +116,50 @@ map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "N
 -- more find
 map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
 map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+
+-- Lazygit
+map({ "n", "t" }, "<C-g>", function() Snacks.lazygit() end, { desc = "Lazygit" })
+-- commit in parent Git
+vim.env.GIT_EDITOR = "nvr --remote-tab-wait +'set bufhidden=wipe'"
+
+local function close_lazygit_focus_largest()
+  local largest_window = nil
+  local largest_area = 0
+  local closed_count = 0
+
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.api.nvim_win_is_valid(win) then
+      local config = vim.api.nvim_win_get_config(win)
+      local buf = vim.api.nvim_win_get_buf(win)
+      local buf_name = vim.api.nvim_buf_get_name(buf)
+      if buf_name:match("^term://.*lazygit$") then
+        pcall(vim.api.nvim_win_close, win, false)
+        closed_count = closed_count + 1
+      -- ignore floating windows -- I don't edit files in floating windows
+      elseif config.relative ~= "" then
+      -- ignore all terminal buffers
+      elseif buf_name:match("^term://.*") then
+      else
+        local width = vim.api.nvim_win_get_width(win)
+        local height = vim.api.nvim_win_get_height(win)
+        local area = width * height
+        if area > largest_area then
+          largest_area = area
+          largest_window = win
+        end
+      end
+    end
+  end
+
+  if largest_window and vim.api.nvim_win_is_valid(largest_window) then vim.api.nvim_set_current_win(largest_window) end
+end
+
+-- Create command for closing lazygit and focusing largest non floating buffer
+vim.api.nvim_create_user_command("LazygitCloseFocusLargest", close_lazygit_focus_largest, {})
+
+-- Terminal
+map({ "n", "t" }, "<C-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
+map({ "n", "t" }, "<C-_>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
 
 -- Buffers
 map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
