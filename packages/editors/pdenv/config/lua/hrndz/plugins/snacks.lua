@@ -127,7 +127,7 @@ map("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smar
 map("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
 map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
-map("n", "<leader>n", function() Snacks.picker.notifications() end, { desc = "Notification History" })
+map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
 map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
 
 -- find
