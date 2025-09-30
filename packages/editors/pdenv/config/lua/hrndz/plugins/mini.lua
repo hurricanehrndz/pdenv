@@ -7,6 +7,7 @@ require("mini.indentscope").setup({}) -- extended creations of a/i text objects
 require("mini.align").setup({}) -- align text
 require("mini.icons").setup({})
 require("mini.icons").mock_nvim_web_devicons()
+vim.g.miniindentscope_disable = true
 
 require("mini.surround").setup({
   mappings = {
