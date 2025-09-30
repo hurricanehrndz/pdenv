@@ -67,6 +67,21 @@ require("snacks").setup({
           },
         },
       },
+      colorschemes = {
+        confirm = function(picker, item)
+          vim.g.snacks_colors_confirm = true
+          Snacks.picker.sources.colorschemes.confirm(picker, item)
+          save_colorscheme(item.text)
+        end,
+        on_close = function()
+          if vim.g.snacks_colors_confirm ~= true then pcall(vim.cmd.colorscheme, get_colorscheme()) end
+          vim.g.snacks_colors_confirm = nil
+        end,
+        on_change = function(_, item)
+          if item then pcall(vim.cmd.colorscheme, item.text) end
+        end,
+        layout = { preset = "sidebar" },
+      },
     },
   },
   lazygit = {
@@ -191,3 +206,5 @@ map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git 
 map("n", "<leader>gS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
 -- map("n", "<leader>gd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
 map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })
+-- ui
+map("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })

@@ -18,7 +18,6 @@
 in
   with pkgs.vimExtraPlugins; [
     # Theme
-    themery-nvim
     rose-pine
     chocolatier
     papercolor
