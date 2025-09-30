@@ -13,7 +13,6 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.fidget")
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
-  require("nvim-web-devicons").setup({ default = true })
   require("Comment").setup()
   -- require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")

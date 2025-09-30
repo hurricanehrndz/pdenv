@@ -25,7 +25,6 @@ in
     everforest-nvim
     tokyonight-nvim
     catppuccin
-    nvim-web-devicons
     gitsigns-nvim
     nvim-colorizer-catgoose
     nvim-window

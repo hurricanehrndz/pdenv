@@ -9,6 +9,8 @@ local function diff_source()
   end
 end
 
+local icons = require("hrndz.icons")
+
 require("lualine").setup({
   options = {
     icons_enabled = true,
@@ -30,8 +32,28 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
-    lualine_c = { { "filename", path = 3 } },
+    lualine_b = {
+      { "b:gitsigns_head", icon = "" },
+      {
+        "diff",
+        symbols = {
+          added = icons.git.added,
+          modified = icons.git.modified,
+          removed = icons.git.removed,
+        },
+        source = diff_source,
+      },
+      {
+        "diagnostics",
+        symbols = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warn,
+          info = icons.diagnostics.Info,
+          hint = icons.diagnostics.Hint,
+        },
+      },
+    },
+    lualine_c = { { "filename", path = 1 } },
     lualine_x = {
       ---@diagnostic disable
       {
@@ -43,6 +65,11 @@ require("lualine").setup({
         function() return require("noice").api.status.mode.get() end,
         cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
         color = function() return { fg = Snacks.util.color("Constant") } end,
+      },
+      {
+        function() return "  " .. require("dap").status() end,
+        cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+        color = function() return { fg = Snacks.util.color("Debug") } end,
       },
       ---@diagnostic enable
       "encoding",

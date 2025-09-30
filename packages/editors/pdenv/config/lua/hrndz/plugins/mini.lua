@@ -5,6 +5,8 @@ require("mini.misc").setup({})
 require("mini.ai").setup({}) -- extended creations of a/i text objects
 require("mini.indentscope").setup({}) -- extended creations of a/i text objects
 require("mini.align").setup({}) -- align text
+require("mini.icons").setup({})
+require("mini.icons").mock_nvim_web_devicons()
 
 require("mini.surround").setup({
   mappings = {

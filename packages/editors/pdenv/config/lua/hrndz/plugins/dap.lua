@@ -1,6 +1,6 @@
 local icons = require("hrndz.icons")
 vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-for name, sign in pairs(icons) do
+for name, sign in pairs(icons.dap) do
   sign = type(sign) == "table" and sign or { sign }
   vim.fn.sign_define(
     "Dap" .. name,
