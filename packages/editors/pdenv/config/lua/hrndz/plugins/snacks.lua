@@ -122,15 +122,17 @@ require("snacks").setup({
 vim.notify = notify
 
 local map = vim.keymap.set
--- most commonly use keybinds
-map("n", "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
-map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-map("n", "<leader>f/", function() Snacks.picker.grep() end, { desc = "Grep" })
-map("n", "<leader>fc", function() Snacks.picker.command_history() end, { desc = "Command History" })
-map("n", "<leader>fe", function() Snacks.explorer() end, { desc = "File Explorer" })
-map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
+-- Top Pickers & Explorer
+map("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
+map("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+map("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
+map("n", "<leader>n", function() Snacks.picker.notifications() end, { desc = "Notification History" })
+map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
 
--- more find
+-- find
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
 map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 
@@ -186,25 +188,45 @@ map("n", "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch 
 map("n", "<leader>S", function() Snacks.scratch.select() end, { desc = "Select Scratch Buffer" })
 
 -- toggles
-Snacks.toggle.line_number():map("<leader>ul")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
-Snacks.toggle.line_number():map("<leader>ul")
 Snacks.toggle
   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
   :map("<leader>uc")
 Snacks.toggle.treesitter():map("<leader>uT")
-Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.inlay_hints():map("<leader>uh")
 
 -- git
-map("n", "<leader>gb", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
+map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+map("n", "<leader>gB", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
 map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log" })
-map("n", "<leader>gL", function() Snacks.picker.git_log_line() end, { desc = "Git Log Line" })
 map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
 map("n", "<leader>gS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
--- map("n", "<leader>gd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
+map("n", "<leader>gh", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
 map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })
+
+-- search
+map("n", '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
+map("n", "<leader>s/", function() Snacks.picker.search_history() end, { desc = "Search History" })
+map("n", "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
+map("n", "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" })
+map("n", "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" })
+map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+map("n", "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer Diagnostics" })
+map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
+map("n", "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" })
+map("n", "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" })
+map("n", "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" })
+map("n", "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
+map("n", "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
+map("n", "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
+map("n", "<leader>su", function() Snacks.picker.undo() end, { desc = "Undotree" })
+
+-- grep
+map("n", "<leader>sb", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
+map("n", "<leader>sB", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
+
 -- ui
 map("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
