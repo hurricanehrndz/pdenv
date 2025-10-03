@@ -63,7 +63,10 @@ in
     # add lsp config
     nvim-lspconfig
     nvim-lsp-endhints
+
+    # CodeActions preview
     tiny-code-action-nvim
+    plenary-nvim
 
     # nice plugins
     nvim-osc52

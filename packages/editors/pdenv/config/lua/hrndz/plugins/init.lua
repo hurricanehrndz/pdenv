@@ -29,7 +29,7 @@ if vim.g.vscode == nil then
   require("hrndz.lsp")
 
   require("hrndz.plugins.statusline")
-  require("hrndz.plugins.actionspreview")
+  require("hrndz.plugins.codeactions")
   require("hrndz.plugins.endhints")
 
   -- debugging and tests
