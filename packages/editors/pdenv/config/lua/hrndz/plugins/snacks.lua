@@ -115,9 +115,9 @@ require("snacks").setup({
       style = "lazygit",
     },
   },
-  image = {
-    enabled = true,
-  },
+  image = { enabled = true },
+  words = { enabled = true },
+  indent = { enabled = true },
 })
 vim.notify = notify
 
