@@ -182,6 +182,8 @@ map({ "n", "t" }, "<C-_>", function() Snacks.terminal() end, { desc = "Toggle Te
 
 -- Buffers
 map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
+map("n", "<leader>ba", function() Snacks.bufdelete.all() end,   { desc = "Buffer delete all" })
+map("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Buffer delete other" })
 
 -- scartch butter
 map("n", "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch Buffer" })
