@@ -3,7 +3,7 @@ require("blink.cmp").setup({
   keymap = { preset = "default" },
   appearance = {
     nerd_font_variant = "mono",
-    kind_icons = kind_icons
+    kind_icons = kind_icons,
   },
   completion = {
     accept = {
@@ -18,6 +18,13 @@ require("blink.cmp").setup({
     menu = {
       draw = {
         treesitter = { "lsp" },
+      },
+      border = "rounded",
+      winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+    },
+    documentation = {
+      window = {
+        border = "rounded",
       },
     },
     ghost_text = {
