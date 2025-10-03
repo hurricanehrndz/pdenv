@@ -14,7 +14,6 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.gitsigns")
   require("colorizer").setup()
   require("Comment").setup()
-  -- require("hrndz.plugins.toggleterm")
   require("hrndz.plugins.winpicker")
   require("hrndz.plugins.osc52")
   require("hrndz.plugins.diffview")
