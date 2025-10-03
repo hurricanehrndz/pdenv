@@ -1,6 +1,6 @@
 require("render-markdown").setup({
   render_modes = { "n", "c" },
-  file_types = { 'markdown', 'vimwiki', "Avante" },
+  file_types = { "markdown", "vimwiki" },
 })
 
 -- render-markdown
