@@ -1,35 +1,55 @@
 local M = {}
 
+function M.has(buffer, method)
+  if type(method) == "table" then
+    for _, m in ipairs(method) do
+      if M.has(buffer, m) then return true end
+    end
+    return false
+  end
+  method = method:find("/") and method or "textDocument/" .. method
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    if client:supports_method(method) then return true end
+  end
+  return false
+end
+
 function M.on_attach(_, buffer)
-  local map = vim.keymap.set
-  map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = buffer })
-  map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover", buffer = buffer })
-  map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Code Action", buffer = buffer })
-  -- map(
-  --   { "n", "v" },
-  --   "<leader>lA",
-  --   require("actions-preview").code_actions,
-  --   { desc = "Code Action Preview", buffer = buffer }
-  -- )
-  map(
-    "n",
-    "<leader>ca",
-    function() require("tiny-code-action").code_action() end,
-    { desc = "Code Action Preview", buffer = buffer, noremap = true, silent = true }
-  )
-  map(
-    { "n" },
-    "<C-k>",
-    function() require("lsp_signature").toggle_float_win() end,
-    { silent = true, noremap = true, desc = "toggle signature" }
-  )
-  map("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "Rename" })
-  map(
-    "n",
-    "<leader>lh",
-    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled() ) end,
-    { desc = "Toggle hints" }
-  )
+  local bufmap = function(mode, rhs, lhs) vim.keymap.set(mode, rhs, lhs, { buffer = buffer }) end
+  -- default keymaps
+  --[[
+    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    bufmap('n', 'grr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    bufmap('n', 'gri', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+    bufmap('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', 'gra', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('n', 'gO', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
+    bufmap({'i', 's'}, '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+  ]]
+
+  -- tiny code action
+  bufmap({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action() end, { desc = "Code Action" })
+  bufmap("n", "<leader>cl", function() Snacks.picker.lsp_config() end, { desc = "Lsp Info" })
+
+  if M.has(buffer, "definition") then bufmap("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" }) end
+  if M.has(buffer, "codeLens") then
+    bufmap({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
+    bufmap("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens" })
+  end
+  if M.has(buffer, "signatureHelp") then
+    bufmap({ "i", "s" }, "<c-k>", function() return vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
+  end
+
+  bufmap("n", "grt", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
+  bufmap("n", "grd", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+
+  if M.has(buffer, "documentHighlight") then
+    bufmap("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
+    bufmap("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
+    bufmap("n", "<a-n>", function() Snacks.words.jump(vim.v.count1, true) end, { desc = "Next Reference" })
+    bufmap("n", "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, { desc = "Prev Reference" })
+  end
 end
 
 return M

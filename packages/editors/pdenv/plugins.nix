@@ -50,22 +50,10 @@ in
     diffview-nvim
 
     # add completion
-    nvim-cmp
-    cmp-nvim-lsp
-    cmp-nvim-lua
-    cmp-path
-    cmp-buffer
-    cmp-cmdline
-    cmp-dictionary
-    cmp-zsh # next is required
-    pkgs.vimPlugins.deol-nvim
-    # pkgs.vimPlugins.lsp_lines-nvim
+    blink-cmp
 
     # snippets
-    pkgs.vimPlugins.luasnip
-    pkgs.vimPlugins.cmp_luasnip
     friendly-snippets
-    pkgs.vimPlugins.vim-snippets
 
     # formatters, linters
     conform-nvim
@@ -74,8 +62,6 @@ in
 
     # add lsp config
     nvim-lspconfig
-    lspsaga-nvim
-    lsp-signature-nvim
     nvim-lsp-endhints
     tiny-code-action-nvim
 

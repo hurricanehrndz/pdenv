@@ -89,3 +89,11 @@ end
 vim.g.markdown_recommended_style = 0
 
 vim.cmd("filetype plugin indent on")
+
+-- completion options
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect", "preview" }
+-- disable insert completion menu messages, I = true -- disable intro
+vim.opt.shortmess:append({ I = true, c = true, C = true })
+-- completion menu height
+vim.opt.pumblend = 10 -- Popup blend
+vim.opt.pumheight = 10 -- Maximum number of entries in a popup
