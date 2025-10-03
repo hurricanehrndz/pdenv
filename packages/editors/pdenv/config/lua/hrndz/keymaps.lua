@@ -79,13 +79,6 @@ wk.add({
   { "<leader>xu", "<Cmd>UndotreeToggle<CR>", desc = "Undotree" },
 })
 
--- diagnostic
-wk.add({
-  { "<leader>ld", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-  { "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
-  { "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Prev Diagnostic" },
-})
-
 -- file operations
 map("n", "<leader>fs", "<Cmd>update<CR>", { desc = "Save changes" })
 
@@ -96,12 +89,6 @@ map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
-
--- markdown toggle checks
--- toggle checked / create checkbox if it doesn't exist
-vim.keymap.set('n', '<leader>nn', require('markdown-togglecheck').toggle, { desc = 'Toggle Checkmark' });
--- toggle checkbox (it doesn't remember toggle state and always creates [ ])
-vim.keymap.set('n', '<leader>nN', require('markdown-togglecheck').toggle_box, { desc = 'Toggle Checkbox' });
 
 -- copy to clipboard
 map({ "n", "v" }, ",y", [["+y]], { desc = "Copy to clipboard" })

@@ -12,6 +12,9 @@ vim.keymap.set('n', '<C-w>d', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '<C-w><C-d>', '<cmd>lua vim.diagnostic.open_float()<cr>')
   ]]
 
+-- diagnostic
+vim.keymap.set("n",  "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
 vim.diagnostic.config({
   underline = true,
   signs = true,
