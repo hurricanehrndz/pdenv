@@ -1,14 +1,20 @@
 require("noice").setup({
+  views = {
+    cmdline_popup = {
+      position = {
+        row = "50%",
+        col = "50%",
+      },
+      size = {
+        min_width = 60,
+        width = "auto",
+        height = "auto",
+      },
+    },
+  },
   cmdline = {
     enabled = true,
     view = "cmdline_popup",
-    opts = {
-      row = "50%",
-      col = "50%",
-      min_width = 60, -- Example for minimum width
-      width = "auto",
-      height = "auto",
-    },
   },
   lsp = {
     signature = {
