@@ -1,10 +1,10 @@
 -- disable problematic keybinding -- substitute
-vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
+vim.keymap.set({ "n", "x" }, "s", "<Nop>")
 
 require("mini.misc").setup({})
-require("mini.ai").setup({}) -- extended creations of a/i text objects
+require("mini.ai").setup({})          -- extended creations of a/i text objects
 require("mini.indentscope").setup({}) -- extended creations of a/i text objects
-require("mini.align").setup({}) -- align text
+require("mini.align").setup({})       -- align text
 require("mini.icons").setup({})
 require("mini.icons").mock_nvim_web_devicons()
 vim.g.miniindentscope_disable = true
@@ -20,8 +20,8 @@ require("mini.surround").setup({
     update_n_lines = "sn", -- Update `n_lines`
 
     -- disable extended mappings
-    suffix_last = '',
-    suffix_next = '',
+    suffix_last = "",
+    suffix_next = "",
   },
 })
 
