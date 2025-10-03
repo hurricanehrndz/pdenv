@@ -26,6 +26,11 @@
     nixneovimplugins.url = "github:NixNeovim/NixNeovimPlugins";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
+    # blink-cmp plugin
+    blink-cmp = {
+      url = "github:Saghen/blink.cmp";
+    };
+
     # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
     neovim-src = {
       url = "github:neovim/neovim";

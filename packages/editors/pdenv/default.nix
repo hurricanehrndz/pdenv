@@ -28,7 +28,7 @@
       withPython3 = false;
       viAlias = false;
       vimAlias = false;
-      plugins = import ./plugins.nix {inherit pkgs packages inputs nvimPython;};
+      plugins = import ./plugins.nix {inherit pkgs packages inputs inputs' nvimPython;};
       wrapRc = false;
     };
     wrapperArgs = lib.escapeShellArgs (neovimConfig.wrapperArgs

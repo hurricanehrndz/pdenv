@@ -1,5 +1,6 @@
 {
   inputs,
+  inputs',
   pkgs,
   packages,
   nvimPython,
@@ -50,7 +51,7 @@ in
     diffview-nvim
 
     # add completion
-    blink-cmp
+    inputs'.blink-cmp.packages.blink-cmp
 
     # snippets
     friendly-snippets
