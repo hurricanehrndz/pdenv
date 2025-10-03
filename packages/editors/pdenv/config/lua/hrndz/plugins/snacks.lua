@@ -89,9 +89,9 @@ require("snacks").setup({
     configure = true,
     config = {
       os = {
-        edit = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr {{filename}}]],
-        editAtLine = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr +{{line}} -- {{filename}}]],
-        openDirInEditor = [[nvr -s --remote-expr 'execute("LazygitCloseFocusLargest")' &&  nvr {{dir}}]],
+        edit = [[nvr -s -cc 'LazygitCloseFocusLargest' &&  nvr {{filename}}]],
+        editAtLine = [[nvr -s -cc 'LazygitCloseFocusLargest' &&  nvr +{{line}} -- {{filename}}]],
+        openDirInEditor = [[nvr -s 'LazygitCloseFocusLargest' &&  nvr {{dir}}]],
       },
       gui = {
         nerdFontsVersion = "3",
