@@ -78,7 +78,7 @@ in
     markdown-meandering-programmer
     markdown-togglecheck
     treesitter-utils
-    pkgs.vimPlugins.vim-tmux-navigator
+    Navigator-nvim
     no-neck-pain-nvim
 
     # pictograms
