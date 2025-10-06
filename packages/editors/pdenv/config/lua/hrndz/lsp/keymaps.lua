@@ -16,7 +16,10 @@ function M.has(buffer, method)
 end
 
 function M.on_attach(_, buffer)
-  local bufmap = function(mode, rhs, lhs) vim.keymap.set(mode, rhs, lhs, { buffer = buffer }) end
+  local bufmap = function(mode, rhs, lhs, opts)
+    local bufopts = vim.tbl_deep_extend("force", { buffer = buffer }, opts)
+    vim.keymap.set(mode, rhs, lhs, bufopts)
+  end
   -- default keymaps
   --[[
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
@@ -29,7 +32,7 @@ function M.on_attach(_, buffer)
   ]]
 
   -- tiny code action
-  bufmap({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action() end, { desc = "Code Action" })
+  bufmap({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action({}) end, { desc = "Code Action" })
   bufmap("n", "<leader>cl", function() Snacks.picker.lsp_config() end, { desc = "Lsp Info" })
 
   if M.has(buffer, "definition") then bufmap("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" }) end

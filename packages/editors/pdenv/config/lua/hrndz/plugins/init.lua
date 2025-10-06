@@ -39,7 +39,6 @@ if vim.g.vscode == nil then
   -- merge conflicts
   require("diffview").setup()
 
-
   -- notes plugins
   require("hrndz.plugins.md")
   require("hrndz.plugins.zk")
