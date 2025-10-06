@@ -73,6 +73,7 @@ in
     name = "nvim";
     paths = [
       (pkgs.writeShellScriptBin "nvim" ''exec ${nvimCmd} "$@"'')
+      (pkgs.writeShellScriptBin "v" ''exec ${nvimCmd} "$@"'')
       (pkgs.writeShellScriptBin "vi" ''exec ${nvimCmd} "$@"'')
       (pkgs.writeShellScriptBin "vim" ''exec ${nvimCmd} "$@"'')
       (pkgs.writeShellScriptBin "nvim-minimal" ''exec ${baseNeovim}/bin/nvim --clean "$@"'')
