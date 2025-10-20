@@ -72,6 +72,10 @@
       url = "github:NLKNguyen/papercolor-theme";
       flake = false;
     };
+    opencode-nvim-src = {
+      url = "github:NickvanDyke/opencode.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:

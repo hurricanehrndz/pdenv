@@ -36,5 +36,14 @@ autocmd("TextYankPost", {
   end,
 })
 
+local formatoptions_group = augroup("FormatOptions", {})
+autocmd("BufEnter", {
+  group = formatoptions_group,
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})
+
 -- no folding if buffer is bigger then 1 mb
 -- see: https://github.com/nvim-treesitter/nvim-treesitter/issues/1100

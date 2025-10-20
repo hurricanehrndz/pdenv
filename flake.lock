@@ -548,6 +548,22 @@
         "type": "github"
       }
     },
+    "opencode-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760721743,
+        "narHash": "sha256-56ElFptgARlinzDtPPvD9BXq5obpc7teflIjpnMqleU=",
+        "owner": "NickvanDyke",
+        "repo": "opencode.nvim",
+        "rev": "f8a3a88ad5c0c01102fedaacb1c612a4b874ed54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NickvanDyke",
+        "repo": "opencode.nvim",
+        "type": "github"
+      }
+    },
     "papercolor-src": {
       "flake": false,
       "locked": {
@@ -608,6 +624,7 @@
         ],
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-treesitter-src": "nvim-treesitter-src",
+        "opencode-nvim-src": "opencode-nvim-src",
         "papercolor-src": "papercolor-src",
         "telescope-nvim-src": "telescope-nvim-src",
         "yamlfixer-src": "yamlfixer-src",

@@ -16,6 +16,10 @@
     name = "papercolor";
     src = inputs.papercolor-src;
   };
+  opencode-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "opencode-nvim";
+    src = inputs.opencode-nvim-src;
+  };
 in
   with pkgs.vimExtraPlugins; [
     # Theme
@@ -100,6 +104,9 @@ in
     pkgs.vimPlugins.FixCursorHold-nvim
     neotest
     pkgs.vimPlugins.neotest-go
+
+    # ai
+    opencode-nvim
 
     # notes
     zk-nvim
