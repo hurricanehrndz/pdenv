@@ -24,22 +24,22 @@
           build-system = [ setuptools ];
           propagatedBuildInputs = [setuptools yamllint];
         };
-      go-enum = pkgs.buildGoModule {
-        name = "go-enum";
-        src = inputs.go-enum-src;
-        vendorHash = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
-      };
-      gomvp = pkgs.buildGoModule {
-        name = "gomvp";
-        src = inputs.gomvp-src;
-        vendorHash = null;
-      };
-      json-to-struct = pkgs.buildGoModule rec {
-        name = "json-to-struct";
-        src = inputs.json-to-struct-src;
-        vendorHash = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
-        proxyVendor = true;
-      };
+      # go-enum = pkgs.buildGoModule {
+      #   name = "go-enum";
+      #   src = inputs.go-enum-src;
+      #   vendorHash = "sha256-+iQCOUg7rGfOgNvmj+lMLYb4A749hDK/3hexEw9IRmI=";
+      # };
+      # gomvp = pkgs.buildGoModule {
+      #   name = "gomvp";
+      #   src = inputs.gomvp-src;
+      #   vendorHash = null;
+      # };
+      # json-to-struct = pkgs.buildGoModule rec {
+      #   name = "json-to-struct";
+      #   src = inputs.json-to-struct-src;
+      #   vendorHash = "sha256-JAVBrhec5NNWKK+ayICu57u8zXrL6JGhl6pEhYhC7lg=";
+      #   proxyVendor = true;
+      # };
     };
   };
 }

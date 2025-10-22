@@ -57,16 +57,15 @@
         -- Global vars
         vim.g.nix_dap_python = "${nvimPython}/bin/python"
         vim.g.user_provided_dict = "${nvimDict}/en.dict"
-        vim.g.nix_dap_codelldb  = "${debugserverPath}"
       end
       return M
       EOF
     '';
   };
 
-  ext = inputs.nix-vscode-extensions.extensions.${system};
-  codelldb = ext.vscode-marketplace.vadimcn.vscode-lldb;
-  debugserverPath = "${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
+  # ext = inputs.nix-vscode-extensions.extensions.${system};
+  # codelldb = ext.vscode-marketplace.vadimcn.vscode-lldb;
+  # debugserverPath = "${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
   nvimCmd = "${baseNeovim}/bin/nvim --cmd \"set rtp^=${nvimConfig}\" -u \"${nvimConfig}/init.lua\"";
 in
   pkgs.symlinkJoin {

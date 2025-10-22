@@ -41,12 +41,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # golang support tools
-    go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
-    go-enum-src.flake = false;
-    gomvp-src.url = "github:abenz1267/gomvp";
-    gomvp-src.flake = false;
-    json-to-struct-src.url = "github:tmc/json-to-struct";
-    json-to-struct-src.flake = false;
+    # go-enum-src.url = "github:abice/go-enum?ref=v0.5.6";
+    # go-enum-src.flake = false;
+    # gomvp-src.url = "github:abenz1267/gomvp";
+    # gomvp-src.flake = false;
+    # json-to-struct-src.url = "github:tmc/json-to-struct";
+    # json-to-struct-src.flake = false;
 
     # pypi packages
     yamllint-src.url = "github:adrienverge/yamllint";

@@ -49,23 +49,23 @@ map("n", "<leader>dw", function() require("dap.ui.widgets").hover() end, { desc 
 
 local dap_python = require("dap-python")
 dap_python.setup(vim.g.nix_dap_python)
-dap.adapters.codelldb = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = vim.g.nix_dap_codelldb,
-    args = { "--port", "${port}" },
-  },
-}
-dap.configurations.cpp = {
-  {
-    name = "Launch file",
-    type = "codelldb",
-    request = "launch",
-    program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
-    cwd = "${workspaceFolder}",
-    stopOnEntry = false,
-  },
-}
+-- dap.adapters.codelldb = {
+--   type = "server",
+--   port = "${port}",
+--   executable = {
+--     command = vim.g.nix_dap_codelldb,
+--     args = { "--port", "${port}" },
+--   },
+-- }
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch file",
+--     type = "codelldb",
+--     request = "launch",
+--     program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+--     cwd = "${workspaceFolder}",
+--     stopOnEntry = false,
+--   },
+-- }
 dap.configurations.swift = dap.configurations.cpp
-dap.configurations.c = dap.configurations.cpp
+-- dap.configurations.c = dap.configurations.cpp

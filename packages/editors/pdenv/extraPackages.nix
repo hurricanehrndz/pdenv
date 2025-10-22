@@ -28,9 +28,9 @@ in
     gotestsum
     govulncheck
     mockgen
-    go-enum
-    gomvp
-    json-to-struct
+    # go-enum
+    # gomvp
+    # json-to-struct
 
     # lua
     sumneko-lua-language-server
@@ -86,6 +86,6 @@ in
     # snacks dashboard
     dwt1-shell-color-scripts
 
-    # cpp, c, swift
-    vscode-ext.vadimcn.vscode-lldb
+    # cpp, c, swift -- I really don't debug
+    # vscode-ext.vadimcn.vscode-lldb
   ]
