@@ -33,7 +33,7 @@ in
     # json-to-struct
 
     # lua
-    sumneko-lua-language-server
+    lua-language-server
     stylua
 
     # nix
