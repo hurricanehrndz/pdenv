@@ -2,6 +2,9 @@ require("lint").linters_by_ft = {
   go = { "golangcilint" },
   swift = { "swiftlint" },
   gitcommit = { "gitlint" },
+  sh = { "shellcheck" },
+  zsh = { "shellcheck" },
+
 }
 
 -- local golangcilint = require("lint").linters.golangcilint
