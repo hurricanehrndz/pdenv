@@ -47,7 +47,8 @@ with pkgs;
   vale
   mermaid-cli
 
-  # yaml
+  # git
+  gitlint
 
   # python
   black
