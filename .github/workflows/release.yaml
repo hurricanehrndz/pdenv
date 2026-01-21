@@ -21,7 +21,7 @@ jobs:
         include:
           - os: ubuntu-latest
             system: x86_64-linux
-          - os: ubuntu-latest
+          - os: ubuntu-24.04-arm
             system: aarch64-linux
           - os: macos-latest
             system: aarch64-darwin
@@ -44,9 +44,9 @@ jobs:
 #         nix flake update --accept-flake-config --no-use-registries
 
       - name: Build and Publish nix flake
-        run: >
-          nix build --no-link --print-out-paths .\#pdenv \
-            | cachix pin main-${{ matrix.system }}-pdenv
+        run: |
+          OUTPUT_PATH=$(nix build --no-link --print-out-paths .\#pdenv)
+          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv $OUTPUT_PATH --keep-revisions 5
 
       # - uses: EndBug/add-and-commit@v9
       #   with:
