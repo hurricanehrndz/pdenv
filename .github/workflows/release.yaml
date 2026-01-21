@@ -5,9 +5,9 @@
 name: release
 on:
   push:
-  workflow_dispatch:
-  schedule:
-    - cron: "30 1 1,15 * *"
+  # workflow_dispatch:
+  # schedule:
+  #   - cron: "30 1 1,15 * *"
 
 env:
   IMAGE_NAME: ghcr.io/hurricanehrndz/pdenv
@@ -15,20 +15,20 @@ env:
 jobs:
   cachix:
     name: Publish Flake to Cachix
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.system }}
     strategy:
       matrix:
-        platform:
-          - linux/amd64
+        system: [x86_64-linux, aarch64-linux, aarch64-darwin]
+
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install nix
-        uses: cachix/install-nix-action@v22
+        uses: DeterminateSystems/nix-installer-action@main
 
       - name: Authenticate with Cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v15
         with:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -39,14 +39,13 @@ jobs:
 
       - name: Build and Publish nix flake
         run: >
-          cachix watch-exec hurricanehrndz -- nix build \
-            --accept-flake-config \
-            --show-trace
+          nix build --no-link --print-out-paths .\#pdenv \
+            | cachix pin main-${{ matrix.system }}-pdenv
 
-      - uses: EndBug/add-and-commit@v9
-        with:
-          message: "Flake: update input"
-          default_author: github_actions
+      # - uses: EndBug/add-and-commit@v9
+      #   with:
+      #     message: "Flake: update input"
+      #     default_author: github_actions
 
   docker:
     name: Push Personal Dev Env OCI to Github Container Reistry
@@ -57,19 +56,19 @@ jobs:
         arch: ["amd64", "arm64"]
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install nix
-        uses: cachix/install-nix-action@v22
+        uses: DeterminateSystems/nix-installer-action@main
 
       - name: Authenticate with Cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v15
         with:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -101,18 +100,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: manifest
-        name: Create and Push mainfest to Github Container Registry
+        name: Create and Push manifest to Github Container Registry
         run: |
           IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
           echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
           docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
+          docker buildx imagetools create -t "${IMAGE_NAME}:latest" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
 
       - name: Verify Image on GitHub Container Registry
         run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
