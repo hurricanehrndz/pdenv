@@ -134,7 +134,7 @@ map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "N
 map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
 
 -- find
-map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+map("n", "<leader>ff", function() Snacks.picker.files({ hidden = true }) end, { desc = "Find Files" })
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
 map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
