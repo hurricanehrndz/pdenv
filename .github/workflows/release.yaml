@@ -43,10 +43,15 @@ jobs:
 #       run: >
 #         nix flake update --accept-flake-config --no-use-registries
 
-      - name: Build and Publish nix flake
+      - name: Build nix flake
+        id: build
         run: |
-          OUTPUT_PATH=$(nix build --no-link --print-out-paths .\#pdenv)
-          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv $OUTPUT_PATH --keep-revisions 5
+          OUTPUT_PATH=$(nix build --accept-flake-config --no-link --print-out-paths .\#pdenv)
+          echo "output_path=$OUTPUT_PATH" >> $GITHUB_OUTPUT
+
+      - name: Pin to Cachix
+        run: |
+          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv ${{ steps.build.outputs.output_path }} --keep-revisions 5
 
       # - uses: EndBug/add-and-commit@v9
       #   with:
