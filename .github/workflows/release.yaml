@@ -15,10 +15,16 @@ env:
 jobs:
   cachix:
     name: Publish Flake to Cachix
-    runs-on: ${{ matrix.system }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        system: [x86_64-linux, aarch64-linux, aarch64-darwin]
+        include:
+          - os: ubuntu-latest
+            system: x86_64-linux
+          - os: ubuntu-latest
+            system: aarch64-linux
+          - os: macos-latest
+            system: aarch64-darwin
 
     steps:
       - name: Checkout sources
