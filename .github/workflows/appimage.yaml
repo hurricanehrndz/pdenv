@@ -1,0 +1,33 @@
+name: appimage
+on:
+  workflow_dispatch:
+
+jobs:
+  appimage-build:
+    name: Bundle pdenv into AppImage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Use Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: hurricanehrndz
+          skipPush: true
+          useDaemon: false
+
+      - name: Build AppImage
+        run: |
+          nix bundle --bundler github:ralismark/nix-appimage .\#pdenv
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v6
+        with:
+          name: pdenv-appimage
+          path: "*.AppImage"
+          overwrite: true
