@@ -10,6 +10,7 @@ end
 require("lazydev").setup({
   library = {
     { path = find_plugin_in_rtp("snacks-nvim-folke"), words = { "Snacks" } },
+    { path = find_plugin_in_rtp("wezterm-types-DrKJeff16"), mods = { "wezterm"} },
     { path = "${3rd}/luv/library", words = { "vim%.uv" } },
   },
 })

@@ -94,6 +94,10 @@ with pkgs.vimExtraPlugins;
   # ai
   opencode-nvim
 
+  # wezterm
+  wezterm-nvim-willothy
+  wezterm-types-DrKJeff16
+
   # notes
   zk-nvim-zk-org
 ]
