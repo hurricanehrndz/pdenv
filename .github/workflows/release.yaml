@@ -63,77 +63,77 @@ jobs:
       #     message: "Flake: update input"
       #     default_author: github_actions
 
-  docker:
-    name: Push Personal Dev Env OCI to Github Container Reistry
-    needs: [cachix]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: ["amd64", "arm64"]
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
-      - name: Install nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Authenticate with Cachix
-        uses: cachix/cachix-action@v15
-        with:
-          name: hurricanehrndz
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - id: build
-        name: Build
-        run: |
-          IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')-${{ matrix.arch }}"
-          echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-          nix build \
-            --file docker.nix \
-            --argstr name "$IMAGE_NAME" \
-            --argstr tag "$IMAGE_TAG" \
-            --argstr rev ${{ github.sha }} \
-            --argstr arch ${{ matrix.arch }}
-
-      - name: Load into Docker
-        run: docker load < result
-
-      - name: Push to GitHub Container Registry
-        run: docker push "${IMAGE_NAME}:${IMAGE_TAG}"
-        env:
-          IMAGE_TAG: ${{ steps.build.outputs.tag }}
-
-  docker-manifest:
-    name: Create Multi-Arch Image
-    needs: [docker]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - id: manifest
-        name: Create and Push manifest to Github Container Registry
-        run: |
-          IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
-          echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-          docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
-          docker buildx imagetools create -t "${IMAGE_NAME}:latest" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
-
-      - name: Verify Image on GitHub Container Registry
-        run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
-        env:
-          IMAGE_TAG: ${{ steps.manifest.outputs.tag }}
+  # docker:
+  #   name: Push Personal Dev Env OCI to Github Container Reistry
+  #   needs: [cachix]
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       arch: ["amd64", "arm64"]
+  #   steps:
+  #     - name: Checkout sources
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Install nix
+  #       uses: DeterminateSystems/nix-installer-action@main
+  #
+  #     - name: Authenticate with Cachix
+  #       uses: cachix/cachix-action@v15
+  #       with:
+  #         name: hurricanehrndz
+  #         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+  #
+  #     - name: Login to GitHub Container Registry
+  #       uses: docker/login-action@v3
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  #
+  #     - id: build
+  #       name: Build
+  #       run: |
+  #         IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')-${{ matrix.arch }}"
+  #         echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+  #         nix build \
+  #           --file docker.nix \
+  #           --argstr name "$IMAGE_NAME" \
+  #           --argstr tag "$IMAGE_TAG" \
+  #           --argstr rev ${{ github.sha }} \
+  #           --argstr arch ${{ matrix.arch }}
+  #
+  #     - name: Load into Docker
+  #       run: docker load < result
+  #
+  #     - name: Push to GitHub Container Registry
+  #       run: docker push "${IMAGE_NAME}:${IMAGE_TAG}"
+  #       env:
+  #         IMAGE_TAG: ${{ steps.build.outputs.tag }}
+  #
+  # docker-manifest:
+  #   name: Create Multi-Arch Image
+  #   needs: [docker]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Login to GitHub Container Registry
+  #       uses: docker/login-action@v3
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  #
+  #     - id: manifest
+  #       name: Create and Push manifest to Github Container Registry
+  #       run: |
+  #         IMAGE_TAG="$(echo ${{ github.ref_name }} | sed -e 's/^v//')"
+  #         echo "tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+  #         docker buildx imagetools create -t "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
+  #         docker buildx imagetools create -t "${IMAGE_NAME}:latest" "${IMAGE_NAME}:${IMAGE_TAG}-arm64" "${IMAGE_NAME}:${IMAGE_TAG}-amd64"
+  #
+  #     - name: Verify Image on GitHub Container Registry
+  #       run: docker buildx imagetools inspect "${IMAGE_NAME}:${IMAGE_TAG}"
+  #       env:
+  #         IMAGE_TAG: ${{ steps.manifest.outputs.tag }}
 
 permissions:
   contents: write
