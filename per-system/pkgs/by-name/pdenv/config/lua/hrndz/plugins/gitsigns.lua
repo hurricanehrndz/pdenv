@@ -2,6 +2,8 @@ local gitsigns = require("gitsigns")
 local wk = require("which-key")
 
 gitsigns.setup({
+  signcolumn = false,
+  sign_priority = 99,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
     local map = vim.keymap.set
@@ -28,15 +30,15 @@ gitsigns.setup({
         noremap = true,
         { "<leader>h", group = "+hunks" },
         { "<leader>hS", gs.stage_buffer, desc = "Stage Buffer" },
-        { "<leader>hu", gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
         { "<leader>hR", gs.reset_buffer, desc = "Reset Buffer" },
         { "<leader>hp", gs.preview_hunk, desc = "Preview Hunk" },
+        { "<leader>hi", gs.preview_hunk_inline, desc = "Preview Hunk InLine" },
         { "<leader>hb", function() gs.blame_line({ full = true }) end, desc = "Blame Line" },
         { "<leader>hd", gs.diffthis, desc = "Diff This" },
         { "<leader>hD", function() gs.diffthis("~") end, desc = "Diff This ~" },
         { "<leader>hg", gs.toggle_deleted, desc = "View Deleted" },
-        { "<leader>hs", ":Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
-        { "<leader>hr", ":Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
+        { "<leader>hs", gitsigns.stage_hunk, desc = "Stage Hunk" },
+        { "<leader>hr", gitsigns.reset_hunk, desc = "Reset Hunk" },
       },
       {
         mode = "v",
