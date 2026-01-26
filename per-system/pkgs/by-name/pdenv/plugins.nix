@@ -43,6 +43,9 @@ with pkgs.vimExtraPlugins;
   trouble-nvim-folke
   diffview-nvim-sindrets
 
+  # distributions
+  mini-nvim-nvim-mini
+
   # add completion
   pkgs.blinkcmpFlake.blink-cmp
 
@@ -65,12 +68,14 @@ with pkgs.vimExtraPlugins;
   nvim-osc52-ojroques
   undotree-mbbill
   vim-repeat-tpope
-  mini-nvim-nvim-mini
+  no-neck-pain-nvim-shortcuts
+
+  # markdown
+  markdown-meandering-programmer-MeanderingProgrammer
+
+  # commenting
   nvim-ts-context-commentstring-JoosepAlviste
   pkgs.vimPlugins.comment-nvim
-  markdown-meandering-programmer-MeanderingProgrammer
-  Navigator-nvim-numToStr
-  no-neck-pain-nvim-shortcuts
 
   # debugging
   nvim-dap-mfussenegger
@@ -88,14 +93,15 @@ with pkgs.vimExtraPlugins;
   neotest-nvim-neotest
   neotest-golang-fredrikaverpil
   pkgs.vimPlugins.FixCursorHold-nvim
-  # async
+
+  # async - used by many plugins
   plenary-nvim-nvim-lua
 
   # ai
   opencode-nvim
 
   # wezterm
-  wezterm-nvim-willothy
+  smart-splits-nvim-mrjones2014
   wezterm-types-DrKJeff16
 
   # notes

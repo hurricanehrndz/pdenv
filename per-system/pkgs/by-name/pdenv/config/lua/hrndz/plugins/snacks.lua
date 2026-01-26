@@ -126,7 +126,7 @@ vim.notify = notify
 
 local map = vim.keymap.set
 -- Top Pickers & Explorer
-map("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
+map("n", "<leader>fp", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 map("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
 map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
@@ -178,6 +178,13 @@ end
 
 -- Create command for closing lazygit and focusing largest non floating buffer
 vim.api.nvim_create_user_command("LazygitCloseFocusLargest", close_lazygit_focus_largest, {})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  pattern = "term://*lazygit*",
+  callback = function()
+    vim.defer_fn(close_lazygit_focus_largest, 100)
+  end,
+})
 
 -- Terminal
 map({ "n", "t" }, "<C-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
