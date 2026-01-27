@@ -100,7 +100,8 @@ with pkgs.vimExtraPlugins;
   # ai
   opencode-nvim
 
-  # wezterm
+  # wezterm/tmux
+  Navigator-nvim-numToStr
   smart-splits-nvim-mrjones2014
   wezterm-types-DrKJeff16
 
