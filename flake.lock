@@ -22,6 +22,22 @@
         "type": "github"
       }
     },
+    "claudecode-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769438551,
+        "narHash": "sha256-B6BA+3h7RLmk+zk6O365DmY06ALdbbkFBmOaRH9muog=",
+        "owner": "coder",
+        "repo": "claudecode.nvim",
+        "rev": "aa9a5cebebdbfa449c1c5ff229ba5d98e66bafed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coder",
+        "repo": "claudecode.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -397,6 +413,7 @@
     "root": {
       "inputs": {
         "blink-cmp": "blink-cmp",
+        "claudecode-nvim-src": "claudecode-nvim-src",
         "devshell": "devshell",
         "flake-parts": "flake-parts_2",
         "import-tree": "import-tree",

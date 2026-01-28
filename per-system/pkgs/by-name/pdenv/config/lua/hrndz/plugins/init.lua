@@ -23,6 +23,7 @@ if vim.g.vscode == nil then
 
   -- ai
   require("hrndz.plugins.opencode")
+  require("hrndz.plugins.claude")
 
   -- completion, diagnostics, actions and LSP
   require("hrndz.plugins.trouble")

@@ -1,7 +1,6 @@
 {
+  inputs,
   pkgs,
-  opencode-nvim-src,
-  nvim-treesitter-src,
   ...
 }:
 let
@@ -10,9 +9,9 @@ let
     pkg.overrideAttrs (_: {
       inherit src;
     });
-  opencode-nvim = pkgs.vimUtils.buildVimPlugin {
+  opencode-nvim = pkgs.vimUtils.buildVimPlugin  {
     name = "opencode-nvim";
-    src = opencode-nvim-src;
+    src = inputs.opencode-nvim-src;
   };
 in
 with pkgs.vimExtraPlugins;
@@ -35,7 +34,7 @@ with pkgs.vimExtraPlugins;
   noice-nvim-folke
 
   # add some syntax highlighting
-  (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars nvim-treesitter-src)
+  (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
 
   # which key did I just hit
   which-key-nvim-folke
@@ -99,6 +98,7 @@ with pkgs.vimExtraPlugins;
 
   # ai
   opencode-nvim
+  (withSrc pkgs.vimPlugins.claudecode-nvim inputs.claudecode-nvim-src)
 
   # wezterm/tmux
   Navigator-nvim-numToStr

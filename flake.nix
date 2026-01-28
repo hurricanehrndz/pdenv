@@ -57,6 +57,10 @@
     };
 
     # ai
+    claudecode-nvim-src = {
+      url = "github:coder/claudecode.nvim";
+      flake = false;
+    };
     opencode-nvim-src = {
       url = "github:NickvanDyke/opencode.nvim";
       flake = false;

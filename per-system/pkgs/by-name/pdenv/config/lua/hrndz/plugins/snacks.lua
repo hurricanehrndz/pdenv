@@ -128,10 +128,10 @@ local map = vim.keymap.set
 -- Top Pickers & Explorer
 map("n", "<leader>fp", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 map("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-map("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "<leader>/", function() Snacks.picker.grep({ hidden = true }) end, { desc = "Grep" })
 map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
 map("n", "<leader>fn", function() Snacks.picker.notifications() end, { desc = "Notification History" })
-map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
+map("n", "<leader>e", function() Snacks.explorer({ hidden = true }) end, { desc = "File Explorer" })
 
 -- find
 map("n", "<leader>ff", function() Snacks.picker.files({ hidden = true }) end, { desc = "Find Files" })

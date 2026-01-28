@@ -29,7 +29,6 @@ let
   # This is your base neovim - only rebuilds when plugins change
   baseNeovim =
     let
-      inherit (inputs) opencode-nvim-src nvim-treesitter-src;
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         withRuby = false;
         withPython3 = false;
@@ -37,9 +36,8 @@ let
         vimAlias = false;
         plugins = import ./plugins.nix {
           inherit
+            inputs
             pkgs
-            opencode-nvim-src
-            nvim-treesitter-src
             ;
         };
         wrapRc = false;
