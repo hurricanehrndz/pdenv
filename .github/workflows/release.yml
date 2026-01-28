@@ -1,0 +1,104 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  # Build AppImage
+  appimage-build:
+    name: Bundle pdenv into AppImage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Use Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: hurricanehrndz
+          skipPush: true
+          useDaemon: false
+
+      - name: Build AppImage
+        run: |
+          nix bundle --bundler github:ralismark/nix-appimage .\#pdenv
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v6
+        with:
+          name: pdenv-appimage
+          path: "*.AppImage"
+          overwrite: true
+
+  # Create GitHub release
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: appimage-build
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Download AppImage
+        uses: actions/download-artifact@v6
+        with:
+          name: pdenv-appimage
+          path: ./artifacts
+
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v4.6.2
+        with:
+          myToken: ${{ secrets.GH_PULL_TOKEN }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            # pdenv ${{ steps.get_version.outputs.VERSION }}
+
+            Personal development environment with Neovim.
+
+            ## Changes
+
+            ${{ steps.changelog.outputs.changelog }}
+
+            ## Installation
+
+            Download the AppImage and make it executable:
+
+            ```bash
+            chmod +x pdenv-*.AppImage
+            ./pdenv-*.AppImage
+            ```
+
+            Or use Nix:
+
+            ```bash
+            nix run github:hurricanehrndz/pdenv/${{ steps.get_version.outputs.VERSION }}
+            ```
+
+            ## Documentation
+
+            See [README.md](https://github.com/${{ github.repository }}/blob/${{ steps.get_version.outputs.VERSION }}/README.md) for usage instructions.
+          files: ./artifacts/*.AppImage
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+
+permissions:
+  contents: write
+  packages: write

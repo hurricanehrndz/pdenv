@@ -1,0 +1,59 @@
+---
+# Publish the Nix flake outputs to Cachix
+# shamelessy stolen from:
+# https://sourcegraph.com/github.com/helix-editor/helix/-/blob/.github/workflows/cachix.yml
+name: nixcache
+on:
+  push:
+  # workflow_dispatch:
+  # schedule:
+  #   - cron: "30 1 1,15 * *"
+
+env:
+  IMAGE_NAME: ghcr.io/hurricanehrndz/pdenv
+
+jobs:
+  cachix:
+    name: Publish Flake to Cachix
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            system: x86_64-linux
+          - os: ubuntu-24.04-arm
+            system: aarch64-linux
+          - os: macos-latest
+            system: aarch64-darwin
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Authenticate with Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: hurricanehrndz
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          useDaemon: false
+
+      - name: Build nix flake
+        id: build
+        run: |
+          OUTPUT_PATH=$(nix build --accept-flake-config --no-link --print-out-paths .\#pdenv)
+          echo "output_path=$OUTPUT_PATH" >> $GITHUB_OUTPUT
+
+      - name: Push to Cachix
+        run: |
+          cachix push hurricanehrndz ${{ steps.build.outputs.output_path }}
+
+      - name: Pin to Cachix
+        run: |
+          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv ${{ steps.build.outputs.output_path }} --keep-revisions 5
+
+permissions:
+  contents: write
+  packages: write
