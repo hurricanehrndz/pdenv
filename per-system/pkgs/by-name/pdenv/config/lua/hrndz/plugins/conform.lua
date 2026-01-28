@@ -8,6 +8,7 @@ require("conform").setup({
     nix = { "nixfmt" },
     json = { "jq" },
     xml = { "xmllint" },
+    yaml = { "yamlfmt" },
   },
   formatters = {
     isort = {

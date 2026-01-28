@@ -86,6 +86,8 @@ with pkgs;
   # treesitter cli
   pkgs.treesitterFlake.cli
 
+  # yaml
+  yamlfmt
   # cpp, c, swift -- I really don't debug
   # vscode-ext.vadimcn.vscode-lldb
 ]
