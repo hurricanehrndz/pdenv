@@ -60,7 +60,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@v4.6.2
         with:
-          myToken: ${{ secrets.GH_PULL_TOKEN }}
+          myToken: ${{ secrets.GH_RELEASE_TOKEN }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
