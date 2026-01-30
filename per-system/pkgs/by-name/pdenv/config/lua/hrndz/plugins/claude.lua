@@ -1,4 +1,21 @@
-require("claudecode").setup({})
+require("claudecode").setup({
+  focus_after_send = true,
+
+  diff_opts = {
+    auto_close_on_accept = true,
+    vertical_split = true,
+    open_in_current_tab = false,
+    keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens (including floating terminals)
+  },
+  terminal = {
+    cwd_provider = function(ctx)
+      -- Prefer repo root; fallback to file's directory
+      local cwd = require("claudecode.cwd").git_root(ctx.file_dir or ctx.cwd) or ctx.file_dir or ctx.cwd
+      return cwd
+    end,
+  },
+})
+
 local map = vim.keymap.set
 local wk = require("which-key")
 wk.add({
