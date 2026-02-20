@@ -24,10 +24,11 @@ require("conform").setup({
   },
 })
 
+require("conform").formatters.jq = {
+  ptepend_args = { "--indent", "2" },
+}
 require("conform").formatters.shfmt = {
   ptepend_args = { "-i", "4", "-ci" },
-  -- The base args are { "-filename", "$FILENAME" } so the final args will be
-  -- { "-i", "2", "-filename", "$FILENAME" }
 }
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 

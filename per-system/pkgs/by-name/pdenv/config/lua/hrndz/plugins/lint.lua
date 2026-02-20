@@ -4,6 +4,7 @@ require("lint").linters_by_ft = {
   gitcommit = { "gitlint" },
   sh = { "shellcheck" },
   zsh = { "shellcheck" },
+  json = { "json_tool" },
 
 }
 
