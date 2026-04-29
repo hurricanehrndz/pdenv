@@ -9,7 +9,7 @@ let
     pkg.overrideAttrs (_: {
       inherit src;
     });
-  opencode-nvim = pkgs.vimUtils.buildVimPlugin  {
+  opencode-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "opencode-nvim";
     src = inputs.opencode-nvim-src;
   };

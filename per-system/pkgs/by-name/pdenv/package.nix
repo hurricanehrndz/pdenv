@@ -27,27 +27,30 @@ let
   };
 
   # This is your base neovim - only rebuilds when plugins change
+  plugins = import ./plugins.nix {
+    inherit
+      inputs
+      pkgs
+      ;
+  };
+
+  commonWrapperArgs = [
+    "--suffix"
+    "PATH"
+    ":"
+    "${extraPackagesBinPath}"
+  ];
+
   baseNeovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
     withRuby = false;
     withPython3 = false;
     viAlias = false;
     vimAlias = false;
-    plugins = import ./plugins.nix {
-      inherit
-        inputs
-        pkgs
-        ;
-    };
+    inherit plugins;
     wrapRc = false;
-    wrapperArgs = [
-      "--suffix"
-      "PATH"
-      ":"
-      "${extraPackagesBinPath}"
-    ];
+    wrapperArgs = commonWrapperArgs;
   };
 
-  # Separate config derivation
   nvimConfig = pkgs.stdenv.mkDerivation {
     name = "nvim-config";
     src = ./config;
@@ -69,18 +72,31 @@ let
     '';
   };
 
+  configuredNeovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+    withRuby = false;
+    withPython3 = false;
+    viAlias = false;
+    vimAlias = false;
+    inherit plugins;
+    wrapRc = true;
+    luaRcContent = ''
+      vim.opt.runtimepath:prepend("${nvimConfig}")
+      dofile("${nvimConfig}/init.lua")
+    '';
+    wrapperArgs = commonWrapperArgs;
+  };
+
   # ext = inputs.nix-vscode-extensions.extensions.${system};
   # codelldb = ext.vscode-marketplace.vadimcn.vscode-lldb;
   # debugserverPath = "${codelldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
-  nvimCmd = "${baseNeovim}/bin/nvim --cmd \"set rtp^=${nvimConfig}\" -u \"${nvimConfig}/init.lua\"";
 in
 symlinkJoin {
   name = "pdenv";
   paths = [
-    (writeShellScriptBin "nvim" ''exec ${nvimCmd} "$@"'')
-    (writeShellScriptBin "v" ''exec ${nvimCmd} "$@"'')
-    (writeShellScriptBin "vi" ''exec ${nvimCmd} "$@"'')
-    (writeShellScriptBin "vim" ''exec ${nvimCmd} "$@"'')
+    (writeShellScriptBin "nvim" ''exec ${configuredNeovim}/bin/nvim "$@"'')
+    (writeShellScriptBin "v" ''exec ${configuredNeovim}/bin/nvim "$@"'')
+    (writeShellScriptBin "vi" ''exec ${configuredNeovim}/bin/nvim "$@"'')
+    (writeShellScriptBin "vim" ''exec ${configuredNeovim}/bin/nvim "$@"'')
     (writeShellScriptBin "nvim-minimal" ''exec ${baseNeovim}/bin/nvim --clean "$@"'')
   ];
 }
