@@ -27,32 +27,25 @@ let
   };
 
   # This is your base neovim - only rebuilds when plugins change
-  baseNeovim =
-    let
-      neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-        withRuby = false;
-        withPython3 = false;
-        viAlias = false;
-        vimAlias = false;
-        plugins = import ./plugins.nix {
-          inherit
-            inputs
-            pkgs
-            ;
-        };
-        wrapRc = false;
-      };
-      wrapperArgs = lib.escapeShellArgs (
-        neovimConfig.wrapperArgs
-        ++ [
-          "--suffix"
-          "PATH"
-          ":"
-          "${extraPackagesBinPath}"
-        ]
-      );
-    in
-    pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (neovimConfig // { inherit wrapperArgs; });
+  baseNeovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+    withRuby = false;
+    withPython3 = false;
+    viAlias = false;
+    vimAlias = false;
+    plugins = import ./plugins.nix {
+      inherit
+        inputs
+        pkgs
+        ;
+    };
+    wrapRc = false;
+    wrapperArgs = [
+      "--suffix"
+      "PATH"
+      ":"
+      "${extraPackagesBinPath}"
+    ];
+  };
 
   # Separate config derivation
   nvimConfig = pkgs.stdenv.mkDerivation {

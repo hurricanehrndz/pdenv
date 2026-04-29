@@ -38,12 +38,12 @@ with pkgs;
 
   # shell
   beautysh
-  nodePackages.bash-language-server
+  bash-language-server
   shellcheck
   shfmt
 
   # markdwon
-  nodePackages.markdownlint-cli
+  markdownlint-cli
   vale
   mermaid-cli
 
@@ -58,15 +58,15 @@ with pkgs;
   nvimPython
 
   # typescript
-  nodePackages.typescript
-  nodePackages.typescript-language-server
+  typescript
+  typescript-language-server
 
   # terraform
   terraform-ls
   tflint
 
   # one-ofs
-  nodePackages.prettier
+  prettier
   puppet-lint
 
   # other useful binaries
@@ -75,7 +75,6 @@ with pkgs;
   bashInteractive
   bat
   coreutils
-  direnv
   eza
   fd
   findutils

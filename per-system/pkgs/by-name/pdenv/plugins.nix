@@ -13,6 +13,9 @@ let
     name = "opencode-nvim";
     src = inputs.opencode-nvim-src;
   };
+  blink-cmp = pkgs.blinkcmpFlake.blink-cmp.overrideAttrs (_: {
+    doCheck = false;
+  });
 in
 with pkgs.vimExtraPlugins;
 [
@@ -46,7 +49,7 @@ with pkgs.vimExtraPlugins;
   mini-nvim-nvim-mini
 
   # add completion
-  pkgs.blinkcmpFlake.blink-cmp
+  blink-cmp
 
   # snippets
   friendly-snippets-rafamadriz
