@@ -1,5 +1,5 @@
 -- Setup lspconfig.
-local lsp_servers = { "lua_ls", "nixd", "sourcekit", "bashls", "basedpyright", "ruff", "gopls", "terraformls" }
+local lsp_servers = { "lua_ls", "nixd", "sourcekit", "bashls", "basedpyright", "ruff", "gopls", "terraformls", "ts_ls" }
 for _, server_name in ipairs(lsp_servers) do
   local has_opts, opts = pcall(require, "hrndz.lsp.servers." .. server_name)
   local config = has_opts and opts or {}

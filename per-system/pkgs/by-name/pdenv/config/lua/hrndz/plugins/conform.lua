@@ -4,6 +4,8 @@ require("conform").setup({
     python = { "isort", "black" },
     go = { "goimports", "gofumpt" },
     javascript = { "prettier", stop_after_first = true },
+    typescript = { "prettier", stop_after_first = true },
+    typescriptreact = { "prettier", stop_after_first = true },
     sh = { "shfmt" },
     nix = { "nixfmt" },
     json = { "jq" },

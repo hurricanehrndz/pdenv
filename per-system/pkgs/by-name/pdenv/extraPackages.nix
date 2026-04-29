@@ -57,6 +57,10 @@ with pkgs;
   ruff
   nvimPython
 
+  # typescript
+  nodePackages.typescript
+  nodePackages.typescript-language-server
+
   # terraform
   terraform-ls
   tflint
