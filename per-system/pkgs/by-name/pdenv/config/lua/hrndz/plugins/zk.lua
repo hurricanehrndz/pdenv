@@ -1,5 +1,5 @@
 require("zk").setup({
-  picker = "Telescope",
+  picker = "snacks_picker",
   lsp = {
     -- `config` is passed to `vim.lsp.start_client(config)`
     config = {

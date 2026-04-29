@@ -46,6 +46,7 @@ with pkgs;
   markdownlint-cli
   vale
   mermaid-cli
+  zk
 
   # git
   gitlint
