@@ -27,10 +27,10 @@ require("conform").setup({
 })
 
 require("conform").formatters.jq = {
-  ptepend_args = { "--indent", "2" },
+  prepend_args = { "--indent", "2" },
 }
 require("conform").formatters.shfmt = {
-  ptepend_args = { "-i", "4", "-ci" },
+  prepend_args = { "-i", "4", "-ci" },
 }
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
