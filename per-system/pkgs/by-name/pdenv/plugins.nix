@@ -37,7 +37,29 @@ with pkgs.vimExtraPlugins;
   noice-nvim-folke
 
   # add some syntax highlighting
-  (withSrc pkgs.vimPlugins.nvim-treesitter.withAllGrammars inputs.nvim-treesitter-src)
+  (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+    grammars: with grammars; [
+      bash
+      c
+      go
+      javascript
+      json
+      lua
+      markdown
+      markdown_inline
+      nix
+      objc
+      python
+      ruby
+      rust
+      swift
+      toml
+      tsx
+      typescript
+      yaml
+      zsh
+    ]
+  ))
 
   # which key did I just hit
   which-key-nvim-folke

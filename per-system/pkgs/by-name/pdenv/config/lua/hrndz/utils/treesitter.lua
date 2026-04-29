@@ -5,6 +5,17 @@ M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
 
 ---@param lang string
+function M.have_parser(lang)
+  if M._installed == nil then
+    M._installed = {}
+  end
+  if M._installed[lang] == nil then
+    M._installed[lang] = vim.treesitter.language.add(lang) == true
+  end
+  return M._installed[lang]
+end
+
+---@param lang string
 ---@param query string
 function M.have_query(lang, query)
   local key = lang .. ":" .. query
@@ -24,6 +35,9 @@ function M.have(what, query)
   what = type(what) == "number" and vim.bo[what].filetype or what --[[@as string]]
   local lang = vim.treesitter.language.get_lang(what)
   if lang == nil then
+    return false
+  end
+  if not M.have_parser(lang) then
     return false
   end
   if query and not M.have_query(lang, query) then

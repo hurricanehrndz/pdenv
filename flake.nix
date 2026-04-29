@@ -51,10 +51,6 @@
     # treesitter
     treesitter.url = "github:tree-sitter/tree-sitter";
     treesitter.inputs.nixpkgs.follows = "nixpkgs";
-    nvim-treesitter-src = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
 
     # ai
     claudecode-nvim-src = {
