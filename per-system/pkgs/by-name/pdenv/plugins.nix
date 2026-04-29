@@ -79,6 +79,7 @@ with pkgs.vimExtraPlugins;
   # formatters, linters
   conform-nvim-stevearc
   pkgs.vimPlugins.vim-better-whitespace
+  indent-blankline-nvim-lukas-reineke
   nvim-lint-mfussenegger
 
   # add lsp config
