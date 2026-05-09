@@ -39,6 +39,22 @@
         "type": "github"
       }
     },
+    "copy-reference-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755152899,
+        "narHash": "sha256-5c+1G0hKMCXAqS6byiEZsO2VosZrkeDjYyV5LX/iPHo=",
+        "owner": "cajames",
+        "repo": "copy-reference.nvim",
+        "rev": "6b888fa9b280724f79f33c031a2105a962c2014c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cajames",
+        "repo": "copy-reference.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -404,6 +420,7 @@
       "inputs": {
         "blink-cmp": "blink-cmp",
         "claudecode-nvim-src": "claudecode-nvim-src",
+        "copy-reference-nvim-src": "copy-reference-nvim-src",
         "devshell": "devshell",
         "flake-parts": "flake-parts_2",
         "import-tree": "import-tree",

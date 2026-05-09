@@ -47,6 +47,9 @@ if vim.g.vscode == nil then
   -- notes plugins
   require("hrndz.plugins.md")
   require("hrndz.plugins.zk")
+
+  -- copy reference
+  require("hrndz.plugins.copy-reference")
 end
 
 -- text manipulation

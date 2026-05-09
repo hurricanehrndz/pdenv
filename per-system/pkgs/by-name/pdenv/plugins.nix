@@ -9,6 +9,10 @@ let
     pkg.overrideAttrs (_: {
       inherit src;
     });
+  copy-reference-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "copy-reference-nvim";
+    src = inputs.copy-reference-nvim-src;
+  };
   opencode-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "opencode-nvim";
     src = inputs.opencode-nvim-src;
@@ -120,6 +124,9 @@ with pkgs.vimExtraPlugins;
 
   # async - used by many plugins
   plenary-nvim-nvim-lua
+
+  # copy reference
+  copy-reference-nvim
 
   # ai
   opencode-nvim

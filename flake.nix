@@ -61,6 +61,10 @@
       url = "github:NickvanDyke/opencode.nvim";
       flake = false;
     };
+    copy-reference-nvim-src = {
+      url = "github:cajames/copy-reference.nvim";
+      flake = false;
+    };
   };
 
   outputs =
