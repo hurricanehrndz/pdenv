@@ -124,9 +124,7 @@ with pkgs.vimExtraPlugins;
   # copy reference
   copy-reference-nvim
 
-  # wezterm/tmux
-  Navigator-nvim-numToStr
-  smart-splits-nvim-mrjones2014
+  # wezterm types (lazydev)
   wezterm-types-DrKJeff16
 
   # notes
