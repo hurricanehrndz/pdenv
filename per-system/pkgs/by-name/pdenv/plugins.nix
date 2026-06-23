@@ -13,10 +13,6 @@ let
     name = "copy-reference-nvim";
     src = inputs.copy-reference-nvim-src;
   };
-  opencode-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "opencode-nvim";
-    src = inputs.opencode-nvim-src;
-  };
   blink-cmp = pkgs.blinkcmpFlake.blink-cmp.overrideAttrs (_: {
     doCheck = false;
   });
@@ -127,10 +123,6 @@ with pkgs.vimExtraPlugins;
 
   # copy reference
   copy-reference-nvim
-
-  # ai
-  opencode-nvim
-  (withSrc pkgs.vimPlugins.claudecode-nvim inputs.claudecode-nvim-src)
 
   # wezterm/tmux
   Navigator-nvim-numToStr

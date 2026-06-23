@@ -23,22 +23,6 @@
         "type": "github"
       }
     },
-    "claudecode-nvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777313962,
-        "narHash": "sha256-h8wYaWBKjKrb7hYYKYs5yUS5RI0JVFo8Emcy99YK6Qw=",
-        "owner": "coder",
-        "repo": "claudecode.nvim",
-        "rev": "102d835c964069c9c5e37abaf05ae4f9c3ee6f00",
-        "type": "github"
-      },
-      "original": {
-        "owner": "coder",
-        "repo": "claudecode.nvim",
-        "type": "github"
-      }
-    },
     "copy-reference-nvim-src": {
       "flake": false,
       "locked": {
@@ -359,22 +343,6 @@
         "type": "github"
       }
     },
-    "opencode-nvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777304009,
-        "narHash": "sha256-oP4mVD9C/Y+CFZQX59Oy8PH2pn1YrQQHTJkuEd0/wVY=",
-        "owner": "NickvanDyke",
-        "repo": "opencode.nvim",
-        "rev": "0e3ae21c6c4c8def63e3503b238870f1251288e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NickvanDyke",
-        "repo": "opencode.nvim",
-        "type": "github"
-      }
-    },
     "pkgs-by-name-for-flake-parts": {
       "locked": {
         "lastModified": 1769286518,
@@ -419,7 +387,6 @@
     "root": {
       "inputs": {
         "blink-cmp": "blink-cmp",
-        "claudecode-nvim-src": "claudecode-nvim-src",
         "copy-reference-nvim-src": "copy-reference-nvim-src",
         "devshell": "devshell",
         "flake-parts": "flake-parts_2",
@@ -431,7 +398,6 @@
           "nixpkgs-unstable"
         ],
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "opencode-nvim-src": "opencode-nvim-src",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
         "treefmt-nix": "treefmt-nix",
         "treesitter": "treesitter"

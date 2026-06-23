@@ -53,14 +53,6 @@
     treesitter.inputs.nixpkgs.follows = "nixpkgs";
 
     # ai
-    claudecode-nvim-src = {
-      url = "github:coder/claudecode.nvim";
-      flake = false;
-    };
-    opencode-nvim-src = {
-      url = "github:NickvanDyke/opencode.nvim";
-      flake = false;
-    };
     copy-reference-nvim-src = {
       url = "github:cajames/copy-reference.nvim";
       flake = false;

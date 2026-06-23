@@ -21,10 +21,6 @@ if vim.g.vscode == nil then
   require("hrndz.plugins.conform")
   require("hrndz.plugins.lint")
 
-  -- ai
-  require("hrndz.plugins.opencode")
-  require("hrndz.plugins.claude")
-
   -- completion, diagnostics, actions and LSP
   require("hrndz.plugins.trouble")
   require("hrndz.plugins.todo")
