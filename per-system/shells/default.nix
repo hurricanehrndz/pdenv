@@ -14,6 +14,7 @@
           name = "Personal development environment";
           packages = with pkgs; [
             local.pdenv
+            just
           ];
           commands = with pkgs; [
             (pkgWithCategory "nix cache" cachix)
