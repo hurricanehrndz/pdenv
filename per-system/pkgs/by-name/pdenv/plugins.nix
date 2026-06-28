@@ -23,8 +23,12 @@ let
     ];
   });
   snacks-nvim = pkgs.vimExtraPlugins.snacks-nvim-folke.overrideAttrs (_: {
-    # Optional Trouble profiler bridge; add Trouble here if the profiler integration is used.
-    nvimSkipModules = [ "trouble.sources.profiler" ];
+    nvimSkipModules = [
+      # Optional Trouble profiler bridge; add Trouble here if the profiler integration is used.
+      "trouble.sources.profiler"
+      # Optional sqlite-backed picker DB; not require-checkable in the build sandbox.
+      "snacks.picker.util.db"
+    ];
   });
   tokyonight-nvim = pkgs.vimExtraPlugins.tokyonight-nvim-folke.overrideAttrs (old: {
     dependencies = (old.dependencies or [ ]) ++ [ lazy-nvim ];
