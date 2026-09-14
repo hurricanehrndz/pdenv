@@ -13,7 +13,7 @@ let
     name = "copy-reference-nvim";
     src = inputs.copy-reference-nvim-src;
   };
-  blink-cmp = pkgs.blinkcmpFlake.blink-cmp.overrideAttrs (_: {
+  blink-cmp = pkgs.vimPlugins.blink-cmp.overrideAttrs (_: {
     doCheck = false;
   });
   lazy-nvim = pkgs.vimExtraPlugins.lazy-nvim-folke.overrideAttrs (_: {

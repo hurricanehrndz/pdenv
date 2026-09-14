@@ -7,8 +7,8 @@
         projectRootFile = "flake.nix";
 
         programs.nixfmt = {
-          enable = lib.meta.availableOn stdenv.buildPlatform nixfmt-rfc-style.compiler;
-          package = nixfmt-rfc-style;
+          enable = lib.meta.availableOn stdenv.buildPlatform nixfmt.compiler;
+          package = nixfmt;
         };
         programs.shfmt.enable = true;
         programs.shellcheck.enable = true;

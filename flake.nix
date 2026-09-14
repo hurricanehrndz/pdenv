@@ -44,10 +44,6 @@
     # nvim extra plugins -- more up to date
     nixneovimplugins.url = "github:NixNeovim/NixNeovimPlugins";
 
-    # blink-cmp plugin
-    blink-cmp.url = "github:Saghen/blink.cmp/v1";
-    blink-cmp.inputs.nixpkgs.follows = "nixpkgs";
-
     # treesitter
     treesitter.url = "github:tree-sitter/tree-sitter";
     treesitter.inputs.nixpkgs.follows = "nixpkgs";

@@ -22,7 +22,6 @@
           inputs.nixneovimplugins.overlays.default
           (final: prev: {
             treesitterFlake = inputs'.treesitter.packages;
-            blinkcmpFlake = inputs'.blink-cmp.packages;
             neovimFlake = inputs'.neovim-nightly-overlay.packages;
             local = config.packages;
           })
