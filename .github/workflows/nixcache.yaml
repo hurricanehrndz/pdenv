@@ -28,13 +28,13 @@ jobs:
 
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Authenticate with Cachix
-        uses: cachix/cachix-action@v15
+        uses: cachix/cachix-action@v17
         with:
           name: hurricanehrndz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -44,15 +44,15 @@ jobs:
         id: build
         run: |
           OUTPUT_PATH=$(nix build --accept-flake-config --no-link --print-out-paths .\#pdenv)
-          echo "output_path=$OUTPUT_PATH" >> $GITHUB_OUTPUT
+          echo "output_path=$OUTPUT_PATH" >> "$GITHUB_OUTPUT"
 
       - name: Push to Cachix
         run: |
-          cachix push hurricanehrndz ${{ steps.build.outputs.output_path }}
+          cachix push hurricanehrndz "${{ steps.build.outputs.output_path }}"
 
       - name: Pin to Cachix
         run: |
-          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv ${{ steps.build.outputs.output_path }} --keep-revisions 5
+          cachix pin hurricanehrndz main-${{ matrix.system }}-pdenv "${{ steps.build.outputs.output_path }}" --keep-revisions 5
 
 permissions:
   contents: write

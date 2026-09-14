@@ -9,13 +9,13 @@ jobs:
 
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Use Cachix
-        uses: cachix/cachix-action@v15
+        uses: cachix/cachix-action@v17
         with:
           name: hurricanehrndz
           skipPush: true

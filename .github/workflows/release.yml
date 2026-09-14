@@ -4,6 +4,14 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag (for example, v20260301)
+        required: true
+        type: string
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
 jobs:
   # Build AppImage
@@ -12,14 +20,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate release tag
+        run: |
+          [[ "$RELEASE_TAG" == v* ]] || {
+            echo "::error::Release tag must start with v"
+            exit 1
+          }
+          git check-ref-format "refs/tags/$RELEASE_TAG"
+
       - name: Checkout sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Use Cachix
-        uses: cachix/cachix-action@v15
+        uses: cachix/cachix-action@v17
         with:
           name: hurricanehrndz
           skipPush: true
@@ -43,37 +59,22 @@ jobs:
     needs: appimage-build
 
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
       - name: Download AppImage
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdenv-appimage
           path: ./artifacts
 
-      - name: Get version
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-
-      - name: Generate changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v4.6.2
-        with:
-          myToken: ${{ secrets.GH_RELEASE_TOKEN }}
-
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
-          name: Release ${{ steps.get_version.outputs.VERSION }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
+          name: Release ${{ env.RELEASE_TAG }}
           body: |
-            # pdenv ${{ steps.get_version.outputs.VERSION }}
+            # pdenv ${{ env.RELEASE_TAG }}
 
             Personal development environment with Neovim.
-
-            ## Changes
-
-            ${{ steps.changelog.outputs.changelog }}
 
             ## Installation
 
@@ -87,13 +88,14 @@ jobs:
             Or use Nix:
 
             ```bash
-            nix run github:hurricanehrndz/pdenv/${{ steps.get_version.outputs.VERSION }}
+            nix run github:hurricanehrndz/pdenv/${{ env.RELEASE_TAG }}
             ```
 
             ## Documentation
 
-            See [README.md](https://github.com/${{ github.repository }}/blob/${{ steps.get_version.outputs.VERSION }}/README.md) for usage instructions.
+            See [README.md](https://github.com/${{ github.repository }}/blob/${{ env.RELEASE_TAG }}/README.md) for usage instructions.
           files: ./artifacts/*.AppImage
+          generate_release_notes: true
           draft: false
           prerelease: false
         env:
